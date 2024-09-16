@@ -24,8 +24,7 @@ int main() {
     }
 
     {
-        int a = 0;
-
+       
         bool res = !a;
         cout << "res: " << boolalpha << res << e
     return 0;
