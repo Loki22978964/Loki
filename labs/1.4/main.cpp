@@ -1,10 +1,4 @@
-/**
- * Done by:
- * Student Name: Severyn Kotyhoroshko
- * Student Group: 123
- * Lab 1.4
- */
-// ;jgfgdgdfg
+
 #include <iostream>
 
 using namespace std;
