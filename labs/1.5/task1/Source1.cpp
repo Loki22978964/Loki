@@ -1,5 +1,5 @@
 /**
-* Student Name: 
+* Student Name: Bobro Mykola
 * Student Group: 123
 * Lab 1.5
 */
