@@ -17,13 +17,24 @@ int main() {
         int d = 14;
 
         //  empty (  !    (a == b)    ^   (   !   (c != d))) 
-        bool res = (!(a == b) ^ (!(c != d)));
-        cout << "res: " << boolalpha << res << endl;
-    }
+        bool res1 = (!(a == b) ^ (!(c != d)));
+        cout << "res1: " << boolalpha << res1 << endl;
 
+
+    }
     {
+        int a = 7;
+        int b = 7;
+        int c = 24;
+        int d = 1;
 
-        bool res = !a;
-        cout << "res: " << boolalpha << res << e
-            return 0;
+        //  empty (  !    (a == b)    ^   (   !   (c != d))) 
+        bool res2 = (!(a == b) ^ (!(c != d)));
+        cout << "res2: " << boolalpha << res2 << endl;
+
+
+
+
     }
+
+}
