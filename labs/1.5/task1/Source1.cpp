@@ -1,6 +1,5 @@
 /**
-* Done by:
-* Student Name: Severyn Kotyhoroshko
+* Student Name: 
 * Student Group: 123
 * Lab 1.5
 */
@@ -12,13 +11,12 @@ using namespace std;
 
 int main() {
     {
-        int a = 10;
-        int b = 20;
-        int c = 30;
-        int d = 40;
+        int a = 6;
+        int b = 2;
+        int c = 7;
+        int d = 14;
 
-        // <скн1> (<скн2> (A<нб1>B) <акн> (<скн3> (C<нб2>D)))
-        //  empty (  !    (a == b)    ^   (   !   (c != d)))
+        //  empty (  !    (a == b)    ^   (   !   (c != d))) 
         bool res = (!(a == b) ^ (!(c != d)));
         cout << "res: " << boolalpha << res << endl;
     }
