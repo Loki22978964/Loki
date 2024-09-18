@@ -1,9 +1,9 @@
 /**
- * Done by:
- * Student Name: Severyn Kotyhoroshko
- * Student Group: 123
- * Lab 1.5
- */
+* Done by:
+* Student Name: Severyn Kotyhoroshko
+* Student Group: 123
+* Lab 1.5
+*/
 
 #include <iostream>
 #include <cmath>
@@ -17,15 +17,15 @@ int main() {
         int c = 30;
         int d = 40;
 
-        // <Ð£Ð›Ðž1> (<Ð£Ð›Ðž2> (A<ÐžÐ’1>B) <Ð‘Ð›Ðž> (<Ð£Ð›Ðž3> (C<ÐžÐ’2>D)))
+        // <ÓËÎ1> (<ÓËÎ2> (A<ÎÂ1>B) <ÁËÎ> (<ÓËÎ3> (C<ÎÂ2>D)))
         //  empty (  !    (a == b)    ^   (   !   (c != d)))
         bool res = (!(a == b) ^ (!(c != d)));
         cout << "res: " << boolalpha << res << endl;
     }
 
     {
-       
+
         bool res = !a;
         cout << "res: " << boolalpha << res << e
-    return 0;
-}
+            return 0;
+    }
