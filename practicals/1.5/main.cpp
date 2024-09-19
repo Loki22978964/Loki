@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstdlib>
+#include <ctime>
+#include <algorithm>
 using namespace std;
 
 void initRandomizer()
