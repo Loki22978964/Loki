@@ -66,16 +66,12 @@ int main()
         //1
         int arrMin = arr[0];
 
-
-
-
         for (int i = 0; i < n; i++) {
             if (arrMin < 0) {
                 arrMin = arr[i];
             }
             if (arr[i] < arrMin && arr[i] > 0) {
                 arrMin = arr[i];
-
             }
         }
         cout << arrMin << endl;
@@ -85,6 +81,46 @@ int main()
     }
 
     {
-       //Task 2
+       //Task 3
+        {
+            int n;
+            cout << "Enter the length of the sequence: ";
+            cin >> n;
+
+            int* arr = new int[n];
+            // Populate the array with random values
+            for (int i = 0; i < n; i++) {
+                arr[i] = (rand() % 200) - 100;
+            }
+
+            // cout the array
+            for (int i = 0; i < n; i++) {
+                cout << arr[i] << " ";
+
+            }
+            cout << endl;
+
+            int* minVal = std::min_element(arr, arr + n);
+            int* maxVal = std::max_element(arr, arr + n);
+
+            cout << "Min: " << *minVal << endl;
+            cout << "Max: " << *maxVal << endl;
+
+            if (minVal != maxVal) {
+                swap(*minVal, *maxVal);
+
+            }
+
+            for (int i = 0; i < n; i++) {
+                cout << arr[i] << " ";
+
+            }
+            cout << endl;
+
+            delete[] arr;
+            arr = nullptr;
+
+
+        }
     }
 }
