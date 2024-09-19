@@ -121,8 +121,6 @@ int main()
 
             delete[] arr;
             arr = nullptr;
-
-
         }
     }
 }
