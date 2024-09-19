@@ -103,8 +103,8 @@ int main()
             int* minVal = std::min_element(arr, arr + n);
             int* maxVal = std::max_element(arr, arr + n);
 
-            cout << "Min: " << *minVal << endl;
             cout << "Max: " << *maxVal << endl;
+            cout << "Min: " << *minVal << endl;
 
             if (minVal != maxVal) {
                 swap(*minVal, *maxVal);
