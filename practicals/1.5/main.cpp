@@ -7,19 +7,6 @@ void initRandomizer()
     srand(time(NULL));
 }
 
-int getP()
-{
-    int p;
-    cout << "Enter number P from 0 to 10 that you want to find: " << endl;
-    cin >> p;
-
-    if (p > 10 || p < 0)
-    {
-        cout << "P is out of range" << endl;
-        getP();
-    }
-    return p;
-}
 
 int main()
 {
@@ -57,9 +44,44 @@ int main()
     }
 
     {
+        initRandomizer();
         //Task 2
 
-        
+        int n;
+        cout << "Enter the length of the sequence: ";
+        cin >> n;
+
+        int* arr = new int[n];
+        // Populate the array with random values
+        for (int i = 0; i < n; i++) {
+            arr[i] = (rand() % 200) - 100;
+        }
+
+        // cout the array
+        for (int i = 0; i < n; i++) {
+            cout << arr[i] << " ";
+
+        }
+        cout << endl;
+        //1
+        int arrMin = arr[0];
+
+
+
+
+        for (int i = 0; i < n; i++) {
+            if (arrMin < 0) {
+                arrMin = arr[i];
+            }
+            if (arr[i] < arrMin && arr[i] > 0) {
+                arrMin = arr[i];
+
+            }
+        }
+        cout << arrMin << endl;
+
+        delete[] arr;
+        arr = nullptr;
     }
 
     {
