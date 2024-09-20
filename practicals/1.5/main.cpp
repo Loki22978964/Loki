@@ -84,43 +84,79 @@ int main()
 
     {
        //Task 3
-        {
+        int main() {
+            initRandomizer();
             int n;
+
             cout << "Enter the length of the sequence: ";
             cin >> n;
-
             int* arr = new int[n];
-            // Populate the array with random values
+
             for (int i = 0; i < n; i++) {
                 arr[i] = (rand() % 200) - 100;
             }
 
-            // cout the array
+            // Виводимо масив
+            cout << "Array: ";
             for (int i = 0; i < n; i++) {
                 cout << arr[i] << " ";
-
             }
             cout << endl;
 
-            int* minVal = std::min_element(arr, arr + n);
-            int* maxVal = std::max_element(arr, arr + n);
-
-            cout << "Max: " << *maxVal << endl;
-            cout << "Min: " << *minVal << endl;
-
-            if (minVal != maxVal) {
-                swap(*minVal, *maxVal);
-
-            }
+            int minIndex = -1; // Для індексу мінімального від'ємного
+            int maxIndex = -1; // Для індексу максимального позитивного
+            int arrMin = INT_MAX; // Максимально можливе значення
+            int arrMax = INT_MIN; // Мінімально можливе значення
 
             for (int i = 0; i < n; i++) {
-                cout << arr[i] << " ";
+                if (arr[i] < 0 && arr[i] < arrMin) {
+                    arrMin = arr[i];
+                    minIndex = i;
+                }
+            }
+            for (int i = 0; i < n; i++) {
 
+                if (arr[i] > arrMax) {
+                    arrMax = arr[i];
+                    maxIndex = i;
+                }
+            }
+
+            // Виводимо мінімальне та максимальне значення
+            if (minIndex != -1) {
+                cout << "Minimum negative value: " << arrMin << " at index " << minIndex << endl;
+            }
+            else {
+                cout << "No negative values found." << endl;
+            }
+
+            if (maxIndex != -1) {
+                cout << "Maximum positive value: " << arrMax << " at index " << maxIndex << endl;
+            }
+            else {
+                cout << "No positive values found." << endl;
+            }
+
+            // Обмін значеннями
+            if (minIndex != -1 && maxIndex != -1) {
+                int temp = arr[minIndex];
+                arr[minIndex] = arr[maxIndex];
+                arr[maxIndex] = temp;
+            }
+            else {
+                cout << "No suitable values found for swapping." << endl;
+            }
+
+            // Виводимо масив після обміну
+            cout << "Array after swap: ";
+            for (int i = 0; i < n; i++) {
+                cout << arr[i] << " ";
             }
             cout << endl;
 
             delete[] arr;
             arr = nullptr;
+
+            return 0;
         }
-    }
 }
