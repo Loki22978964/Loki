@@ -5,7 +5,6 @@ int main()
 {
     {
              // task 1
-        cout << "Task 1" << endl;
 
         int a;
         int mask = 1;
@@ -49,7 +48,7 @@ int main()
 
     {
             // task 2
-        cout << "Task 2" << endl;
+
 #include <iostream>
         using namespace std;
 
@@ -85,7 +84,6 @@ int main()
                 }
             }
 
-
             cout << "Result of XOR operation (sequence C): " << endl;
             for (int i = 0; i < size; i++) {
                 cout << C[i] << " ";
@@ -94,18 +92,5 @@ int main()
 
             return 0;
         }
-
     }
-    as
-        d
-        a
-        das
-        d
-        asd
-        as
-        da
-        d
-        asd
-        d
-
 }
