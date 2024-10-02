@@ -3,16 +3,6 @@
 static int sA = 12;
 static int sB;
 
-sd
-fs
-fs
-dfsf
-sd
-fs
-dfs
-fs
-df
-
 
 int main()
 {
