@@ -24,7 +24,7 @@ int main()
     {
         for (int j = 0; j < c; j++)
         {
-            arr[i][j] = rand() % 21 - 10;
+            arr[i][j] = rand() % 20 - 10;
         }
     }
 
