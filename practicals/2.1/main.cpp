@@ -1,4 +1,4 @@
-// Bobro Nick 123 
+// Bobro Nick 123 - 1
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
@@ -9,10 +9,9 @@ int main()
     srand(time(0));
 
     cout << "Enter number of arrays and their size" << endl;
-    int c,
-        r;
-    cin >> r >> c;
-
+    int c, r;
+    cin >> r;
+    cin >> c;
     int** arr = new int* [r];
 
     for (int i = 0; i < r; i++) {
