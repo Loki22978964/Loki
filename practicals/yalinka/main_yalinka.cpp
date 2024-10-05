@@ -1,12 +1,3 @@
-/******************************************************************************
-
-                              Online C++ Compiler.
-               Code, Compile, Run and Debug C++ program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
-
-#include <iostream>
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -78,7 +69,7 @@ vector<vector<string>> createTree(int levels, vector<pair<int, int>>& toy) {
 }
 
 
-void displayTree(const vector<vector<string>>& tree, const vector<pair<int, int>>& ornaments) {
+void displayTree(const vector<vector<string>>& tree, const vector<pair<int, int>>& toy) {
     clearScreen();
 
     for (int i = 0; i < tree.size(); ++i) {
@@ -86,8 +77,8 @@ void displayTree(const vector<vector<string>>& tree, const vector<pair<int, int>
             bool isOrnament = false;
 
 
-            for (auto& ornament : ornaments) {
-                if (ornament.first == i && ornament.second == j) {
+            for (auto& toy : toy) {
+                if (toy.first == i && toy.second == j) {
                     cout << getRandomtoy();
                     isOrnament = true;
                     break;
@@ -136,11 +127,11 @@ int main() {
 
     vector<pair<int, int>> toy;
     vector<vector<string>> tree = createTree(h, toy);
-
-    int iterations = 10;
+    int iterations = 20;
     while (iterations--) {
         displayTree(tree, toy);
-        this_thread::sleep_for(chrono::seconds(1)); 
+        this_thread::sleep_for(chrono::seconds(1));
+    }
 
     saveTreeToFile(tree);
 
