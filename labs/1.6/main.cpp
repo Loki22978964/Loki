@@ -13,7 +13,7 @@ int main()
         char chVar4 = 0x5a; // Z
 
 	}
-	{    //Опису змінних типів double, int, char.
+	{    //double, int, char.
 		int nA;
 
 		float fltB;
@@ -26,14 +26,14 @@ int main()
 
 		wC = 11974;
 
-		//Ініціювання змінних
+		
 		double dblD;
 
 		int nE;
 
 		char chF;
 		
-		//за допомогою неявного приведення типів
+	
 
 		dblD = nA;
 
@@ -41,7 +41,7 @@ int main()
 
 		chF = wC;
 
-		//за допомогою явного приведення
+
 
 		dblD = (double)nA;
 
@@ -49,7 +49,7 @@ int main()
 
 		chF = (char)wC;
 
-		//з обходом суворої типізації
+		//bypassing strict typing
 
 		double* pdblD;
 
