@@ -2,7 +2,8 @@
 using namespace std;
 
 int main() {
-    {
+    {            //task 1
+
         int arr1[7];
 
 
@@ -35,7 +36,8 @@ int main() {
     }
 
 
-    {
+    {             // task 2
+
         int arr1[10];
         int arr2[10];
         int arr3[10];
