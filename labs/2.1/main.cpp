@@ -98,4 +98,34 @@ int main() {
 
         return 0;
     }
+    {      // task 3
+        const int r = 4, c = 4;
+        int intArray[r][c] = {
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12},
+            {13, 14, 15, 16}
+        };
+
+        int diagonal[r];
+        for (int i = 0; i < r; ++i) {
+            diagonal[i] = intArray[i][i];
+        }
+
+        cout << "Integer array 4x4:\n";
+        for (int i = 0; i < r; ++i) {
+            for (int j = 0; j < c; ++j) {
+                cout << setw(4) << intArray[i][j];
+            }
+            cout << endl;
+        }
+
+        cout << "\nOne-dimensional array with elements of the main diagonal:\n";
+        for (int i = 0; i < r; ++i) {
+            cout << diagonal[i] << " ";
+        }
+        cout << endl;
+
+
+    }
 }
