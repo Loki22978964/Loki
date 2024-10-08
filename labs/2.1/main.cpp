@@ -1,4 +1,6 @@
 #include <iostream>
+#include <iomanip>
+#include <climits>
 using namespace std;
 
 int main() {
@@ -96,9 +98,9 @@ int main() {
         cout << "Second minimum with arr1: " << min2 << endl;
         cout << "The sum of the two minimum elements from arr1:" << (min1 + min2) << endl;
 
-        return 0;
+
     }
-    {      // task 3
+    {   // task 3.1
         const int r = 4, c = 4;
         int intArray[r][c] = {
             {1, 2, 3, 4},
@@ -127,5 +129,43 @@ int main() {
         cout << endl;
 
 
+
+
     }
+    {   // task 3.2
+        const int r2 = 4, c2 = 5;
+        double floatArray[r2][c2] = {
+            {1.1, 2.2, 3.3, 4.4, 5.5},
+            {6.6, 7.7, 8.8, 9.9, 10.1},
+            {11.2, 12.3, 13.4, 14.5, 15.6},
+            {16.7, 17.8, 18.9, 19.0, 20.2}
+        };
+
+        // Step 3: Create a one-dimensional array with the average values of the rows
+        double averages[r2];
+        for (int i = 0; i < r2; ++i) {
+            double sum = 0.0;
+            for (int j = 0; j < c2; ++j) {
+                sum += floatArray[i][j];
+            }
+            averages[i] = sum / c2;
+        }
+
+        // Output the double array and the average values of the rows
+        cout << "Double array 4x5:\n";
+        for (int i = 0; i < r2; ++i) {
+            for (int j = 0; j < c2; ++j) {
+                cout << setw(6) << floatArray[i][j];
+            }
+            cout << endl;
+        }
+
+        cout << "\nOne-dimensional array with the average values of each row:\n";
+        for (int i = 0; i < r2; ++i) {
+            cout << fixed << setprecision(2) << averages[i] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
 }
