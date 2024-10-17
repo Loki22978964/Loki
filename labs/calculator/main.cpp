@@ -32,7 +32,7 @@ string infixToPostfix(const string& expression) {
             while (!operators.empty() && precedence(operators.top()) >= precedence(c)) {
                 postfix += operators.top(); // Додаємо оператор до постфіксного виразу
                 postfix += ' ';
-                operators.pop();
+                operators.pop(); //removes the top element from the stack
             }
             operators.push(c); // Додаємо поточний оператор до стеку
         }
@@ -87,7 +87,9 @@ int main() {
     string infixExpression;
 
     cout << "expression ";
-    getline(cin, infixExpression);
+    getline(cin, infixExpression); //The std::getline function in C++ is used to read a line of text
+                                  //from an input stream and store it into a string. 
+                                 // It stops reading when it encounters a newline character or the specified delimiter.
 
     try {
         string postfixExpression = infixToPostfix(infixExpression);
