@@ -10,7 +10,7 @@ bool isValidString(const string& l) {
         return false;
     }
 
-    for (i = 2; i < l.size(); ++i) {
+    for (size_t i = 2; i < l.size(); ++i) {
         // from 0 to 5 
         if (!((isdigit(l[i]) && l[i] >= '0' && l[i] <= '5') ||
             (l[i] >= 'A' && l[i] <= 'K'))) { // from A to K
