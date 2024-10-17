@@ -26,16 +26,7 @@ string infixToPostfix(const string& expression) {
         if (isdigit(c)) {
             postfix += c; // Додаємо операнд до постфіксного виразу
         }
-        else if (c == '(') {
-            operators.push(c);
-        }
-        else if (c == ')') {
-            while (!operators.empty() && operators.top() != '(') {
-                postfix += ' ' + string(1, operators.top()); // Додаємо оператор до постфіксного виразу
-                operators.pop();
-            }
-            operators.pop(); // Витягуємо '(' зі стеку
-        }
+        
         else { // Оператор
             postfix += ' '; // Додаємо пробіл перед оператором
             while (!operators.empty() && precedence(operators.top()) >= precedence(c)) {
