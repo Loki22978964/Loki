@@ -16,11 +16,10 @@ void createEvenPositionList(List* firstList, List*& secondList) {
     int p = 1; 
 
     while (temp != nullptr) {
-        // Check if the position is even
         if (p % 2 == 0) {
             List* newNode = new List(temp->data);
 
-            // Add new node to the end of the second list
+            
             if (secondList == nullptr) {
                 secondList = newNode;
                 last = newNode;
