@@ -13,3 +13,10 @@ int main(){
     cout << sum << endl ; 
     return 0;
 }
+// _Get_asan_aligned_first_endasd
+// a
+// sd
+// asd
+// abortsd
+// abortas
+// data
