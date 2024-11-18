@@ -6,13 +6,13 @@ int main() {
     std::cin >> number;
 
     // PUT YOUR CODE HERE
-    for (unsigned no = 1, n = 0 ;; no *= 2 , n++) {
-        if (no == number) {
+    for ( unsigned n = 0 , no = 1 ;; no = no * 2 , n++ ){
+        if (no == number){
             std::cout << number << " is 2 to the power of " << n << std::endl;
             break;
         }
-        if (no > number) {
-            std::cout << number << " is not a power of 2" << std::endl;
+        if(no > number){
+            std::cout << number << " is not a power of 2 " << n << std::endl;
             break;
         }
     }
