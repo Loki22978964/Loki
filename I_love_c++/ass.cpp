@@ -1,21 +1,22 @@
 #include <iostream>
 
 int main() {
-  unsigned number;
+    unsigned number;
+    std::cout << "Enter the number: ";
+    std::cin >> number;
 
-  std::cout << "Enter the number: ";
-  std::cin >> number;
-
-  for (unsigned power = 0; ; power++, number /= 2) {
-    if (number == 1) {
-      std::cout << "number is 2 to the power of " << power;
-      break;
+    // PUT YOUR CODE HERE
+    for (unsigned no = 1, n = 0;; no *= 2, n++) {
+        if (no == number) {
+            std::cout << number << " is 2 to the power of " << n << std::endl;
+            break;
+        }
+        if (no > number) {
+            std::cout << number << " is not a power of 2" << std::endl;
+            break;
+        }
     }
+   
 
-    if (number % 2 != 0) {
-      std::cout << "number is not a power of 2";
-      break;
-    }
-  }
-  return 0;
+    return 0;
 }
