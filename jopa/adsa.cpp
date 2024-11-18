@@ -11,10 +11,10 @@ int main() {
         number /= 2; // Ділимо на 2
     }
      if (number == 2) {
-        std::cout << n << " is 2 to the power of n" << std::endl;
+        std::cout << number << "is 2 to the power of n" << std::endl;
      }
      else{
-        std::cout << n << " is not a power of 2" << std::endl;
+        std::cout << number << "is not a power of 2" << std::endl;
      }
     
     return 0;
