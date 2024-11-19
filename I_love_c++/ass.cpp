@@ -2,21 +2,18 @@
 using namespace std;
 
 int main() {
-    int count = 0;
-    int weight , real_weight;
-    cout << "enter waight ";
-    cin >> weight;
-    real_weight = weight;
-    while (real_weight < 101){
-        count++;
-        cout << "enter waight ";
-        cin >> weight;
-        real_weight = real_weight + weight;
-        if (real_weight == 100){
-            real_weight++;
-            count++;
-        }
-    }
-    cout << count << endl;
+    int age , start;
+    cout << "Enter age "; cin >> age;
+     if (age % 2 == 0){
+        start = 0;
+     }
+     else{
+        start = 1;
+     }
+     for (int i = start ; i <= age ; i = i + 2){
+        if ( i != 0){
+            cout << i << "";
+        }   
+     }
     return 0;
 }
