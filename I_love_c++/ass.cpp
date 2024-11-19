@@ -2,15 +2,26 @@
 using namespace std;
 
 int main() {
-   for ( int i = 1000; i <= 9999 ; i++){
-    int n4 = i % 10 ;
-    int n3 = (i / 10) % 10 ;  
-    int n2 = (i / 100) % 10 ;
-    int n1 = i / 1000;
-    if (n1 + n2 + n3 + n4 == 15){
-        cout << i << endl;
+   int  count;
+   cout << "enter enregy" ;
+   cin >> count;  
+   double trafic = 7.80;
+   double price = trafic * count;
+   cout << price << endl;
+
+   double cash , rest;
+   cout << "Enter cash " ;
+   cin >> cash;
+   do{
+    cout << "Enter cash " ;
+    rest = cash - price;
+    if (rest < 0 ) {
+        cout << "Nit enough money" << endl;
     }
-   }
+
+   }while (rest < 0);
+   cout << rest << endl;
+   
 
     return 0;
 }
