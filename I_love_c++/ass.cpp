@@ -2,19 +2,21 @@
 using namespace std;
 
 int main() {
-    int n;
-    cout << "n ";
-    cin >> n;
-    int p;
-    double sum = 0;
-    
-   for(int i = 1 ; i <= n ;i++){
-    cout << "Enter point " << i  << " ";
-    cin >> p;
-    sum = sum + p;
-   }
-   sum = sum / n;
-   cout << sum << endl;
-
+    int count = 0;
+    int weight , real_weight;
+    cout << "enter waight ";
+    cin >> weight;
+    real_weight = weight;
+    while (real_weight < 101){
+        count++;
+        cout << "enter waight ";
+        cin >> weight;
+        real_weight = real_weight + weight;
+        if (real_weight == 100){
+            real_weight++;
+            count++;
+        }
+    }
+    cout << count << endl;
     return 0;
 }
