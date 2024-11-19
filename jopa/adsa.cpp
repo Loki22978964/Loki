@@ -9,8 +9,8 @@ int main() {
    cout << "desired_amount " ; cin >> desired_amount;
 
    while(deposit_amount < desired_amount){
-    deposit_period++;
-    deposit_amount = deposit_amount + desired_amount * annual_rate / 100;
+    deposit_period= deposit_period + 1;
+    deposit_amount = deposit_amount + deposit_amount * annual_rate / 100;
 
    }
    cout << "Dep period " << deposit_period << endl;
