@@ -1,20 +1,33 @@
 #include <iostream>
+using namespace std;
 
 int main() {
-    unsigned number;
-    std::cout << "Enter the number: ";
-    std::cin >> number;
+    int count;
+    cout << "Enter energy: ";
+    cin >> count;
 
-    // PUT YOUR CODE HERE
-    for ( unsigned n = 0 , no = 1 ;; no = no * 2 , n=++ ){
-        if (no == number){
-            std::cout << number << " is 2 to the power of " << n << std::endl;
+    double traffic = 7.80; // Цена за единицу энергии
+    double price = traffic * count; // Общая стоимость
+    cout << "Total price: " << price << endl;
+
+    double cash = 0.0, rest = 0.0, total = 0.0;
+
+    while ( total < price){
+        cout << "Enter cash: ";
+        cin >> cash;
+        total += cash;
+
+        if ( total < price){
+            cout << "Not enough money" << price - total << endl;
         }
         else{
-            std::cout << number << " is not a power of 2 " << n << std::endl;
+            rest = total - price;
+            if (rest > 0){
+                cout << "Change: " << rest << endl;
+            }
         }
     }
-   
 
+    cout << "Payment complete. Thank you!" << endl;
     return 0;
 }
