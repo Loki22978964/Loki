@@ -2,32 +2,17 @@
 using namespace std;
 
 int main() {
-    int count;
-    cout << "Enter energy: ";
-    cin >> count;
+    int deposit_period;
+   double deposit_amount , annual_rate , desired_amount;
+   cout << "deposit_amount " ; cin >> deposit_amount;
+   cout << "annual_rate " ; cin >> annual_rate;
+   cout << "desired_amount " ; cin >> desired_amount;
 
-    double traffic = 7.80; // Цена за единицу энергии
-    double price = traffic * count; // Общая стоимость
-    cout << "Total price: " << price << endl;
+   while(deposit_amount < desired_amount){
+    deposit_period++;
+    deposit_amount = deposit_amount + desired_amount * annual_rate / 100;
 
-    double cash = 0.0, rest = 0.0, total = 0.0;
-
-    while ( total < price){
-        cout << "Enter cash: ";
-        cin >> cash;
-        total += cash;
-
-        if ( total < price){
-            cout << "Not enough money" << price - total << endl;
-        }
-        else{
-            rest = total - price;
-            if (rest > 0){
-                cout << "Change: " << rest << endl;
-            }
-        }
-    }
-
-    cout << "Payment complete. Thank you!" << endl;
+   }
+   cout << "Dep period " << deposit_period << endl;
     return 0;
 }
