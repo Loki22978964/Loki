@@ -1,19 +1,30 @@
 #include <iostream>
+#include <cmath>
+
 using namespace std;
 
-int main() {
-    int age , start;
-    cout << "Enter age "; cin >> age;
-     if (age % 2 == 0){
-        start = 0;
-     }
-     else{
-        start = 1;
-     }
-     for (int i = start ; i <= age ; i = i + 2){
-        if ( i != 0){
-            cout << i << "";
-        }   
-     }
+int fibonacci (int n){
+    int result;
+
+    if ( n == 1 || n == 2){
+        result = 1;
+    }
+    else {
+        result = fibonacci(n-1) + fibonacci(n-2);
+    }
+    return result;
+}
+
+int main() 
+{
+  int n , count;
+  cout << "n "; cin >> n;
+  if (n < 1 ){
+    cout << "Its a bad number" << endl;
+  }
+  else{
+    count = fibonacci(n);
+    cout << "fibonacci " << count << endl ;
+  }
     return 0;
 }
