@@ -2,29 +2,32 @@
 using namespace std;
 
 
-  double max_two ( double a , double b ){
-    double max;
-    if (a >= b){
-        max = a;
-    }
-    else {
-        max = b;
-    }
-    return max;
+  double cylinder_volume (double r, double h){
+    double volume;
+    volume = 3.14 * h * r * r;
+    return volume;
   }
 
   int main(){
-    double num1 , num2 , num3 , num4;
-    cout << "Enter num1 "; cin >> num1;
-    cout << "Enter num2 "; cin >> num2;
-    cout << "Enter num3 "; cin >> num3;
-    cout << "Enter num4 "; cin >> num4;
-    
-    double one , two , res;
-    one = max_two(num1 ,num2);
-    two = max_two(num3 ,num4);
-    res = max_two(one , two);
-    cout << res<< endl;
+    double r1 ,r2 , h1 , h2;
+    cout << "r1 "; cin >> r1;
+    cout << "r2 "; cin >> r2;
+    cout << "h1 "; cin >> h1;
+    cout << "h2 "; cin >> h2;
+
+    double vol1 , vol2;
+
+    vol1 = cylinder_volume(r1 , h1);
+    vol2 = cylinder_volume(r2, h2);
+
+    if ( vol1 > vol2){
+      cout << "The first cylinder is larger" << endl;
+    }
+    else{
+      cout << "The second cylinder is larger " << endl;
+    }
+
+    return 0;
 
 
   }
