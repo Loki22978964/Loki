@@ -1,24 +1,16 @@
 #include <iostream>
 
 using namespace std;
-bool is_adult (int age){
-    if (age >= 18){
-        return true;
-    }
-    else {
-        return false;
-    }
-}
+float currency_exchange( float euro ,)
 
 int main() 
 {
-    double years_count;
-    cout << "Enter the number of years: "; cin >> years_count;
+    double euro_rate, amount_euros;
+    cout << "Enter the euro to hryvnia exchange rate: "; cin >> euro_rate;
+    cout << "Enter the amount in euros: "; cin >> amount_euros;
 
-    if (is_adult(years_count))
-        cout<< "This is an adult"<<endl;
-    else
-        cout << "This is a minor" << endl;
+    double amount_hryvnia = currency_exchange(euro_rate, amount_euros);
+    cout << "Amount in hryvnias: " << amount_hryvnia << endl;
 
     return 0;
 }
