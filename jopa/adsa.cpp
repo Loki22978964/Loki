@@ -4,25 +4,27 @@
 using namespace std;
 
 
- bool triangle_check (double side1 ,double side2 , double side3){
-  return (side1 < side2 + side3);
+ int sum (int num1 , int num2 , int num3){
+    int suma;
+    if (num1 == num2 || num1 == num3 || num2 == num3){
+      suma = 0;
+    }
+    else{
+      suma = num1 + num2 + num3;
+    }
+    return suma;     
  }
 
  int main(){
-  double a , b ,c;
+  int a , b ,c;
   cout << "Enter a "; cin >> a;
   cout << "Enter b "; cin >> b;
   cout << "Enter c "; cin >> c;
-  bool rez1, rez2 , rez3;
-  rez1 = triangle_check(a , b , c);
-  rez2 = triangle_check(b , a , c );
-  rez3 = triangle_check(c , a , b );
-  
-  if (rez1 && rez2 && rez3){
-    cout << "True " << endl;
-  }
-  else{
-    cout << "False " << endl;
-  }
+
+  int res;
+  res = sum(a , b , c);
+  cout << res << endl;
   return 0;
+
+
  }
