@@ -1,10 +1,12 @@
+#define _USE_MATH_DEFINES 
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 
   double cylinder_volume (double r, double h){
     double volume;
-    volume = 3.14 * h * r * r;
+    volume = M_PI * h * r * r;
     return volume;
   }
 
