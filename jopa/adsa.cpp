@@ -1,35 +1,28 @@
-#define _USE_MATH_DEFINES 
+
 #include <iostream>
-#include <cmath>
+
 using namespace std;
 
 
-  double cylinder_volume (double r, double h){
-    double volume;
-    volume = M_PI * h * r * r;
-    return volume;
+ bool triangle_check (double side1 ,double side2 , double side3){
+  return (side1 < side2 + side3);
+ }
+
+ int main(){
+  double a , b ,c;
+  cout << "Enter a "; cin >> a;
+  cout << "Enter b "; cin >> b;
+  cout << "Enter c "; cin >> c;
+  bool rez1, rez2 , rez3;
+  rez1 = triangle_check(a , b , c);
+  rez2 = triangle_check(b , a , c );
+  rez3 = triangle_check(c , a , b );
+  
+  if (rez1 && rez2 && rez3){
+    cout << "True " << endl;
   }
-
-  int main(){
-    double r1 ,r2 , h1 , h2;
-    cout << "r1 "; cin >> r1;
-    cout << "r2 "; cin >> r2;
-    cout << "h1 "; cin >> h1;
-    cout << "h2 "; cin >> h2;
-
-    double vol1 , vol2;
-
-    vol1 = cylinder_volume(r1 , h1);
-    vol2 = cylinder_volume(r2, h2);
-
-    if ( vol1 > vol2){
-      cout << "The first cylinder is larger" << endl;
-    }
-    else{
-      cout << "The second cylinder is larger " << endl;
-    }
-
-    return 0;
-
-
+  else{
+    cout << "False " << endl;
   }
+  return 0;
+ }
