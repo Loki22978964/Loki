@@ -21,14 +21,14 @@ int positive_count( int arr[], const int size){
 
     for (int i = 0 ; i < size; i++){
         if (arr[i] > 0){
-            b = b + 1;
+            b++;
 
         }
     }
     return b;
 }
 
-double average_temperature( int arr[], const int size){
+double average_temperature( int arr[], const int size){ //Тип повернення функції — int, але для середнього значення слід використовувати double. Інакше дробова частина буде втрачена.
     double sum;
 
     for ( int i = 0; i < size ; i++){
