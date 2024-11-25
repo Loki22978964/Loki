@@ -12,7 +12,7 @@ int main(){
     gas_cost[i] = price * gas_volume[i];
    }
    for (int i = 0 ; i < N ; i++){
-    cout << gas_cost[i] << " ";
+    cout << "Cloent number " << i << " = "<<gas_cost[i] << endl;
    }
     return 0;
 }
