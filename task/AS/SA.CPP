@@ -2,32 +2,17 @@
 
 using namespace std;
 
-double factorial(double num){
-    double res = 1;
-    for (int i = 1 ; i <= num ; i++ ){
-         res =res * i;
-    }
-    return res;
-} 
-    
+int main(){
+   const double price = 7.98;
+   int gas_volume[] = {10, 12, 65, 34, 132, 76, 23, 12, 22, 31};
+   const int N = size(gas_volume);
+   double gas_cost[N]{};
 
-int main() 
-{
-    int n, factorial_n;
-    cout << "Enter a positive number n: "; cin >> n;
-    factorial_n = factorial(n);
-    switch (factorial_n)
-    {
-    case -1:
-        cout << "You entered a negative number";
-        break;
-    case 0:
-        cout << "You entered 0";
-        break;
-    default:
-        cout << n << "! = " << factorial_n;
-        break;
-    }
-
+   for (int i = 0 ; i < N ; i++){
+    gas_cost[i] = price * gas_volume[i];
+   }
+   for (int i = 0 ; i < N ; i++){
+    cout << gas_cost[i] << " ";
+   }
     return 0;
 }

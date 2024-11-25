@@ -1,16 +1,34 @@
 #include <iostream>
 
 using namespace std;
-float currency_exchange( float euro ,)
-
+ double factorial(double nn){
+    double res = 1;
+    for (int i = 1 ; i <= nn ; i++){
+        res *= i;
+    }
+    return res;
+ }
+  
 int main() 
 {
-    double euro_rate, amount_euros;
-    cout << "Enter the euro to hryvnia exchange rate: "; cin >> euro_rate;
-    cout << "Enter the amount in euros: "; cin >> amount_euros;
+    int n, factorial_n;
 
-    double amount_hryvnia = currency_exchange(euro_rate, amount_euros);
-    cout << "Amount in hryvnias: " << amount_hryvnia << endl;
+    cout << "Enter a positive number n: "; 
+    cin >> n;
 
-    return 0;
+    factorial_n = factorial(n);
+    switch (factorial_n)
+    {
+    case -1:
+        cout << "You entered a negative number";
+        break;
+    case 0:
+        cout << "You entered 0";
+        break;
+    default:
+        cout << n << "! = " << factorial_n;
+        break;
+    }
+
+    return 0;  
 }
