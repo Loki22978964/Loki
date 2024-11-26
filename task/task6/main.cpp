@@ -11,12 +11,13 @@ int main(){
         cin >> arr[i];
     }
 
-   while(ind % 3 != 0){
+   while(arr[ind] % 3 != 0){
     ind = ind + 2;
    }
    int max = arr[ind];
-   for ( int i = max ; i < 10 ; i = i + 2){
-    if (arr[i] > max && arr[i] % 4 == 0){
+
+   for ( int i = ind ; i < 10 ; i = i + 2){
+    if (arr[i] > max && arr[i] % 3 == 0){
         max = arr[i];
    }
    }
