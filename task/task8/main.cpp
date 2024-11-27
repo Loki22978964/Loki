@@ -1,19 +1,20 @@
 #include <iostream>
 using namespace std;
 
-	double arrayProduct (double arr[], int size){
-         double s = 1;
-    for ( int i = 0 ; i < size ; i++){
-        s = s * arr[i];
+	double getMinOfArray(double arr[], int size){
+        double min = arr[0]; 
+        for(int i = 0 ; i < size ; i++){
+            if(min > arr[i]){
+                min = arr[i];
+            }
+        }
+        return min;
     }
-    return s;
-    }
-   
 
 int main() 
 {
     
-	double arr[5];
+	double arr[6];
     int arrSize = size(arr);
 
     cout << "Input numbers: " << endl;
@@ -22,7 +23,8 @@ int main()
         cin >> arr[i];
     }
 
-    cout << "Product: " << arrayProduct(arr, arrSize) << endl;
+    cout << "min: " << getMinOfArray(arr, arrSize) << endl;
+
 
     return 0;
 }
