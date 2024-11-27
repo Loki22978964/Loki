@@ -1,18 +1,28 @@
+
 #include <iostream>
 using namespace std;
 
-	double getMinOfArray(double arr[], int size){
-        double min = arr[0]; 
-        for(int i = 0 ; i < size ; i++){
-            if(min > arr[i]){
-                min = arr[i];
-            }
+	double getAveragePositiveArray(double arr[], int size){
+        double s = 1;
+        double count = 0;
+
+    for (int i = 0 ; i< size ; i++ ){
+        if (arr[i] > 0){
+            s = s + arr[i];
+            count++;
         }
-        return min;
+        if (count == 0){
+            return -1;
+        }
+    }
+    return s / count;
+
     }
 
-int main() 
-{
+    
+
+
+int main(){
     
 	double arr[6];
     int arrSize = size(arr);
@@ -23,7 +33,7 @@ int main()
         cin >> arr[i];
     }
 
-    cout << "min: " << getMinOfArray(arr, arrSize) << endl;
+    cout << "Result: " << getAveragePositiveArray(arr, arrSize) << endl;
 
 
     return 0;
