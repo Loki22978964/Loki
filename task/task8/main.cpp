@@ -4,21 +4,24 @@ using namespace std;
 int main() 
 {
     
-	int arr[7];
-    int arrSize = size(arr);
+	int arrForward[7];
+    const int arrSize = size(arrForward);
 
     cout << "Input numbers: " << endl;
 
     for (int i = 0; i < arrSize; i++) {
-        cin >> arr[i];
+        cin >> arrForward[i];
     }
 
-    for (int i = 0; i < arrSize; i++) {
-        arr[i] = - arr[i];
-    }
+    int arrBack[arrSize];
+
+    for (int i = 0; i < arrSize; i++){
+        arrBack[arrSize - i] = arrForward[i];
+        
+    } 
 
     for (int i = 0; i < arrSize; i++) {
-        cout << arr[i] << " ";
+        cout << arrBack[i] << ' ';
     }
 
     return 0;
