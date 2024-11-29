@@ -18,7 +18,7 @@ int main(){
     int l = get_length(text);
 
     for (int i = l ; i >= 0 ; i--){
-        cout << text[i];
+        cout << text[i] << " ";
     }
 
     return 0;
