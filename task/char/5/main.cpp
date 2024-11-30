@@ -25,7 +25,7 @@ unsigned l(const char* t){
 
         for( int i = 0 ; i <= ltext - lstr ; i++){
             if (text[i] == string [0]){
-                for (int j = 1 ; j < lstr - 1 ; j++){
+                for (int j = 1 ; j < lstr  ; j++){
                     if (text[i + j] != string[j]){
                         break;
                     }
