@@ -19,6 +19,10 @@ string numbersInWord(string text) {
             it = text.insert(it, replacement.begin(), replacement.end()); 
             it += replacement.length(); 
         }
+        else{
+            if ((*it >= 'A' && *it <= 'Z')||(*it >= 'a' && *it <= 'z'))
+            return "It's not a number";
+        }
     }
     return text; 
 }
