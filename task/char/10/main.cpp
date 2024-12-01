@@ -17,13 +17,14 @@ string numbersInWord(string text) {
 
         } else if (*it == '.') {
             string replacement = num[10]; 
+            replacement.append (" ");
             it = text.erase(it); 
             it = text.insert(it, replacement.begin(), replacement.end()); 
             it += replacement.length(); 
             
         }
         else{
-            if ((*it >= 'A' && *it <= 'Z')||(*it >= 'a' && *it <= 'z'))
+            if ( ((*it >= 'A' && *it <= 'Z')||(*it >= 'a' && *it <= 'z') || (*it  = ',')) )
             return "It's not a number";
         }
     }
@@ -33,10 +34,10 @@ string numbersInWord(string text) {
 int main() {
     string number;
     
-    cout << "Введіть число: ";
+    cout << "Input number: ";
     getline(cin, number);
 
-    cout << "Результат: " << numbersInWord(number) ;
+    cout << "Result: " << numbersInWord(number) ;
 
     return 0;
 }
