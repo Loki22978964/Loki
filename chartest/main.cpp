@@ -8,18 +8,15 @@ string numbersInWord(string text){
 
     for ( std::string::iterator it = text.begin(); it != text.end();){
         if (*it >= '0' && *it <= '9'){
-      int count = count * 10 + (*it - '0');
-      if ( count > 9){
+      
             string mo = monght[*it - '0'];
             it = text.erase(it);
             it = text.insert(it , mo.begin(), mo.end());
             it += mo.length();
-            count = 0;
         }
-    }
+    
         
         else{
-            text[*it] = text[*it];
             it++;
         }
     }
