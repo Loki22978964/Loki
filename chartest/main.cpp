@@ -1,39 +1,21 @@
-#include <iostream>
-#include <string>
-using namespace std;
-string numbersInWord(string text){
-    string monght[]{"January", "February", "March", "April", 
-                  "May", "June", "July", "August", "September",
-                   "October", "November", "December"};
-
-    for ( std::string::iterator it = text.begin(); it != text.end();){
-        if (*it >= '0' && *it <= '9'){
-      
-            string mo = monght[*it - '0'];
-            it = text.erase(it);
-            it = text.insert(it , mo.begin(), mo.end());
-            it += mo.length();
-        }
-    
-        
-        else{
-            it++;
-        }
-    }
-    return text;
-    
-}
+// 1
+// з 16 бітного запису у десятковий
+// #include <iostream>
+// #include <bitset>
 
 
-int main()
-{
-  string number;
+// int main() {
+
     
-    cout << "Input monght: ";
-    getline(cin , number);
+//     // Створення об'єкта bitset з 16 бітів і ініціалізація його значенням
+//     std::bitset<16> bits;
+// std::cin >> bits;
+//     // Виведення всіх бітів
+//     std::cout << "Бітовий набір: " << bits.to_ulong() << std::endl;
+
     
 
-    cout << "Result: " << numbersInWord(number) ;
+    
 
-
-}
+//     return 0;
+// }
