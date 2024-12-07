@@ -1,38 +1,65 @@
+#include <iostream>
+using namespace std ;
+
+int main(){
+    unsigned short result = 0;
+
+    for (int i = 0 ; i < 16 ; i++){
+        char c;
+        cin >> c;
+        c = c -'0';
+        if (c != '0'){
+            result = result << 1;
+        }
+        else{
+            result = result;
+        }
+        result = result | c;
+    }
+    cout << result;
+    return 0;
+}
+
 // #include <iostream>
-// using namespace std ;
+// #include <bitset>
+// int main()
+// {
 
-// int main(){
-//     unsigned short result = 0;
+// std::bitset<16> bits;
+// std::cin >> bits;
 
-//     for (int i = 0 ; i < 16 ; i++){
-//         char c;
-//         cin >> c;
-//         c = c -'0';
-//         if (c != '0'){
-//             result = result << 1;
-//         }
-//         else{
-//             result = result;
-//         }
-//         result = result | c;
-//     }
-//     cout << result;
-//     return 0;
+// unsigned short result = bits.to_ulong();
+// std::cout << result << std::endl;
+// return 0;
 // }
 
-#include <iostream>
-#include <bitset>
-int main()
-{
-// Створити 16-бітний std::bitset і зчитати в нього значення.
-// Кількість біт задається в кутніх дужках. Символів може бути
-// менше ніж 16 - відповідні старші біти будуть занулені.
-std::bitset<16> bits;
-std::cin >> bits;
-// Конвертувати std::bitset в unsigned long (32 або 64 біти)
-// і присвоїти unsigned short (16 біт). Біти unsigned long
-// після 16 будуть відкинуті, але вони все одно занулені.
-unsigned short result = bits.to_ulong();
-std::cout << result << std::endl;
-return 0;
-}
+
+
+
+// int main() {
+// 	unsigned short res = 0;
+// 	// Ви можете вводити рядок, як 0000000000001110, тому що наша програма зчитує символи з консолі по одному,
+//     // і кожен символ розглядається окремо. Це дозволяє користувачу вводити значення по черзі,
+//     // навіть якщо воно має формат двійкового числа.
+
+
+// 	for (int i = 0; i < 16; i++) {
+// 		char c;
+// 		cin >> c;
+// 		if (c == '1' || c == '0') {
+// 			c = c - '0';
+// 			res = res << 1;
+// 			res = res | c;
+// 		}
+// 		else{
+// 			cout << " go to hell ";
+// 		    break;
+// 		}
+// 	}
+
+
+// 	cout << res;
+
+
+// 	return 0;
+// }

@@ -8,7 +8,7 @@
     int precision;
     cout << "Enter tne precision: "; cin >> precision;
 
-    cout << std::fixed << std::setprecision(precision) ;
+    cout << std::fixed <<std::setprecision(precision) ;
     cout << n;
     return 0;
     
