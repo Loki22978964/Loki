@@ -1,6 +1,21 @@
 #include <iostream>
-extern const int LIBVERSION;
+#include <string> // Для std::string
+
+struct S {
+    int data; // Доданий прикладовий член структури
+};
+
+struct S1 {
+    char a[2];    // Масив з 2 елементів типу char
+    char c;       // Звичайна змінна типу char
+    const char* s;      // Вказівник на тип char
+    S* p;         // Вказівник на структуру типу S
+    short i;      // Змінна типу short
+} z = { "a", 'b', "&qwerty", new S{42} }; // Приклад ініціалізації
+
+
 int main() {
-	std::cout << "Library version: " << LIBVERSION << std::endl;
-	return 0;
+    cout << sizeof(S1);
+    return 0;
 }
+
