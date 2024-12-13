@@ -110,6 +110,7 @@
 //     int year;
 //     std::string name;
 // };
+
 // int main() 
 // {
 //     Book books[5];
@@ -140,23 +141,38 @@
 
 #include <iostream>
 #include <string>
-
 struct Book{
     int year;
     std::string name;
 };
+
 int main() 
 {
     Book books[5];
-    Book res;
-
-    for (int i = 0; i < 5 ; i++){
-        
+    Book result;
+    for (int i = 0; i < 5; ++i) {
+        std::cout << "Enter book " << i << ": ";
+        std::cin >> books[i].year;
+        std::cin.get();
+        std::getline(std::cin, books[i].name);
     }
+
+
+   result.year = books[0].year;
+   result.name = books[0].name;
+
+    for (int i = 0 ; i < 5 ; i++){
+        if (result.year < books[i].year){
+            result.year = books[i].year;
+            result.name = books[i].name;
+        }
+    }
+
 
     std::cout << "Newest: ";
     std::cout << '"' << result.name << '"' << ' ';
     std::cout << '(' << result.year << ')' << std::endl;
-
-    return 0;
+  
+    return 0;  
 }
+
