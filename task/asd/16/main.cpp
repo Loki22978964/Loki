@@ -58,9 +58,30 @@
 // int main(void) {
 //     cout << boolalpha
 //          << "A:" << std::is_union<A>::value << '\n'  // Проверка для структуры A
-//          << "B:" << std::is_union<а>::value << '\n'  // Проверка для union B
+//          << "B:" << std::is_union<B>::value << '\n'  // Проверка для union B
 //          << "C:" << std::is_union<C>::value << '\n'  // Проверка для структуры C
 //          << "int:" << std::is_union<int>::value << '\n';  // Проверка для int
 //     return 0;
 // }
 
+#include <iostream>
+using namespace std;
+
+int i;               // ініціалізуємо глобальну змінну i
+int& j = i;          // оголошуємо посилання на глобальну змінну i
+// int& z; помилка
+
+int main(void) {
+    int i = 1;       // ініціалізуємо локальну змінну i
+    int *const p1 = &i; // оголошуємо константний вказівник на локальну змінну i
+    int& p2 = i;     // оголошуємо посилання на локальну змінну i
+
+    cout << "Variable address: 0x" << hex << &i << '\n'
+         << "Reference address: 0x" << hex << &p2 << '\n'
+         << "Pointer address: 0x" << hex << &p1 << '\n'
+         << "Pointed address: 0x" << hex << &*p1 << '\n';
+
+    p2 = 10;         // використання посилання для зміни значення локальної змінної i
+
+    return 0;
+}
