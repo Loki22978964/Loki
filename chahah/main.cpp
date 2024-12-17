@@ -499,33 +499,84 @@
 // }
 
 
+// #include <iostream>
+// using namespace std;
+
+// #define OUT cout << " main -\t::i = " << ::i << " i = " << i << " j = " << j << '\n';
+
+// int i = 10;
+
+// int& f() {
+//     static int s = 0;
+//     int i = -10;
+//     s++;
+//     i++;
+//     ::i++;
+//     cout << " f -\t::i = " << ::i << " i = " << i << " s = " << s << '\n';
+//     return s;
+// }
+
+// int main() {
+//     int i = 15;
+//     int& j = f();
+//     OUT;
+//     f();
+//     OUT;
+//     i++;
+//     ::i++;
+//     f();
+//     OUT;
+
+    
+// }
+
+
+
 #include <iostream>
 using namespace std;
 
-#define OUT cout << " main -\t::i = " << ::i << " i = " << i << " j = " << j << '\n';
 
-int i = 10;
+int main(){
 
-int& f() {
-    static int s = 0;
-    int i = -10;
-    s++;
-    i++;
-    ::i++;
-    cout << " f -\t::i = " << ::i << " i = " << i << " s = " << s << '\n';
-    return s;
-}
+    int h , w;
+    cout << "enter h "; cin >> h;
+    cout << "enter w "; cin >> w;
 
-int main() {
-    int i = 15;
-    int& j = f();
-    OUT;
-    f();
-    OUT;
-    i++;
-    ::i++;
-    f();
-    OUT;
+    float **arr = new float*[h];
 
-    
+    for (int i = 0 ; i < h ; i ++){
+        arr[i] = new float[w];
+    }
+//
+
+    float** p2 = arr;
+
+    for (int i = 0 ; i < h ; i++){
+        for (int j = 0 ; j < w ; j++){
+            arr[i][j] = rand()%20;
+        }
+    }
+
+    float sum = 0, sum1 = 0, sum2 = 0;
+
+    for (int i = 0 ; i < h ; i++){
+        for (int j = 0 ; j < w ; j++){
+            sum += arr[i][j];
+            sum2 += *(*(p2 + i) +j );
+        }
+
+    }
+
+    cout << sum << "\n" << sum2;
+
+
+
+//
+    for (int i = 0 ; i < h ; i ++){
+        delete[] arr[i];
+    }
+
+    delete[] arr;
+
+    return 0;
 }
