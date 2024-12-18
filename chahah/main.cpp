@@ -532,51 +532,83 @@
 
 
 
+// #include <iostream>
+// using namespace std;
+
+
+// int main(){
+
+//     int h , w;
+//     cout << "enter h "; cin >> h;
+//     cout << "enter w "; cin >> w;
+
+//     float **arr = new float*[h];
+
+//     for (int i = 0 ; i < h ; i ++){
+//         arr[i] = new float[w];
+//     }
+// //
+
+//     float** p2 = arr;
+
+//     for (int i = 0 ; i < h ; i++){
+//         for (int j = 0 ; j < w ; j++){
+//             arr[i][j] = rand()%20;
+//         }
+//     }
+
+//     float sum = 0, sum1 = 0, sum2 = 0;
+
+//     for (int i = 0 ; i < h ; i++){
+//         for (int j = 0 ; j < w ; j++){
+//             sum += arr[i][j];
+//             sum2 += *(*(p2 + i) +j );
+//         }
+
+//     }
+
+//     cout << sum << "\n" << sum2;
+
+
+
+// //
+//     for (int i = 0 ; i < h ; i ++){
+//         delete[] arr[i];
+//     }
+
+//     delete[] arr;
+
+//     return 0;
+// }
+
 #include <iostream>
-using namespace std;
+    
+    using namespace std;
+
+    int a = 10;         // звичайна змінна
+    const int b = 20; 
 
 
-int main(){
-
-    int h , w;
-    cout << "enter h "; cin >> h;
-    cout << "enter w "; cin >> w;
-
-    float **arr = new float*[h];
-
-    for (int i = 0 ; i < h ; i ++){
-        arr[i] = new float[w];
+void check_const(int& var) {
+    if constexpr (std::is_const_v<std::remove_reference_t<T>>) {
+        std::cout << "const" << std::endl;
+    } else {
+        std::cout << "" << std::endl;
     }
-//
+}
 
-    float** p2 = arr;
+void f(const int);
+void f(int i) {}
 
-    for (int i = 0 ; i < h ; i++){
-        for (int j = 0 ; j < w ; j++){
-            arr[i][j] = rand()%20;
-        }
-    }
+int main() {
+      // константна змінна
 
-    float sum = 0, sum1 = 0, sum2 = 0;
-
-    for (int i = 0 ; i < h ; i++){
-        for (int j = 0 ; j < w ; j++){
-            sum += arr[i][j];
-            sum2 += *(*(p2 + i) +j );
-        }
-
-    }
-
-    cout << sum << "\n" << sum2;
-
-
-
-//
-    for (int i = 0 ; i < h ; i ++){
-        delete[] arr[i];
-    }
-
-    delete[] arr;
+    f(a);  // Виклик функції з не-const аргументом
+    f(b);  // Виклик функції з const аргументом
+    cout << check_const(a) << endl;
+    cout << check_const(b) << endl;
+    cout << check_const(f(a)) << endl;
+    cout << check_const(f(b)) << endl;
 
     return 0;
 }
