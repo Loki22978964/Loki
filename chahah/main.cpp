@@ -731,17 +731,61 @@
 
 
 
+// #include <iostream>
+
+// int main() {
+//     int x = 10, y = 20;
+//     auto lambda = [x, &y]() {
+//         y += x;
+//         return y;
+//     };
+//     std::cout << lambda() << std::endl; // Виведе: 30
+//     std::cout << "y: " << y <<  "x: " << x << std::endl; // Виведе: y: 30
+//     return 0;
+// }
+
+
+// #include <iostream>
+
+// int main() {
+//     int x, y;
+
+//     auto i = [&x, y](int k) {
+//         x = 10;
+//         k = 20;
+//         std::cout << x + y + k ;
+//         return x + y + k;
+//     }(x);
+
+//     // до С++14 не можна використовувати auto у списку параметрів
+//     // auto l = [](auto first, auto second) { return first + second; };
+
+//     int (*l)(int, int) = [](int first, int second) {
+//         return first + second;
+//     };
+
+//     auto f = [](int first, int second) {
+//         return first + second;
+//     };
+
+//     i = l(1, 2);
+//     i = f(1, 2);
+// }
+
+
+
 #include <iostream>
 
 int main() {
-    int x = 10, y = 20;
-    auto lambda = [x, &y]() {
-        y += x;
-        return y;
-    };
-    std::cout << lambda() << std::endl; // Виведе: 30
-    std::cout << "y: " << y <<  "x: " << x << std::endl; // Виведе: y: 30
+    int x = 10, y = 5;
+
+    // Лямбда з захопленням, параметрами та явним поверненням
+    auto result = [x, &y](int a, int b) -> int {
+        y += b; // Можна змінювати y, бо захоплено за посиланням
+        return x + y + a; // x використовується за значенням
+    }(5, 10); // Передаємо аргументи: a = 3, b = 2
+
+    std::cout << "result: " << result << std::endl; // Виведе: result: 20
+    std::cout << "y: " << y << std::endl; // Виведе: y: 7
     return 0;
 }
-
-
