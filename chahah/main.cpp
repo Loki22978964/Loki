@@ -641,9 +641,22 @@
 void f(int i, ...) {
     std::va_list goo;
     va_start(goo,i);
+
+     va_list goo2;
+    va_copy(goo2 , goo);
+
     for(int j = 0; j < i ; j++){
-        std::cout << va_arg(goo, int) << std::endl;
+        std::cout << va_arg(goo, int) << " ";
     }
+    std::cout << std::endl;
+    va_end(goo);
+    
+    int sum = 0;
+    for(int j = 0; j < i ; j++){
+        sum += va_arg(goo2, int);
+    }
+    std::cout << sum << std::endl;
+    va_end (goo2);
 }
 
 int main() {
