@@ -581,34 +581,57 @@
 //     return 0;
 // }
 
-#include <iostream>
+// #include <iostream>
     
-    using namespace std;
+//     using namespace std;
 
-    int a = 10;         // звичайна змінна
-    const int b = 20; 
+//     int a = 10;         // звичайна змінна
+//     const int b = 20; 
 
 
-void check_const(int& var) {
-    if constexpr (std::is_const_v<std::remove_reference_t<T>>) {
-        std::cout << "const" << std::endl;
-    } else {
-        std::cout << "" << std::endl;
-    }
-}
+// void check_const(int& var) {
+//     if constexpr (std::is_const_v<std::remove_reference_t<T>>) {
+//         std::cout << "const" << std::endl;
+//     } else {
+//         std::cout << "" << std::endl;
+//     }
+// }
 
-void f(const int);
-void f(int i) {}
+// void f(const int);
+// void f(int i) {}
+
+// int main() {
+//       // константна змінна
+
+//     f(a);  // Виклик функції з не-const аргументом
+//     f(b);  // Виклик функції з const аргументом
+//     cout << check_const(a) << endl;
+//     cout << check_const(b) << endl;
+//     cout << check_const(f(a)) << endl;
+//     cout << check_const(f(b)) << endl;
+
+//     return 0;
+// }
+
+
+#include <iostream>
+
+#define MF(N) void N(){ std::cout << "Виклик функції "#N << "\n"; }
+
+MF(a);
+MF(b);
+MF(c);
+MF(d);
+
+void(*mf[])() = { a, b, c, d };
 
 int main() {
-      // константна змінна
-
-    f(a);  // Виклик функції з не-const аргументом
-    f(b);  // Виклик функції з const аргументом
-    cout << check_const(a) << endl;
-    cout << check_const(b) << endl;
-    cout << check_const(f(a)) << endl;
-    cout << check_const(f(b)) << endl;
-
-    return 0;
+    while (1) {
+        std::cout << " Input: from a to d \n";
+        char c;
+        std::cin >> c;
+        if (c == 'q') break;
+        if ((c >= 'a') && (c <= 'd'))
+            (*mf[c - 'a'])();
+    }
 }
