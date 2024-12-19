@@ -614,24 +614,45 @@
 // }
 
 
+// #include <iostream>
+
+// #define MF(N) void N(){ std::cout << "Виклик функції "#N << "\n"; }
+
+// MF(a);
+// MF(b);
+// MF(c);
+// MF(d);
+
+// void(*mf[])() = { a, b, c, d };
+
+// int main() {
+//     while (1) {
+//         std::cout << " Input: from a to d \n";
+//         char c;
+//         std::cin >> c;
+//         if (c == 'q') break;
+//         if ((c >= 'a') && (c <= 'd'))
+//             (*mf[c - 'a'])();
+//     }
+// }
 #include <iostream>
+#include <cstdarg>
 
-#define MF(N) void N(){ std::cout << "Виклик функції "#N << "\n"; }
-
-MF(a);
-MF(b);
-MF(c);
-MF(d);
-
-void(*mf[])() = { a, b, c, d };
+void f(int i, ...) {
+    std::va_list goo;
+    va_start(goo,i);
+    for(int j = 0; j < i ; j++){
+        std::cout << va_arg(goo, int) << std::endl;
+    }
+}
 
 int main() {
-    while (1) {
-        std::cout << " Input: from a to d \n";
-        char c;
-        std::cin >> c;
-        if (c == 'q') break;
-        if ((c >= 'a') && (c <= 'd'))
-            (*mf[c - 'a'])();
-    }
+    f(1, 1);       // Виклик з 1 аргументом
+    std::cout << std::endl; 
+    f(2, 1, 2);    // Виклик з 2 аргументами
+    std::cout << std::endl; 
+    f(3, 1, 2, 3); // Виклик з 3 аргументами
+    std::cout << std::endl; 
+
+    return 0;
 }

@@ -65,7 +65,8 @@
         "xstring": "cpp",
         "xtr1common": "cpp",
         "xutility": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "cstdarg": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
