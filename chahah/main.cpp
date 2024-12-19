@@ -634,38 +634,64 @@
 //         if ((c >= 'a') && (c <= 'd'))
 //             (*mf[c - 'a'])();
 //     }
-// }
-#include <iostream>
-#include <cstdarg>
+// }  
 
-void f(int i, ...) {
-    std::va_list goo;
-    va_start(goo,i);
 
-     va_list goo2;
-    va_copy(goo2 , goo);
 
-    for(int j = 0; j < i ; j++){
-        std::cout << va_arg(goo, int) << " ";
-    }
-    std::cout << std::endl;
-    va_end(goo);
+// #include <iostream>
+// #include <cstdarg>
+
+// void f(int i, ...) {
+//     std::va_list goo;
+//     va_start(goo,i);
+
+//      va_list goo2;
+//     va_copy(goo2 , goo);
+
+//     for(int j = 0; j < i ; j++){
+//         std::cout << va_arg(goo, int) << " ";
+//     }
+//     std::cout << std::endl;
+//     va_end(goo);
     
-    int sum = 0;
-    for(int j = 0; j < i ; j++){
-        sum += va_arg(goo2, int);
-    }
-    std::cout << sum << std::endl;
-    va_end (goo2);
-}
+//     int sum = 0;
+//     for(int j = 0; j < i ; j++){
+//         sum += va_arg(goo2, int);
+//     }
+//     std::cout << sum << std::endl;
+//     va_end (goo2);
+// }
+
+// int main() {
+//     f(1, 1);       // Виклик з 1 аргументом
+//     std::cout << std::endl; 
+//     f(2, 1, 2);    // Виклик з 2 аргументами
+//     std::cout << std::endl; 
+//     f(3, 1, 2, 3); // Виклик з 3 аргументами
+//     std::cout << std::endl; 
+
+//     return 0;
+// }
+
+#include <iostream>
+using namespace std;
+
+// Оголошення функцій
+void f(int, int, int);         // Функція без дефолтних значень
+void f(int, int, int = 8);     // Функція з дефолтним значенням для третього параметра
+void f(int , int = 7, int); // Функція з дефолтними значеннями для другого і третього параметра
 
 int main() {
-    f(1, 1);       // Виклик з 1 аргументом
-    std::cout << std::endl; 
-    f(2, 1, 2);    // Виклик з 2 аргументами
-    std::cout << std::endl; 
-    f(3, 1, 2, 3); // Виклик з 3 аргументами
-    std::cout << std::endl; 
-
-    return 0;
+    f(1, 2, 3);   // Виклик з явними значеннями
+    f(1, 2);      // Виклик з дефолтним значенням для третього параметра
+    f(1);         // Виклик з дефолтними значеннями для другого і третього параметра
+    // f(); // Цей виклик викликає помилку, бо немає функції f() без параметрів
 }
+
+// Реалізація функції f
+void f(int a, int b, int c) {
+    cout << a << " " << b << " " << c << endl;
+}
+
+
+
