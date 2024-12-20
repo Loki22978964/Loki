@@ -774,18 +774,48 @@
 
 
 
-#include <iostream>
+// #include <iostream>
 
-int main() {
-    int x = 10, y = 5;
+// int main() {
+//     int x = 10, y = 5;
 
-    // Лямбда з захопленням, параметрами та явним поверненням
-    auto result = [x, &y](int a, int b) -> int {
-        y += b; // Можна змінювати y, бо захоплено за посиланням
-        return x + y + a; // x використовується за значенням
-    }(5, 10); // Передаємо аргументи: a = 3, b = 2
+//     // Лямбда з захопленням, параметрами та явним поверненням
+//     auto result = [x, &y](int a, int b) -> int {
+//         y += b; // Можна змінювати y, бо захоплено за посиланням
+//         return x + y + a; // x використовується за значенням
+//     }(5, 10); // Передаємо аргументи: a = 3, b = 2
 
-    std::cout << "result: " << result << std::endl; // Виведе: result: 20
-    std::cout << "y: " << y << std::endl; // Виведе: y: 7
-    return 0;
-}
+//     std::cout << "result: " << result << std::endl; // Виведе: result: 20
+//     std::cout << "y: " << y << std::endl; // Виведе: y: 7
+//     return 0;
+// }
+
+
+// #include <cmath>
+// #include <iostream>
+// using namespace std ;
+
+// double s(double d1){
+//     cout << "1 function" << endl;
+//     return 3.14 * d1 * d1;
+// }
+
+// double s(double d1 , double d2){
+//     cout << "2 function" << endl;
+//     return  d1 * d2;
+// }
+
+// double s ( double d1 , double d2 , double d3){
+//     cout << "3 function " << endl;
+//         double p = (d1 + d2 + d3) / 2;
+//     return sqrt(p * (p - d1) * (p - d2) * (p - d3));
+// }
+
+// int main(){
+
+//     cout << s(1) << endl;
+//     cout << s(1 , 2) << endl;
+//     cout << s(4 , 2 ,3) << endl;
+
+//     return 0;
+// }
