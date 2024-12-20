@@ -902,34 +902,54 @@
 
 
 
+// #include <iostream>
+// using namespace std;
+
+// int c (int * m , int sz, int(*fu)(int,int)){
+//      int r = m[0];
+//     for (int i = 1 ; i < sz ; i++){
+//         r = fu(r , m[i]);
+//     }
+//     return r;
+// }
+
+
+// int max(int i , int j){
+//     return i > j ? i : j;
+// }
+
+// int min(int i , int j){
+//     return i < j ? i : j;
+// }
+
+// int main(){
+//      int data[] = { 3, 2, 1, 0, -1, -2, -3 };
+//       int sz = sizeof(data) / sizeof(data[0]);
+
+//      cout << c(data , sz , max) << endl;
+//      cout << c ( data , sz , min) << endl;
+     
+//      return 0;
+// }
+
+
+
+
 #include <iostream>
 using namespace std;
 
-int c (int * m , int sz, int(*fu)(int,int)){
-     int r = m[0];
-    for (int i = 1 ; i < sz ; i++){
-        r = fu(r , m[i]);
-    }
-    return r;
-}
-
-
-int max(int i , int j){
-    return i > j ? i : j;
-}
-
-int min(int i , int j){
-    return i < j ? i : j;
+int f ( const int i){
+   
+    return i; 
 }
 
 int main(){
-     int data[] = { 3, 2, 1, 0, -1, -2, -3 };
-      int sz = sizeof(data) / sizeof(data[0]);
+    int m = 5;
 
-     cout << c(data , sz , max) << endl;
-     cout << c ( data , sz , min) << endl;
-     
-     return 0;
+    int p = f(m);
+
+    cout << p;
+
+    return 0;
 }
-
 
