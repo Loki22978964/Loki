@@ -819,3 +819,117 @@
 
 //     return 0;
 // }
+
+
+// #include <iostream>
+
+// void print(int x) {
+//     std::cout << "Це ціле число: " << x << std::endl;
+// }
+
+// void print(double x) {
+//     std::cout << "Це число з плаваючою комою: " << x << std::endl;
+// }
+
+// int main() {
+//     print(5);    // Викликає функцію print(int)
+//     print(5.5);  // Викликає функцію print(double)
+//     print('b');  // Аргумент типу char! Неявно викликає print(int), бо 'a' перетворюється на код ASCII.
+//     return 0;
+// }
+
+
+
+
+
+
+// #include <iostream>
+// #include <vector>
+
+// int main() {
+//     // Масив чисел
+//     const int s = 5;
+//     int numbers [s] = {1, 2, 3, 4, 5};
+
+    
+//     // for (auto num : numbers) {
+//     //     auto square = [](int x) { return x * x; };
+//     //     std::cout << square(num) << " ";  // Вивести квадрат числа
+//     // }
+
+//     for (int i = 0 ; i < s ; i++) {
+//         auto num = numbers[i];
+//         auto square = [](int x) { return x * x; };
+//         std::cout << square(num) << " ";  
+//     }
+
+//     return 0;
+// }
+
+
+
+
+
+// #include <iostream>
+
+// const unsigned sz = 7;
+
+// int callback_f(int *m, unsigned len, int(*comparator)(int, int)) {
+//     int r = m[0];
+//     for (unsigned i = 1; i < len; ++i) {
+//         r = comparator(r, m[i]);
+//     }
+//     return r;
+// }
+
+// int max(int i, int j) {
+//     return i < j ? j : i;
+// }
+
+// int min(int i, int j) {
+//     return i > j ? j : i;
+// }
+
+// int main() {
+//     int data[sz] = {3, 2, 1, 0, -1, -2, -3};
+
+//     std::cout << "Max is  " << callback_f(data, sz, max) << '\n';
+//     std::cout << "Min is  " << callback_f(data, sz, min) << '\n';
+
+//     return 0;
+// }
+
+
+
+
+#include <iostream>
+using namespace std;
+
+int c (int * m , int sz, int(*fu)(int,int)){
+     int r = m[0];
+    for (int i = 1 ; i < sz ; i++){
+        r = fu(r , m[i]);
+    }
+    return r;
+}
+
+
+int max(int i , int j){
+    return i > j ? i : j;
+}
+
+int min(int i , int j){
+    return i < j ? i : j;
+}
+
+int main(){
+     int data[] = { 3, 2, 1, 0, -1, -2, -3 };
+      int sz = sizeof(data) / sizeof(data[0]);
+
+     cout << c(data , sz , max) << endl;
+     cout << c ( data , sz , min) << endl;
+     
+     return 0;
+}
+
+
