@@ -974,20 +974,39 @@
 //     return 0;
 // }
 
+// 
 #include <iostream>
-#include <functional>       // Підключення заголовочного файлу
-using namespace std;        // Використання простору імен std
-using namespace std::placeholders;  // Використання std::placeholders для плейсхолдерів (_1, _2, ...)
+// #include <functional>       // Підключення заголовочного файлу
+// using namespace std;        // Використання простору імен std
+// using namespace std::placeholders;  // Використання std::placeholders для плейсхолдерів (_1, _2, ...)
 
-// Функція, яка приймає три аргументи і повертає їх суму
-double f(int i, char c, double d) { 
-    cout << i << endl;
-    cout << c << endl;
-    cout << d << endl;
-    return i + c + d; 
+// // Функція, яка приймає три аргументи і повертає їх суму
+// double f(int i, char c, double d) { 
+//     cout << i << endl;
+//     cout << c << endl;
+//     cout << d << endl;
+//     return i + c + d; 
+// }
+
+// int main() {
+//     auto bn = bind(f, _1 , 'c' , 4);  // Зв'язування функції f з фіксованими аргументами
+//     double d = bn(7 );                 // Виклик зв'язаного об'єкта bn як функції
+// }
+
+
+#include <iostream>
+using namespace std;
+
+void example() {
+    int x = 10;
+    auto lambda = [&]() { return x + 30 ; };  // x захоплюється за посиланням
+    cout << lambda() << endl;  // Виведе 10
+
+    x = 20;  // Змінюємо x
+    cout << lambda() << endl;  // Виведе 20, тому що lambda захопила посилання на x
 }
 
 int main() {
-    auto bn = bind(f, _1 , 'c' , _3);  // Зв'язування функції f з фіксованими аргументами
-    double d = bn(7 , 4);                 // Виклик зв'язаного об'єкта bn як функції
+    example();  // Викликаємо функцію example
+    return 0;
 }
