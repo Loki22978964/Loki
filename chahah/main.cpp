@@ -935,21 +935,59 @@
 
 
 
-#include <iostream>
-using namespace std;
+// #include <iostream>
+// using namespace std;
 
-int f ( const int i){
+// int f ( const int i){
    
-    return i; 
+//     return i; 
+// }
+
+// int main(){
+//     int m = 5;
+
+//     int p = f(m);
+
+//     cout << p;
+
+//     return 0;
+// }
+
+
+
+
+// #include <iostream>
+
+// using namespace std;
+
+// int main(){
+//     auto  p = [](int x) { return x * x; };
+// }
+// #include <iostream>
+// #include <functional>
+// // Глобальна функція
+// int add(int a, int b) {
+//     return a + b;
+// }
+// int main() {
+//     auto add_five = std::bind(add, 5, std::placeholders::_1);
+//     return 0;
+// }
+
+#include <iostream>
+#include <functional>       // Підключення заголовочного файлу
+using namespace std;        // Використання простору імен std
+using namespace std::placeholders;  // Використання std::placeholders для плейсхолдерів (_1, _2, ...)
+
+// Функція, яка приймає три аргументи і повертає їх суму
+double f(int i, char c, double d) { 
+    cout << i << endl;
+    cout << c << endl;
+    cout << d << endl;
+    return i + c + d; 
 }
 
-int main(){
-    int m = 5;
-
-    int p = f(m);
-
-    cout << p;
-
-    return 0;
+int main() {
+    auto bn = bind(f, _1 , 'c' , _3);  // Зв'язування функції f з фіксованими аргументами
+    double d = bn(7 , 4);                 // Виклик зв'язаного об'єкта bn як функції
 }
-
