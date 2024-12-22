@@ -994,19 +994,110 @@
 // }
 
 
+// #include <iostream>
+// using namespace std;
+
+// void example() {
+//     int x = 10;
+//     auto lambda = [&]() { return x + 30 ; };  // x захоплюється за посиланням
+//     cout << lambda() << endl;  // Виведе 10
+
+//     x = 20;  // Змінюємо x
+//     cout << lambda() << endl;  // Виведе 20, тому що lambda захопила посилання на x
+// }
+
+// int main() {
+//     example();  // Викликаємо функцію example
+//     return 0;
+// }
+
+
+// #include <type_traits>
+// #include <iostream>
+// using namespace std;
+
+// auto f(char) -> int(*)() { 
+//     return nullptr; 
+// }
+
+// int main() {
+//     cout << boolalpha; // Для виведення булевих значень як true/false
+//     cout << is_invocable<int()>::value << '\n'; // Перевірка, чи можна викликати функцію типу int()
+//     cout << is_invocable_r<int, int()>::value << '\n'; // Перевірка, чи можна викликати функцію типу int() і отримати int
+//     cout << is_invocable_r<void, void(int), int>::value << '\n'; // Перевірка, чи можна викликати функцію void(int) з параметром int і отримати void
+//     cout << is_invocable_r<int(*)(), decltype(f), char>::value << '\n'; // Перевірка, чи можна викликати функцію f(char) та отримати тип int(*)()
+    
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// #include <type_traits>
+
+
+
+// int main() {
+//     std::cout << std::boolalpha;
+//     std::cout << "F: " << std::is_same<int(*)(int), std::decay<int(int)>::type>::value << '\n';
+
+//     auto f1 = [](int) { return 1; };
+//     std::cout << f1(5);
+// }
+
+
+
 #include <iostream>
-using namespace std;
+// #include <type_traits>
 
-void example() {
-    int x = 10;
-    auto lambda = [&]() { return x + 30 ; };  // x захоплюється за посиланням
-    cout << lambda() << endl;  // Виведе 10
+// int main() {
+//     int x = 5;
+//     const int& y = x;
 
-    x = 20;  // Змінюємо x
-    cout << lambda() << endl;  // Виведе 20, тому що lambda захопила посилання на x
-}
+//     // Використовуємо std::decay для перетворення типів
+//     std::cout << "Decay of int: " << typeid(std::decay<int>::type).name() << std::endl;
+//     std::cout << "Decay of const int&: " << typeid(std::decay<const int&>::type).name() << std::endl;
 
-int main() {
-    example();  // Викликаємо функцію example
-    return 0;
-}
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// #include <functional>
+// using namespace std;
+
+// // Константа, що визначає розмір масиву
+// const unsigned sz = 7;
+
+// // Функція з callback (вказівником на функцію), яка обчислює результат відповідно до переданого компаратора
+// int callback_f(int *m, unsigned len, int (*comparator)(int , int) ) {
+//     int result = m[0]; // Початкове значення
+//     for (unsigned i = 1; i < len; ++i) {
+//         result = comparator(result, m[i]); // Виклик функції comparator
+//     }
+//     return result;
+// }
+
+// // Функція для порівняння: повертає максимум з двох чисел
+// int max(int i, int j) { 
+//     return i < j ? j : i; 
+// }
+
+// // Функція для порівняння: повертає мінімум з двох чисел
+// int min(int i, int j) { 
+//     return i > j ? j : i; 
+// }
+
+// int main() {
+//     // Вихідний масив
+//     int data[sz] = { 3, 2, 1, 0, -1, -2, -3 };
+
+//     // Використання callback_f з функцією max
+//     std::cout << "Max is " << callback_f(data, sz, max) << '\n';
+
+//     // Використання callback_f з функцією min
+//     std::cout << "Min is " << callback_f(data, sz, min) << '\n';
+
+//     return 0;
+// }
