@@ -1101,3 +1101,134 @@
 
 //     return 0;
 // }
+
+
+
+// #include <iostream>
+// #include <functional>
+
+
+// void print_result(int result) {
+//     std::cout << "The result is: " << result << std::endl;
+// }
+
+// void do_operation(int x, int y, std::function<void(int)> callback) {
+//     int result = x + y;
+//     callback(result);
+// }
+// int main(){
+// do_operation(4, 5, print_result);
+
+// return 0;
+// }
+
+
+
+// #include <iostream>
+
+// int min (int *m , int size){
+//     int res = m[0];
+//     for(int i = 0 ; i < size; i++){
+//         if ( res > m[i]){
+//             res = m[i];
+//         }
+//     }
+//     return res;
+// }
+
+// int main() {
+//     // Зчитати розмір масиву.
+//     int size;
+//     std::cout << "Enter the size: ";
+//     std::cin >> size;
+//     // Зчитати масив.
+//     std::cout << "Enter the numbers: ";
+//     int* numbers = new int[size];
+//     for (int i = 0; i < size; ++i) {
+//         std::cin >> numbers[i];
+//     }
+//     // Вивести мінімальне.
+//     std::cout << "Minimum: " << min(numbers, size) << std::endl;
+//     delete[] numbers;
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// int min(int* n , int s){
+//     int res = n[0];
+//     for (int i = 1 ; i < s; i++){
+//         if (res > n[i]){
+//             res = n[i];
+//         }
+//     }
+//     return res;
+// }
+
+
+// int main(){
+//     int size;
+//     cout << "Enter size: "; cin >> size;
+
+//     int * num = new int[size];
+//     for(int i = 0 ; i < size; i++){
+//         cout << "Enter " << i + 1 <<" "; cin >> num[i];
+//     }
+//     int res = min(num, size);
+//     cout << "Min " << res;
+//     return 0;
+// }
+
+// #include <iostream>
+// using namespace std;
+
+// int main(){
+//     int rows, cols;
+//     cout << "Enter rows "; cin >> rows;
+//     cout << "Enter cols "; cin >> cols;
+
+//     // 
+//     int * arr = new int[rows];
+//     for (int i = 0 ; i < rows ; i++){
+//         arr[i] = i + 1;
+//     }
+//     for (int i = 0 ; i < rows ; i++){
+//         cout << arr[i] << " ";
+//     }
+//     cout << endl;
+//     delete[] arr;
+//     //
+//     int** arr2 = new int*[rows];
+
+//     for ( int i = 0; i < rows ; i++){
+//         arr2[i] = new int[cols]; 
+//     }
+
+//     for ( int i = 0; i < rows ; i++){
+//         for(int j = 0 ; j < cols ; j++){
+//             arr2[i][j] = 2 * i * j;
+//         }
+//     }
+
+//     for ( int i = 0; i < rows ; i++){
+//         for(int j = 0 ; j < cols ; j++){
+//             arr2[i][j] = 2 * i * j;
+//         }
+//     }
+
+//     for ( int i = 0; i < rows ; i++){
+//         for(int j = 0 ; j < cols ; j++){
+//            cout <<  arr2[i][j] <<'\t';
+//         }
+//         cout << endl;
+//     }
+
+//     for (int i = 0; i < rows; i++) {
+//     delete[] arr2[i];  // Звільнення пам'яті для i-го рядка
+// }
+//     delete[] arr2;
+// }
+
