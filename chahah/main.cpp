@@ -1232,3 +1232,234 @@
 //     delete[] arr2;
 // }
 
+// #include <iostream>
+
+// void div(int d1, int d2, int& q, int& r){
+//     q = d1 / d2;
+//     r = d1 % d2;
+// }
+
+// int main() {
+//     // Зчитати операнди.
+//     int dividend; // Ділене.
+//     int divisor; // Дільник.
+//     std::cout << "Enter the operands: ";
+//     std::cin >> dividend >> divisor;
+//     // Обчислити частку і остачу.
+//     int quotient = -1; // Частка.
+//     int remainder = -1; // Остача.
+//     div(dividend, divisor, quotient, remainder);
+//     // Вивести результат.
+//     std::cout << dividend << " / " << divisor << " = "
+//              << quotient << " (" << remainder << ')' << std::endl;
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// #include <string>
+
+// void print(int num){
+//     std::cout << num;
+// }
+// void print(std::string num){
+//     std::cout << '"' << num << '"';
+// }
+
+// int main() {
+//     // Зчитати вхідні дані.
+//     std::cout << "Enter the value: ";
+//     std::string value;
+//     std::cin >> value;
+//     // Викликати print залежно від вхідних даних.
+//     std::cout << "Formatted value: ";
+//     if (isdigit(value[0])) {
+//        print(std::stoi(value));
+//     } else {
+//        print(value);
+//     }
+//     std::cout << std::endl;
+//     return 0;
+// }
+
+
+
+
+// #include <iostream>
+
+// void call(double o1 , double o2, double(*a)(double, double)){
+//     std::cout << a(o1, o2);
+// }
+
+// int main() {
+//     // Зчитати операцію і операнди.
+//     char operation; // Операція.
+//     double o1;  // Лівий операнд.
+//     double o2;  // Правий операнд.
+//     std::cin >> o1 >> operation >> o2;
+//     // Викликати call з відповідною операцією.
+//     switch (operation) {
+//     case '+':
+//         call(o1, o2, [](double o1, double o2) { return o1 + o2; });
+//         break;
+//     case '-':
+//         call(o1, o2, [](double o1, double o2) { return o1 - o2; });
+//         break;
+//     case '*':
+//         call(o1, o2, [](double o1, double o2) { return o1 * o2; });
+//         break;
+//     case '/':
+//         call(o1, o2, [](double o1, double o2) { return o1 / o2; });
+//         break;
+//     }
+//     std::cout << std::endl;
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+
+// int find(int* numbers, int size, bool (*f)(int, int)) {
+//    int result = numbers[0];
+//    for (int i = 1; i < size; ++i) {
+//        if (f(numbers[i], result)) {
+//            result = numbers[i];
+//        }
+//    }
+//    return result;
+// }
+
+// int main() {
+//     // Зчитати операцію і кількість чисел.
+//    std::string operation;
+//    int size;
+//    std::cin >> operation >> size;
+//    // Зчитати числа.
+//    int* numbers = new int[size];
+//    for (int i = 0; i < size; ++i) {
+//        std::cin >> numbers[i];
+//    }
+//    int result;
+//    if (operation == "min") {
+//        auto m =[](int a , int b) -> bool {
+//             return a < b;
+//        };
+//         result = find(numbers, size, m);
+//    } 
+//    else {
+//         auto m = [](int a , int b) -> bool {
+//             return a > b;
+//         };
+//         result = find(numbers, size, m);
+//    }
+//    // Вивести результат і звільнити виділену пам'ять.
+//    std::cout << result << std::endl;
+//    delete[] numbers;
+//    return 0;
+// }
+
+
+
+// #include <iostream>
+// #include <string>
+
+// std::string modify_curly_brackets(const std::string& text) {
+//     return std::string("{") + text + std::string("}");
+// }
+
+// std::string modify_square_brackets(const std::string& text) {
+//     return std::string("[") + text + std::string("]");
+// }
+
+// std::string modify_round_brackets(const std::string& text) {
+//     return std::string("(") + text + std::string(")");
+// }
+
+// std::string modify_duplicate(const std::string& text) {
+//    return text + text;
+// }
+
+// int main() {
+//    // PUT YOUR CODE HERE
+
+//    // Зчитати слово і модифікації.
+//    std::cout << "Enter the word: ";
+//    std::string word;
+//    std::cin >> word;
+//    std::cout << "Enter the pattern: ";
+//    std::string pattern;
+//    std::cin >> pattern;
+//    // Перетворити текст і вивести результат.
+//    for (unsigned i = 0; i < pattern.size(); ++i) {
+//        word = modifications[pattern[i] - '0'](word);
+//    }
+//    std::cout << word << std::endl;
+//    return 0;
+// }
+
+
+
+
+// #include <iostream>
+// #include <string>
+
+// std::string modify_curly_brackets(const std::string& text) {
+//     return std::string("{") + text + std::string("}");
+// }
+
+// std::string modify_square_brackets(const std::string& text) {
+//     return std::string("[") + text + std::string("]");
+// }
+
+// std::string modify_round_brackets(const std::string& text) {
+//     return std::string("(") + text + std::string(")");
+// }
+
+// std::string modify_duplicate(const std::string& text) {
+//    return text + text;
+// }
+
+// int main() {
+//    // PUT YOUR CODE HERE
+//     std::string (*modifications[])(const std::string&){ 
+//         modify_curly_brackets,
+//         modify_square_brackets,
+//         modify_round_brackets,
+//         modify_duplicate};
+//    // Зчитати слово і модифікації.
+//    std::cout << "Enter the word: ";
+//    std::string word;
+//    std::cin >> word;
+//    std::cout << "Enter the pattern: ";
+//    std::string pattern;
+//    std::cin >> pattern;
+//    // Перетворити текст і вивести результат.
+//    for (unsigned i = 0; i < pattern.size(); ++i) {
+//        word = modifications[pattern[i] - '0'](word);
+//    }
+//    std::cout << word << std::endl;
+//    return 0;
+// }
+
+
+#include <iostream>
+class A {
+    long lx;
+public:
+    int x;
+    int F(int x) {
+    lx = A::x + 2;
+    return A::x + x + lx;
+}
+};
+
+
+
+int main() {
+    A a;
+    a.x = 1;
+    std::cout << a.F(2);
+    return 0;
+}
