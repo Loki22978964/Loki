@@ -1444,22 +1444,137 @@
 // }
 
 
-#include <iostream>
-class A {
-    long lx;
-public:
-    int x;
-    int F(int x) {
-    lx = A::x + 2;
-    return A::x + x + lx;
-}
-};
+// #include <iostream>
+// class A {
+//     long lx;
+// public:
+//     int x;
+//     int F(int x) {
+//     lx = A::x + 2;
+//     return A::x + x + lx;
+// }
+// };
 
 
 
-int main() {
-    A a;
-    a.x = 1;
-    std::cout << a.F(2);
-    return 0;
-}
+// int main() {
+//     A a;
+//     a.x = 1;
+//     std::cout << a.F(2);
+//     return 0;
+// }
+
+
+
+
+
+
+// #include <iostream>
+// class A {
+//     long lx;
+// public:
+//     int x;
+//     int F(int);
+// };
+
+// int A::F (int x){
+//     A::lx = A::x + 2;
+//     return A::x + x + A::lx;
+// }
+
+
+
+// int main() {
+//     A a;
+//     a.x = 1;
+//     std::cout << a.F(2);
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// #define OUT std::cout << " " << long(&p) << " " << (long)p << " " << p->i << "\n"
+
+
+// struct A {
+//     int i;
+//     void set(int j) { this->i = j; }
+//     ~A() { std::cout << " Wow. I'm killed\n"; }
+// };
+
+// int main() {
+//     A* p = new A;
+//     p->set(100);
+//     OUT;
+
+//     delete p;
+    
+//     p->set(100);
+//     OUT;
+    
+//     p->i++;
+//     OUT;
+
+//     return 0;
+// }
+
+
+// #include <iostream>
+
+// struct A {
+//     int i;
+    
+//     // Визначення методу всередині класу (якщо це inline метод)
+//     inline int f(int j) {
+//         i = j;
+//         return j;
+//     }
+// };
+
+// int main() {
+//     A a;
+//     a.f(2);  // Викликаємо метод f з аргументом 2
+//     return 0;
+// }
+
+// struct A {
+//     int i;
+//     inline int f(int j);
+// };
+
+// inline int A::f(int j) {
+//     i = j;
+//     return j;
+// }
+
+// int main() {
+//     A a;
+//     a.f(2);
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// class A {
+//     long lx;
+// public:
+//     int x ;
+//     int F (int x)
+//     {
+//     A::lx = this->x + 2;
+//     return this->x + x + A::lx;
+//     }
+// };
+
+
+
+
+
+// int main() {
+//     A a;
+//     a.x = 1;
+//     std::cout << a.F(2);
+//     return 0;
+// }
