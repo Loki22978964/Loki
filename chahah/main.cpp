@@ -1628,30 +1628,51 @@
 
 
 
+// #include <iostream>
+// using namespace std;
+
+// class A{
+//     private:
+//     int i;
+//     public:
+//     A(int x){
+//         A::i = x ;
+//         cout << A::i << endl;
+//     }
+//     A (int x , int y){
+//         this->i = x + y;
+//         cout << A::i << endl;
+//     }
+
+// };
+
+// int main(){
+//     A b(8);
+//     b = 88; // приведення
+//     A a(4 , 4);
+//     A* p = new A(5 , 8);
+//     cout << p;
+
+//     return 0;
+// }
+
+
+
 #include <iostream>
 using namespace std;
 
-class A{
-    private:
+class D{
     int i;
     public:
-    A(int x){
-        A::i = x ;
-        cout << A::i << endl;
+    explicit D(int i){
+        this->i = i;
     }
-    A (int x , int y){
-        this->i = x + y;
-        cout << A::i << endl;
-    }
-
 };
 
 int main(){
-    A b(8);
-    b = 88;
-    A a(4 , 4);
-    A* p = new A(5 , 8);
-    cout << p;
+    setlocale "ru";
+    D b(8);
+    // b(4); // error тому що ми юзаємо explicit
 
-    return 0;
+    return 0 ;
 }
