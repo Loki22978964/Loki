@@ -1641,7 +1641,7 @@ class A{
     }
     A (int x , int y){
         this->i = x + y;
-        cout << A::i;
+        cout << A::i << endl;
     }
 
 };
@@ -1649,6 +1649,8 @@ class A{
 int main(){
     A b(8);
     A a(4 , 4);
+    A* p = new A(5 , 8);
+    cout << p;
 
     return 0;
 }
