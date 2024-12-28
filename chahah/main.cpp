@@ -1648,6 +1648,7 @@ class A{
 
 int main(){
     A b(8);
+    b = 88;
     A a(4 , 4);
     A* p = new A(5 , 8);
     cout << p;
