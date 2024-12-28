@@ -1582,25 +1582,46 @@
 
 
 
+// #include <iostream>
+// using namespace std;
+
+// class A {
+//     public:
+//     A (){
+//         cout << "L got you idiot" << endl; 
+//     }
+
+// }a;
+
+
+// int main(){
+//     a;// визве конструктор два рази тому що екзимпляр а створено
+    
+//     A b {}; // створення екземпляру б ы визов конструктора класу А
+
+    
+//     A();
+//     A{};
+//     return 0;
+// }
+
+
 #include <iostream>
 using namespace std;
 
-class A {
+class A{
+    private:
+    int x;
     public:
-    A (){
-        cout << "L got you idiot" << endl; 
+    A(int x){
+        A::x = x + 2;
+        cout << A::x << endl;
     }
-
-}a;
-
+}a(21);
 
 int main(){
-    a;// визве конструктор два рази тому що екзимпляр а створено
-    
-    A b {}; // створення екземпляру б ы визов конструктора класу А
+    A b(8);
+    A a(4);
 
-    
-    A();
-    A{};
     return 0;
 }
