@@ -1658,21 +1658,80 @@
 
 
 
+// #include <iostream>
+// using namespace std;
+
+// class D{
+//     int i;
+//     public:
+//     explicit D(int i){
+//         this->i = i;
+//     }
+// };
+
+// int main(){
+//     setlocale "ru";
+//     D b(8);
+//     // b(4); // error тому що ми юзаємо explicit
+
+//     return 0 ;
+// }
+
+
+// #include <iostream>
+// using namespace std;
+
+// class A{
+//     public:
+//     A(double x){ cout << x << " double " << endl;}
+//     A(int x) : A ((double) x) {cout << x <<" int" ;}
+// };
+
+
+// int main(){
+//     A a(5);
+//     // A b (5.5);
+//     return 0;
+// }
+
+
+
+
+
+
+
+
+
 #include <iostream>
 using namespace std;
 
-class D{
-    int i;
+class A{
+    private:
+    double v;
+    
     public:
-    explicit D(int i){
-        this->i = i;
+    A(double x){
+        v = x;
+        cout << v << " double origin" << endl;
+    }
+    A(const A& a){
+        v = a.v;
+        cout << v << " copy constructor" << endl; 
+    }
+
+    double getValue() const {
+        return v;
     }
 };
 
-int main(){
-    setlocale "ru";
-    D b(8);
-    // b(4); // error тому що ми юзаємо explicit
+void CC(const A& original){
+    A copy = original;
+    // A copy(original);
+    cout << "Copy inside Foo: " << copy.getValue() << endl;
+}
 
-    return 0 ;
+int main(){
+    A a(5);
+    CC(a);
+    return 0;
 }
