@@ -1606,22 +1606,49 @@
 // }
 
 
+// #include <iostream>
+// using namespace std;
+
+// class A{
+//     private:
+//     int x;
+//     public:
+//     A(int x){
+//         A::x = x + 2;
+//         cout << A::x << endl;
+//     }
+// }a(21);
+
+// int main(){
+//     A b(8);
+//     A a(4);
+
+//     return 0;
+// }
+
+
+
 #include <iostream>
 using namespace std;
 
 class A{
     private:
-    int x;
+    int i;
     public:
     A(int x){
-        A::x = x + 2;
-        cout << A::x << endl;
+        A::i = x ;
+        cout << A::i << endl;
     }
-}a(21);
+    A (int x , int y){
+        this->i = x + y;
+        cout << A::i;
+    }
+
+};
 
 int main(){
     A b(8);
-    A a(4);
+    A a(4 , 4);
 
     return 0;
 }
