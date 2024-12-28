@@ -1578,3 +1578,29 @@
 //     std::cout << a.F(2);
 //     return 0;
 // }
+
+
+
+
+#include <iostream>
+using namespace std;
+
+class A {
+    public:
+    A (){
+        cout << "L got you idiot" << endl; 
+    }
+
+}a;
+
+
+int main(){
+    a;// визве конструктор два рази тому що екзимпляр а створено
+    
+    A b {}; // створення екземпляру б ы визов конструктора класу А
+
+    
+    A();
+    A{};
+    return 0;
+}
