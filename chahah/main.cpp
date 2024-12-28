@@ -1732,6 +1732,7 @@ void CC(const A& original){
 
 int main(){
     A a(5);
+    
     CC(a);
     return 0;
 }
