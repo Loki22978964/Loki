@@ -26,8 +26,8 @@ class Point{
     Point( Point&& other) noexcept{
         this->x = other.x;
         this->y = other.y;
-        other.x = 1; // Обнуляємо "переміщений" об'єкт
-        other.y = 1;
+        other.x = 0; // Обнуляємо "переміщений" об'єкт
+        other.y = 0;
         cout << "move" << " ";
     }
 
@@ -49,7 +49,7 @@ int main(){
     b.Print();
     Point c(std::move(a));
     c.Print();
-    a.Paste();
+    // a.Paste(); метод для заповнення після переміщення
     a.Print();
 
 
