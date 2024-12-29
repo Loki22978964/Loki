@@ -1702,37 +1702,68 @@
 
 
 
+// #include <iostream>
+// using namespace std;
+
+// class A{
+//     private:
+//     double v;
+    
+//     public:
+//     A(double x){
+//         v = x;
+//         cout << v << " double origin" << endl;
+//     }
+//     A(const A& a){
+//         v = a.v;
+//         cout << v << " copy constructor" << endl; 
+//     }
+
+//     double getValue() const {
+//         return v;
+//     }
+// };
+
+// void CC(const A& original){
+//     A copy = original;
+//     // A copy(original);
+//     cout << "Copy inside Foo: " << copy.getValue() << endl;
+// }
+
+// int main(){
+//     A a(5);
+    
+//     CC(a);
+//     return 0;
+// }
+
+
+
+
 #include <iostream>
+#include <utility>
 using namespace std;
 
-class A{
-    private:
-    double v;
-    
-    public:
-    A(double x){
-        v = x;
-        cout << v << " double origin" << endl;
-    }
-    A(const A& a){
-        v = a.v;
-        cout << v << " copy constructor" << endl; 
+class MyClass {
+public:
+    MyClass() {
+        cout << "Constructor called" << endl;  // Викликається при створенні об'єкта
     }
 
-    double getValue() const {
-        return v;
+    ~MyClass() {
+        cout << "Destructor called" << endl;  // Викликається при знищенні об'єкта
+    }
+
+    // Конструктор переміщення
+    MyClass(MyClass&&) noexcept {
+        cout << "Move constructor called" << endl;  // Викликається, коли об'єкт переміщається
     }
 };
 
-void CC(const A& original){
-    A copy = original;
-    // A copy(original);
-    cout << "Copy inside Foo: " << copy.getValue() << endl;
-}
-
-int main(){
-    A a(5);
+int main() {
+    MyClass obj1;  // Створюється об'єкт obj1, викликається конструктор
+    MyClass obj2 = std::move(obj1);  // Переміщаємо об'єкт obj1 в obj2, викликається конструктор переміщення
     
-    CC(a);
-    return 0;
+    // Програма продовжує виконання
+    return 0;  // Коли ми доходимо до return, об'єкти obj1 і obj2 виходять з області видимості
 }
