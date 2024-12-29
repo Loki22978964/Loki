@@ -34,6 +34,11 @@ class Point{
     void Print(){
         cout << x << " " << y << endl;
     }
+    void Paste(){
+        x = 2;
+        y = 8;
+        cout << "Paste ";
+    }
 };
 
 int main(){
@@ -44,6 +49,7 @@ int main(){
     b.Print();
     Point c(std::move(a));
     c.Print();
+    a.Paste();
     a.Print();
 
 
