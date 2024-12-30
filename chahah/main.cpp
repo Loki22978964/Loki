@@ -1772,35 +1772,64 @@
 
 
 
+// #include <iostream>
+// using namespace std;
+// class A{
+//     int i;
+//     public:
+//     A() {i = 0;}
+//     A(int j){i = j;
+//     cout << "created" << endl;
+//     }
+//     A (A& other){
+//         this->i = other.i;
+//         cout << "copy ";
+//     }
+//     void show();
+//     ~A(){
+//         cout << "DESTRUCTED " << endl;
+//     }
+// };
+
+// void A::show(){
+//     cout<< "i= " << i << endl; 
+// }
+// void f (A a){ // тут ми беремо по значенню + у нас своя область вид. і через це створюється копія А а в А а
+//     a.show(); // але якщо ми зробимо (A& a) то буде юзатися вже існуюча адресе даного елемента (копія не треба)
+// }
+
+// int main(){
+//     A a(1);
+//     f(a);
+//     // A a1(a);
+//     return 0 ;
+// }
+
+
+
+
 #include <iostream>
 using namespace std;
+
 class A{
-    int i;
-    public:
-    A() {i = 0;}
-    A(int j){i = j;
-    cout << "created" << endl;
-    }
-    A (A& other){
-        this->i = other.i;
-        cout << "copy ";
-    }
-    void show();
+    private:
     ~A(){
-        cout << "DESTRUCTED " << endl;
+        cout << "Destructor";
     }
+    public:
+    A(double x){ cout << x << " double " << endl;}
+    A(int x) : A ((double) x) {cout << x <<" int" ;}
+    void destruct() { delete this; }
+    // friend void destruct(A*) ;
 };
 
-void A::show(){
-    cout<< "i= " << i << endl; 
-}
-void f (A a){ // тут ми беремо по значенню + у нас своя область вид. і через це створюється копія А а в А а
-    a.show(); // але якщо ми зробимо (A& a) то буде юзатися вже існуюча адресе даного елемента (копія не треба)
-}
+// void destruct(A* ptr) { delete ptr; }
 
 int main(){
-    A a(1);
-    f(a);
-    // A a1(a);
-    return 0 ;
+    A* a = new A(5.5) ;
+    a->destruct();
+    // destruct(a);
+    
+    // A b (5.5);
+    return 0;
 }
