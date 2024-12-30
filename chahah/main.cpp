@@ -1740,30 +1740,66 @@
 
 
 
+// #include <iostream>
+// #include <utility>
+// using namespace std;
+
+// class MyClass {
+// public:
+//     MyClass() {
+//         cout << "Constructor called" << endl;  // Викликається при створенні об'єкта
+//     }
+
+//     ~MyClass() {
+//         cout << "Destructor called" << endl;  // Викликається при знищенні об'єкта
+//     }
+
+//     // Конструктор переміщення
+//     MyClass(MyClass&&) noexcept {
+//         cout << "Move constructor called" << endl;  // Викликається, коли об'єкт переміщається
+//     }
+// };
+
+// int main() {
+//     MyClass obj1;  // Створюється об'єкт obj1, викликається конструктор
+//     MyClass obj2 = std::move(obj1);  // Переміщаємо об'єкт obj1 в obj2, викликається конструктор переміщення
+    
+//     // Програма продовжує виконання
+//     return 0;  // Коли ми доходимо до return, об'єкти obj1 і obj2 виходять з області видимості
+// }
+
+
+
+
+
 #include <iostream>
-#include <utility>
 using namespace std;
-
-class MyClass {
-public:
-    MyClass() {
-        cout << "Constructor called" << endl;  // Викликається при створенні об'єкта
+class A{
+    int i;
+    public:
+    A() {i = 0;}
+    A(int j){i = j;
+    cout << "created" << endl;
     }
-
-    ~MyClass() {
-        cout << "Destructor called" << endl;  // Викликається при знищенні об'єкта
+    A (A& other){
+        this->i = other.i;
     }
-
-    // Конструктор переміщення
-    MyClass(MyClass&&) noexcept {
-        cout << "Move constructor called" << endl;  // Викликається, коли об'єкт переміщається
+    void show();
+    ~A(){
+        cout << "DESTRUCTED " << endl;
     }
 };
 
-int main() {
-    MyClass obj1;  // Створюється об'єкт obj1, викликається конструктор
-    MyClass obj2 = std::move(obj1);  // Переміщаємо об'єкт obj1 в obj2, викликається конструктор переміщення
-    
-    // Програма продовжує виконання
-    return 0;  // Коли ми доходимо до return, об'єкти obj1 і obj2 виходять з області видимості
+void A::show(){
+    cout<< "i= " << i << endl;
+}
+void f (A a){
+    a.show();
+}
+
+int main(){
+    A a(1);
+    // f(a2);
+    A a1(a);
+    return 0 ;
 }
