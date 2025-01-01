@@ -1924,3 +1924,37 @@
 //         a.show() ;
 //         return 0;
 //     }
+
+
+
+
+
+#include <iostream>
+using namespace std;
+
+    class ID{
+        private:
+        
+        static int count;
+        // int id;
+        public:
+        int id;
+        ID(){
+            count++;
+            id = count;
+            cout << id << endl;
+        }
+
+    };
+
+    int ID::count = 0 ;
+
+    
+    int main(){
+        ID a;
+        ID b;
+        ID c;
+        ID d;
+    cout << a.id +b.id + c.id + d.id << endl; 
+        return 0;
+    }
