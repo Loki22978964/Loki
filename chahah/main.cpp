@@ -1850,40 +1850,77 @@
 
 
 
-#include <iostream>
-using namespace std;
-class A{
-    int i;
-    public:
-    A() {i = 0;}
-    A(int j){i = j;
-    cout << "created" << endl;
-    }
-    A (A& other){
-        this->i = other.i;
-        cout << "copy " << endl;
-    }
-    void show();
-    ~A(){
-        cout << "DESTRUCTED " << endl;
-    }
-};
+// #include <iostream>
+// using namespace std;
+// class A{
+//     int i;
+//     public:
+//     A() {i = 0;}
+//     A(int j){i = j;
+//     cout << "created" << endl;
+//     }
+//     A (A& other){
+//         this->i = other.i;
+//         cout << "copy " << endl;
+//     }
+//     void show();
+//     ~A(){
+//         cout << "DESTRUCTED " << endl;
+//     }
+// };
 
-void A::show(){
-    cout<< "i= " << i << endl; 
-}
-void f (A a){
-    cout << "func "; // тут ми беремо по значенню + у нас своя область вид. і через це створюється копія А а в А а
-    a.show(); // але якщо ми зробимо (A& a) то буде юзатися вже існуюча адресе даного елемента (копія не треба)
-}
+// void A::show(){
+//     cout<< "i= " << i << endl; 
+// }
+// void f (A a){
+//     cout << "func "; // тут ми беремо по значенню + у нас своя область вид. і через це створюється копія А а в А а
+//     a.show(); // але якщо ми зробимо (A& a) то буде юзатися вже існуюча адресе даного елемента (копія не треба)
+// }
 
-int main(){
-    A a(1);
-    f(a);
-    A a1(a);
+// int main(){
+//     A a(1);
+//     f(a);
+//     A a1(a);
 
 
 
-    cout << "?????????????"<< endl << "?           ?" << endl << "?           ?" << endl << "?????????????" << endl;
-    return 0 ;
-}
+//     cout << "?????????????"<< endl << "?           ?" << endl << "?           ?" << endl << "?????????????" << endl;
+//     return 0 ;
+// }
+
+
+
+
+
+// #include <iostream>
+// using namespace std;
+
+//     class dyomka{
+//         private:
+//         static int i;
+//         public:
+
+//         dyomka(int p){
+//             i++;
+//             // cout << i << endl;
+//         }
+//         void show(){
+//             cout << dyomka::i << endl;
+//         }
+       
+//     };
+
+//     int dyomka::i = 0;
+
+//     int main(){
+//         dyomka a (1);
+//         dyomka a1(2);
+//         dyomka a2(3);
+//         dyomka ar(3);
+//         dyomka aww(3);
+//         dyomka aw3(3);
+
+
+//         a.show() ;
+//         return 0;
+//     }
