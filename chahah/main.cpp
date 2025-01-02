@@ -1929,32 +1929,144 @@
 
 
 
-#include <iostream>
-using namespace std;
+// #include <iostream>
+// using namespace std;
 
-    class ID{
-        private:
+//     class ID{
+//         private:
         
-        static int count;
-        // int id;
-        public:
-        int id;
-        ID(){
-            count++;
-            id = count;
-            cout << id << endl;
-        }
+//         static int count;
+//         // int id;
+//         public:
+//         int id;
+//         ID(){
+//             count++;
+//             id = count;
+//             cout << id << endl;
+//         }
 
-    };
+//     };
 
-    int ID::count = 0 ;
+//     int ID::count = 0 ;
 
     
-    int main(){
-        ID a;
-        ID b;
-        ID c;
-        ID d;
-    cout << a.id +b.id + c.id + d.id << endl; 
-        return 0;
+//     int main(){
+//         ID a;
+//         ID b;
+//         ID c;
+//         ID d;
+//     cout << a.id +b.id + c.id + d.id << endl; 
+//         return 0;
+//     }
+
+
+
+
+// #include <iostream>
+// using namespace std;
+
+//     class ID{
+//         private:
+//         static int count;
+//         // int id;
+//         public:
+//         int id;
+//         ID(){
+//             count++;
+//             id = count;
+//             cout << id << endl;
+//         }
+
+//     };
+
+//     int ID::count = 0 ;
+
+    
+//     int main(){
+//         ID a;
+//         ID b;
+//         ID c;
+//         ID d;
+//     cout << a.id +b.id + c.id + d.id << endl; 
+//         return 0;
+//     }
+
+
+
+// #include <iostream>
+// #include <thread>
+// #include <vector>
+// #include <mutex> // Для mutex
+
+// std::mutex mtx; // М'ютекс для синхронізації виведення
+
+// void incrementCounter(int threadNum) {
+//     // thread_local змінна для кожного потоку
+//     thread_local int counter = 0;
+
+//     // Інкрементуємо лічильник
+//     ++counter;
+
+//     // Блокування м'ютексу для синхронізованого виведення
+//     std::lock_guard<std::mutex> lock(mtx);
+//     std::cout << "Thread " << threadNum << " -> counter: " << counter << std::endl;
+// }
+
+// int main() {
+//     const int numThreads = 99999999999999999;  // Кількість потоків
+//     std::vector<std::thread> threads;
+
+//     // Створюємо та запускаємо потоки
+//     for (int i = 0; i < numThreads; ++i) {
+//         threads.push_back(std::thread(incrementCounter, i + 1));
+//     }
+
+//     // Очікуємо завершення роботи всіх потоків
+//     for (auto& t : threads) {
+//         t.join();
+//     }
+
+//     return 0;
+// }
+
+
+// #include <iostream>
+//     using namespace std;
+// namespace { int i = 22;}
+// namespace A { int i = 1;}
+
+// int main(){
+//     cout << ::i << " " << A::i << endl;
+
+//     ::i = 55;
+//     A::i = 22;
+
+//     cout << ::i << " " << A::i << endl;
+
+//     return 0;
+// }
+
+
+
+
+#include <iostream>
+
+class MyClass {
+public:
+    void greet() {
+        std::cout << "Hello from MyClass!" << std::endl;
     }
+
+    void displayMessage(std::string message) {
+        std::cout << "Message: " << message << std::endl;
+    }
+};
+
+int main() {
+    MyClass obj;
+
+    MyClass* p = &obj.greet;
+    p;
+
+    return 0;
+}
