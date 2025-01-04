@@ -2049,24 +2049,56 @@
 
 
 
+// #include <iostream>
+
+// class MyClass {
+// public:
+//     void greet() {
+//         std::cout << "Hello from MyClass!" << std::endl;
+//     }
+
+//     void displayMessage(std::string message) {
+//         std::cout << "Message: " << message << std::endl;
+//     }
+// };
+
+// int main() {
+//     MyClass obj;
+
+//     MyClass* p = &obj.greet;
+//     p;
+
+//     return 0;
+// }
+
+
+
+
 #include <iostream>
+#include <string_view>
+using namespace std;
 
-class MyClass {
-public:
-    void greet() {
-        std::cout << "Hello from MyClass!" << std::endl;
-    }
+constexpr std::string_view M = "It's happiness from Global\n";
 
-    void displayMessage(std::string message) {
-        std::cout << "Message: " << message << std::endl;
-    }
-};
+void LocalShow() {
+    string m("It's happiness from LocalShow\n");
+    cout << m;
+    static string m1{"sfsf"};
+    class Lclass {
+    public:
+        void out() {
+            cout << M << m1;
+            cout << "It's happiness from LClass\n";
+        }
+        int i, j = 10;
+        Lclass() { cout << "lclass ctor\n"; }
+    } lcl;
+
+    lcl.out();
+    std::cout << "Wow! Where is Initialization - " << lcl.i << " " << lcl.j << "\n";
+}
 
 int main() {
-    MyClass obj;
-
-    MyClass* p = &obj.greet;
-    p;
-
-    return 0;
+    LocalShow();
 }
+
