@@ -2074,31 +2074,116 @@
 
 
 
+// #include <iostream>
+// #include <string_view>
+// using namespace std;
+
+// constexpr std::string_view M = "It's happiness from Global\n";
+
+// void LocalShow() {
+//     string m("It's happiness from LocalShow\n");
+//     cout << m;
+//     static string m1{"sfsf"};
+//     class Lclass {
+//     public:
+//         void out() {
+//             cout << M << m1;
+//             cout << "It's happiness from LClass\n";
+//         }
+//         int i, j = 10;
+//         Lclass() { cout << "lclass ctor\n"; }
+//     } lcl;
+
+//     lcl.out();
+//     std::cout << "Wow! Where is Initialization - " << lcl.i << " " << lcl.j << "\n";
+// }
+
+// int main() {
+//     LocalShow();
+// }
+
+
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// struct A {
+//     int i;
+//     int f(int j) { i = j; return i + j; }
+// };
+
+// int A::*p1 = &A::i;
+
+// void F(A& a) {
+//     // оголошення вказівника на поле даних класу
+//     int A::*p1 = &A::i;
+//     a.*p1 = 2; // присвоєння значення через вказівник
+//     cout << "In F: " << a.i << "\n";
+
+//     // оголошення вказівника на функцію-член
+//     int (A::*p2)(int) = &A::f;
+//     (a.*p2)(3); // виклик функції через вказівник
+//     cout << "In F: " << a.i << "\n";
+// }
+
+// int main() {
+//     F(a);
+//     int A::*m1 = &A::i;
+//     A a, b;
+//     a.*m1 = 10;
+//     b.*m1 = 30;
+//     cout << "In main : " << a.i << "  " << b.i << "\n";
+//     cout << "sizeof(A) - " << sizeof(A) << "\n";
+// }
+
+
+
 #include <iostream>
-#include <string_view>
 using namespace std;
 
-constexpr std::string_view M = "It's happiness from Global\n";
+class B{
+    public: 
+    int c ;
+    int d ;
+    union{
+        int a ;
+    };
+    union{
+        int b ;
+    };
 
-void LocalShow() {
-    string m("It's happiness from LocalShow\n");
-    cout << m;
-    static string m1{"sfsf"};
-    class Lclass {
-    public:
-        void out() {
-            cout << M << m1;
-            cout << "It's happiness from LClass\n";
-        }
-        int i, j = 10;
-        Lclass() { cout << "lclass ctor\n"; }
-    } lcl;
+    B *p;
 
-    lcl.out();
-    std::cout << "Wow! Where is Initialization - " << lcl.i << " " << lcl.j << "\n";
+
+    int res1 ;
+    int res2;
+
+    B(int n, int m) {
+        c = n;
+        d = m;
+        p = this;  // Вказуємо p на поточний об'єкт
+
+        p->a = 2;  // Ініціалізуємо 'a'
+        p->b = 4;  // Ініціалізуємо 'b'
+
+        res1 =c + a;   // Використовуємо 'b'
+        res2 = d + b;  // Використовуємо 'a'
+    }
+
+    void show(){
+        cout << res1 << endl << res2;
+    }
+
+};
+
+
+
+
+int main(){
+    B b(4,2);
+    b.show();
+    return 0;
+
 }
-
-int main() {
-    LocalShow();
-}
-
