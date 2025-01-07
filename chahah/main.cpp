@@ -2368,39 +2368,133 @@
 
 
 
+// #include <iostream>
+// using namespace std;
+
+// struct A{
+    
+//     void( A::*f)();
+
+//     void happy(){
+//         cout << " All is good" << endl;
+//     };
+
+//     void sad(){
+//         cout << " All is bad" << endl;
+//     };
+
+//     void behappy(bool yes){
+//         f =(yes)? &A::happy : &A::sad;
+//     }
+
+//     A(bool yes){
+//         behappy(yes);
+//     }
+
+// };
+
+
+// int main(){
+//      std::cout << sizeof(A) << "\n";
+//     A a(true);
+//     (a.*(a.f))();
+
+//     A* p = new A(false);
+//     (p->*(p->f))();
+
+//     return 0;
+// }
+
+
+
+// #include<iostream>
+// #define MES(s) { std::cout << s << "\n"; }
+
+// struct A {
+//     void(*p)(void);  // Вказівник на функцію
+
+//     static void happyNotice(void) MES("Wow");
+//     static void sadNotice(void) MES("Ups");
+
+//     // Дефолтна ініціалізація вказівника
+//     A() { behappy(&A::happyNotice); }
+
+//     // Ініціалізатор вказівника
+//     void behappy(void(*f)(void)) { p = *f; }
+
+//     // Виклик через вказівник
+//     void show(void) { (this->p)(); }
+// };
+
+// // Зовнішня функція
+// void sadNotice_All(void) MES("UPPPPPs");
+
+// int main() {
+//     A a;
+//     a.show(); // запуск статичної функції
+
+//     a.behappy(sadNotice_All); // зміна функції на зовнішню
+//     a.show(); // запуск зовнішньої функції
+// }
+
+
+
+// #include <iostream>
+// struct A {
+//     int x;
+//     A() { x = 0; }
+//     A(int x) { this->x = x; }
+//     int getValue() { return x; }
+// };
+
+// A* d[3];
+// A* f[3] = { new A(1), new A(2), new A(3) };
+
+// int main() {
+//     for (int i = 0; i<3; i++)
+//         d[i] = new A(i) ;
+//     std::cout << f[0]->getValue() << " " << f[1]->getValue() << " " << f[2]->getValue() << std::endl;
+//     std::cout << d[0]->getValue() << " " << d[1]->getValue() << " " << d[2]->getValue() << std::endl;
+// }
+
+
 #include <iostream>
 using namespace std;
 
-struct A{
-    
-    void( A::*f)();
+typedef void(*T)();
 
-    void happy(){
-        cout << " All is good" << endl;
+class A{
+    public:
+    static int x1;
+    static void f(){
+        cout << "Class A" << endl;
     };
-
-    void sad(){
-        cout << " All is bad" << endl;
-    };
-
-    void behappy(bool yes){
-        f =(yes)? &A::happy : &A::sad;
-    }
-
-    A(bool yes){
-        behappy(yes);
-    }
-
 };
 
+class B{
+    public:
+ static int x2;
+ static void f(){
+        cout << "Class B" << endl;
+    };
+};
+
+class C{
+    public:
+    static int x3;
+    static void f(){
+        cout << "Class C" << endl;
+    };
+};
+int A::x1 = 1;
+int B::x2 = 2;
+int C::x3 = 3;
+
+int* m[] = {&A::x1 , &B::x2 , &C::x3};
+T n[] = {A::f , B::f , C::f};
 
 int main(){
-     std::cout << sizeof(A) << "\n";
-    A a(true);
-    (a.*(a.f))();
-
-    A* p = new A(false);
-    (p->*(p->f))();
+    n[0]();
 
     return 0;
 }
