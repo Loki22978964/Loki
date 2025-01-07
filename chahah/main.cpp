@@ -2140,50 +2140,267 @@
 
 
 
+// #include <iostream>
+// using namespace std;
+
+// class B{
+//     public: 
+//     int c ;
+//     int d ;
+//     union{
+//         int a ;
+//     };
+//     union{
+//         int b ;
+//     };
+
+//     B *p;
+
+
+//     int res1 ;
+//     int res2;
+
+//     B(int n, int m) {
+//         c = n;
+//         d = m;
+//         p = this;  // Вказуємо p на поточний об'єкт
+
+//         p->a = 2;  // Ініціалізуємо 'a'
+//         p->b = 4;  // Ініціалізуємо 'b'
+
+//         res1 =c + a;   // Використовуємо 'b'
+//         res2 = d + b;  // Використовуємо 'a'
+//     }
+
+//     void show(){
+//         cout << res1 << endl << res2;
+//     }
+
+// };
+
+
+
+
+// int main(){
+//     B b(4,2);
+//     b.show();
+//     return 0;
+
+// }
+
+
+
+
+// #include <iostream> 
+// using namespace std;
+// #define ctorD(M) M() {std::cout <<  \
+// "Default Ctor "#M << " \n" ; M::i = 0;}  
+// #define ctorP(M, N) M(int N) { std::cout << \
+// "Parametrized Ctor "#M <<"\n" ; M::i = N;}  
+
+// struct B {   
+//     int i;  
+//     ctorD(B);     // ctor - B1  
+//     ctorP(B, j);    // ctor - B2  
+// };  
+
+// struct C {   
+//     int i;  
+//     ctorD(C);     // ctor - C1  
+//     ctorP(C, j);    // ctor - C2  
+// };  
+
+// struct A {  // оголошення основного класу  
+//     int i;  
+//     B b1;    // об'єкт-член класу A  
+//     C c1;    // об'єкт-член класу A  
+//     ctorD(A);   // ctor - A0  
+//     ctorP(A, j);    // ctor - A1  
+//     A(int i, int j): b1(j) { i = i; }// ctor - A2  
+//     A(int, int, int);               // ctor - A3  
+// };  
+
+// A::A(int i, int j, int w):  
+//     i(4), b1(j), c1(w) {i = i;}  
+
+// int main() {
+    
+//     // A a0 , a1(1) , a2(1, 2), a3(1, 2, 'c');    
+//     cout << " 1 " << endl;
+//     A a0;
+//     cout << " 2 " << endl;
+//     A a1(1);
+//     cout << " 3 " << endl;
+//     A a2(1, 2);
+//     cout << " 4 " << endl;
+//     A a3(1, 2, 'c');  
+// }
+
+
+
+// #include <iostream>
+// using namespace std;
+// class A{
+//     int i;
+//     public:
+//     A() {i = 0;}
+//     A(int j){i = j;
+//     cout << "created" << endl;
+//     }
+//     A (A& other){
+//         this->i = other.i;
+//         cout << "copy ";
+//     }
+//     void show();
+//     ~A(){
+//         cout << "DESTRUCTED " << endl;
+//     }
+// };
+
+// void A::show(){
+//     cout<< "i= " << i << endl; 
+// }
+// void f (A a){ // тут ми беремо по значенню + у нас своя область вид. і через це створюється копія А а в А а
+//     a.show(); // але якщо ми зробимо (A& a) то буде юзатися вже існуюча адресе даного елемента (копія не треба)
+// }
+
+// int main(){
+//     A a(1);
+//     f(a);
+//     // A a1(a);
+//     return 0 ;
+// }
+
+
+
+// #include <iostream>
+// using namespace std;
+// class A{
+//     public:
+//     int i = 0;
+//     A() : i(0){}
+//     A (int  j) : i(j) {}
+    
+//     A (A&& p){
+//         cout << i << " " << p.i << endl;
+//         i = std::move(p.i);
+//         p.i = 0;
+//         cout << i << " " << p.i << endl;
+//     }
+//     ~A(){
+//         cout << "DESTRUCTED " << endl;
+//     }
+// };
+
+
+
+// int main(){
+    
+//    A a(20);
+  
+//     A b = std::move(a);
+
+
+//     return 0 ;
+// }
+
+
+// #include <iostream>
+// using namespace std;
+// class A{
+//     public:
+//     int i = 0;
+//     A() : i(0){}
+//     A (int  j) : i(j) {}
+    
+//     // A (A&& p){
+//     //     cout << i << " " << p.i << endl;
+//     //     i = std::move(p.i);
+//     //     p.i = 0;
+//     //     cout << i << " " << p.i << endl;
+//     // }
+//     ~A(){
+//         cout << "DESTRUCTED " << endl;
+//     }
+// };
+
+
+
+// int main(){
+    
+//    A a(20);
+  
+//     A b = std::move(a);
+//     cout << a.i << " " << b.i;
+
+
+//     return 0 ;
+// }
+
+// #include <iostream>
+// using namespace std;
+
+// struct B {
+//     int i;
+//     B() { i = -1; }
+//     B(int j) { i = j; }
+// };
+
+// struct A {
+//     int i;      // член даних класу A
+//     B* b = nullptr; // вказівник-член класу
+//     A() { b = new B(10); }
+//     A(B* p, int j) {
+//         b = new B;
+//         *b = *p;
+//         cout << i << " " << j;
+//         i = j;
+//         cout << i << " " << j;
+//     }
+//     ~A() { if (b) delete b; }
+// };
+
+// int main() {
+//     B b(3);
+//     B* p = &b;
+//     A a(p, 3); // створення об'єкта
+// }
+
+
+
 #include <iostream>
 using namespace std;
 
-class B{
-    public: 
-    int c ;
-    int d ;
-    union{
-        int a ;
-    };
-    union{
-        int b ;
+struct A{
+    
+    void( A::*f)();
+
+    void happy(){
+        cout << " All is good" << endl;
     };
 
-    B *p;
+    void sad(){
+        cout << " All is bad" << endl;
+    };
 
-
-    int res1 ;
-    int res2;
-
-    B(int n, int m) {
-        c = n;
-        d = m;
-        p = this;  // Вказуємо p на поточний об'єкт
-
-        p->a = 2;  // Ініціалізуємо 'a'
-        p->b = 4;  // Ініціалізуємо 'b'
-
-        res1 =c + a;   // Використовуємо 'b'
-        res2 = d + b;  // Використовуємо 'a'
+    void behappy(bool yes){
+        f =(yes)? &A::happy : &A::sad;
     }
 
-    void show(){
-        cout << res1 << endl << res2;
+    A(bool yes){
+        behappy(yes);
     }
 
 };
 
 
-
-
 int main(){
-    B b(4,2);
-    b.show();
-    return 0;
+     std::cout << sizeof(A) << "\n";
+    A a(true);
+    (a.*(a.f))();
 
+    A* p = new A(false);
+    (p->*(p->f))();
+
+    return 0;
 }
