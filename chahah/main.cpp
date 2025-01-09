@@ -2458,43 +2458,312 @@
 // }
 
 
+// #include <iostream>
+// using namespace std;
+
+// typedef void(*T)();
+
+// class A{
+//     public:
+//     static int x1;
+//     static void f(){
+//         cout << "Class A" << endl;
+//     };
+// };
+
+// class B{
+//     public:
+//  static int x2;
+//  static void f(){
+//         cout << "Class B" << endl;
+//     };
+// };
+
+// class C{
+//     public:
+//     static int x3;
+//     static void f(){
+//         cout << "Class C" << endl;
+//     };
+// };
+// int A::x1 = 1;
+// int B::x2 = 2;
+// int C::x3 = 3;
+
+// int* m[] = {&A::x1 , &B::x2 , &C::x3};
+// T n[] = {A::f , B::f , C::f};
+
+// int main(){
+//     n[0]();
+
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+
+// class Display {
+//    private: 
+//    Display() = default;
+//    ~Display() = default;
+
+
+//     // Display(const Display& other) = delete;
+//     // Display(const Display&& other) = delete;
+
+
+//    public:
+//    int w = 1920;
+//    int h = 1080;
+//    int f = 120;
+
+//    static Display& instance( ){
+//         static Display obj;
+//         return obj;
+//    }
+
+// };
+
+
+
+// int main() {
+//    std::cout << Display::instance().w << 'x'
+//              << Display::instance().h << '@'
+//              << Display::instance().f << std::endl;
+
+//    return 0;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #include <iostream>
-using namespace std;
 
-typedef void(*T)();
+// class s {
+// /////////
+//    private:
+//    static s* instance;
+//    s() = default;
+//    ~s() = default;
 
-class A{
-    public:
-    static int x1;
-    static void f(){
-        cout << "Class A" << endl;
-    };
+//    s(const s& other) = delete;
+//    s(const s&& other) = delete;
+
+// /////////
+//    public:
+//    int w = 1920;
+//    int h = 1080;
+//    int f = 144;
+
+//    static s* get_instance(){
+//       if ( instance == nullptr){
+//          instance = new s(); // s instance; instance.a; .....
+//       }
+//    return  instance ;
+//   }
+
+// };
+
+// s* s::instance = nullptr;
+
+
+
+// int main() {
+//    std::cout << s::get_instance()->w << 'x'
+//              << s::get_instance()->h << '@'
+//              << s::get_instance()->f << std::endl;
+
+//    return 0;
+// }
+
+
+
+// #include <iostream>
+
+// class s {
+// /////////
+//    private:
+   
+//    s() = default;
+//    ~s() = default;
+
+//    s(const s& other) = delete;
+//    s(const s&& other) = delete;
+
+// /////////
+//    public:
+
+   
+//    int w = 1920;
+//    int h = 1080;
+//    int f = 144;
+
+//    static const s& get_instance(){
+//       static s obj;
+//    return  obj ;
+//   }
+
+// };
+
+
+
+
+
+// int main() {
+   
+//    std::cout << s::get_instance().w << 'x'
+//              << s::get_instance().h << '@'
+//              << s::get_instance().f << std::endl;
+
+   
+//    return 0;
+// }
+
+
+
+// #include <iostream>
+
+// struct Point{
+//    int x;
+//    int y;
+//    Point (const int& x , const int& y){
+//       this->x = x;
+//       this->y =y;
+//    }
+
+//    void print()const{
+//       std::cout << "(" << x << ", " << y << ")";
+//    }
+// };
+
+// int main() {
+//     // Зчитати вхідні дані.
+//     std::cout << "Enter the coordinates: ";
+//     int x;
+//     int y;
+//     std::cin >> x >> y;
+//     // Створити об'єкт Point і вивести його на екран.
+//     const Point point {x, y};
+//     point.print();
+//     std::cout << std::endl;
+//     return 0;
+// }
+
+
+// #include <iostream>
+
+// class Object{
+//    private:
+//    int id;
+//    public:
+//    Object(int id){
+//       this->id = id;
+//       std::cout <<"Object created: " << this->id << std::endl;
+//    }
+
+//    ~Object(){
+//       std::cout <<"Object destroyed: " << this->id << std::endl;
+//    }
+// };
+
+// int main() {
+//     std::cout << "Enter the ID: ";
+//     int id;
+//     std::cin >> id;
+//     Object object { id };
+//     return 0;
+// }
+
+
+// #include <cmath>
+// #include <iomanip>
+// #include <iostream>
+
+// struct Point{
+//    double x;
+//    double y;
+//    friend class Line;
+// };
+
+// class Line{
+//    private:
+//    Point a;
+//    Point b;
+//    public:
+//    Line(Point a , Point b){
+//       this->a.x = a.x;
+//       this->a.y = a.y;
+//       this->b.x = b.x;
+//       this->b.y = b.y;
+//    }
+
+//    double length()const{
+//       const double len = std::sqrt(std::pow((a.x - b.x), 2) + std::pow((a.y - b.y) , 2));
+//       return len;
+//    }
+// };
+
+// int main() {
+//     // Зчитати лінію.
+//     std::cout << "Enter the line: ";
+//     Point a;
+//     Point b;
+//     std::cin >> a.x >> a.y >> b.x >> b.y;
+//     const Line line { a, b };
+//     // Вивести довжину лінії.
+//     std::cout << std::fixed << std::setprecision(1);
+//     std::cout << "Length: " << line.length() << std::endl;
+//     return 0;
+// }
+
+#include <iostream>
+
+class Evaluator{
+   private:
+   int result = 0;
+
+   public:
+   
+   int eval(char oper , int value ){
+      if (oper == '+'){
+         this->result += value;
+      }
+      else{
+         this->result -= value;
+      }
+      return result;
+   }
+   int eval(char oper ){
+      return result;
+   }
+
 };
 
-class B{
-    public:
- static int x2;
- static void f(){
-        cout << "Class B" << endl;
-    };
-};
-
-class C{
-    public:
-    static int x3;
-    static void f(){
-        cout << "Class C" << endl;
-    };
-};
-int A::x1 = 1;
-int B::x2 = 2;
-int C::x3 = 3;
-
-int* m[] = {&A::x1 , &B::x2 , &C::x3};
-T n[] = {A::f , B::f , C::f};
-
-int main(){
-    n[0]();
-
+int main() {
+    char oper;
+    int value;
+    Evaluator evaluator;
+    // Зчитати символ операції, це може одразу бути '='.
+    std::cin >> oper;
+    // Зчитувати в циклі операнд і символ наступної операції.
+    while (oper != '=') {
+        std::cin >> value;
+        evaluator.eval(oper, value);
+        std::cin >> oper;
+    }
+    // Вивести результат, oper має значення '='.
+    std::cout << evaluator.eval(oper) << std::endl;
     return 0;
 }
+
