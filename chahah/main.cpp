@@ -2727,43 +2727,238 @@
 //     return 0;
 // }
 
+// #include <iostream>
+
+// class Evaluator{
+//    private:
+//    int result = 0;
+
+//    public:
+   
+//    int eval(char oper , int value ){
+//       if (oper == '+'){
+//          this->result += value;
+//       }
+//       else{
+//          this->result -= value;
+//       }
+//       return result;
+//    }
+//    int eval(char oper ){
+//       return result;
+//    }
+
+// };
+
+// int main() {
+//     char oper;
+//     int value;
+//     Evaluator evaluator;
+//     // Зчитати символ операції, це може одразу бути '='.
+//     std::cin >> oper;
+//     // Зчитувати в циклі операнд і символ наступної операції.
+//     while (oper != '=') {
+//         std::cin >> value;
+//         evaluator.eval(oper, value);
+//         std::cin >> oper;
+//     }
+//     // Вивести результат, oper має значення '='.
+//     std::cout << evaluator.eval(oper) << std::endl;
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+
+// int main() {
+
+//     const int size = 'z' - 'a' + 1;
+//     int count[size];
+  
+//     for (int i = 0; i < size; ++i) {
+//         count[i] = 0;
+//     }
+
+//     for (char c = std::cin.get(); c != '\n'; c = std::cin.get()) {
+
+//         ++count[c - 'a'];
+//     }
+
+//     for (int i = 0; i < size; ++i) {
+//         if (count[i]) {
+//             std::cout << char('a' + i) << ' ' << count[i] << std::endl;
+//         }
+//     }
+//     return 0;
+// }
+
+////// 001101111010101101010
+// #include <iostream>
+
+// int main() {
+//    int capacity = 0; // Фактичний розмір (місткість) масиву.
+//    int size = 0;     // Поточна кількість елементів (розмір) масиву.
+//    int* array = nullptr;
+//    while (true) {
+//        std::cout << "Enter array: ";
+//        // Зчитати лише розмір масиву.
+//        std::cin >> size;
+//        // Вийти з програми, якщо розмір 0.
+//        if (size == 0) {
+//            delete[] array;
+//            return 0;
+//        }
+//        // Перевиділити пам'ять, якщо поточної недостатньо.
+//        if (size > capacity) {
+//            std::cout << "Reallocation" << std::endl;
+//            delete[] array;
+//            capacity = size;
+//            array = new int[capacity];
+//        }
+//        // Зчитати елементи масиву.
+//        for (int i = 0; i < size; ++i) {
+//            std::cin >> array[i];
+//            array[i] = array[i];
+//        }
+//        // Вивести зчитаний масив.
+//        std::cout << "Origin:";
+//        for (int i = 0; i < size; ++i) {
+//            std::cout << ' ' << array[i];
+//        }
+//        // Відсортувати масив.
+//        std::cout << std::endl;
+//        for (int i = 0; i < size - 1; i++) {
+//            for (int j = 0; j < size - i - 1; j++) {
+//                if (array[j] < array[j + 1]) {
+//                    std::swap(array[j], array[j + 1]);
+//                }
+//            }
+//        }
+//        // Вивести відсортований масив.
+//        std::cout << "Sorted:";
+//        for (int i = 0; i < size; ++i) {
+//            std::cout << ' ' << array[i];
+//        }
+//        std::cout << std::endl;
+//    }
+// }
+
+
+// #include <cmath>
+// #include <iomanip>
+// #include <iostream>
+
+// struct Point {
+//     double x;
+//     double y;
+// };
+
+// class Shape {
+//     int size;
+//     Point* points;
+// public:
+//     Shape(int size){
+//       this->size = size;
+//       points = new Point[size];
+//     }
+//    ~Shape(){
+//       delete[] points;
+//     }
+//     double perimeter() const{
+//       double res = 0;
+//       for (int i = 0 ; i < size ; i++){
+//          if (i < size - 1){
+//          res =std::sqrt(std::pow((points[i].x - points[i + 1].x), 2) + std::pow((points[i].y - points[i + 1].y) , 2)) + res;
+//          }
+//       else{
+//          res =std::sqrt(std::pow((points[i].x - points[0].x), 2) + std::pow((points[i].y - points[0].y) , 2)) + res;
+//       }
+//       }
+//       return res;
+//     }
+
+
+//     void read() {
+//         for (int i = 0; i < size; ++i) {
+//             std::cin >> points[i].x >> points[i].y;
+//         }
+//     }
+// };
+
+// int main() {
+//     // Створити фігуру з заданою кількістю вершин.
+//     std::cout << "Enter the number of points: ";
+//     int size;
+//     std::cin >> size;
+//     Shape shape = Shape { size };
+//     // Зчитати координати вершин.
+//     std::cout << "Enter the coordinates:" << std::endl;
+//     shape.read();
+//     // Вивести периметр фігури.
+//     std::cout << std::fixed << std::setprecision(1);
+//     std::cout << "Perimeter: " << shape.perimeter() << std::endl;
+//     return 0;
+// }
+
+
+
+
+
+
 #include <iostream>
 
-class Evaluator{
+class Stack{
    private:
-   int result = 0;
+   int size = 0;
+   int data[5];
 
    public:
-   
-   int eval(char oper , int value ){
-      if (oper == '+'){
-         this->result += value;
+   void push(int value){
+      if (size >= 5){
+         std::cout << "Cannot push." << std::endl;
       }
       else{
-         this->result -= value;
+         data[size] = value;
+         size++;
       }
-      return result;
-   }
-   int eval(char oper ){
-      return result;
    }
 
+   void pop(){
+      if (size == 0){
+         std::cout << "Cannot pop." << std::endl;
+      }
+      else{
+         size -= 1;
+      }
+   }
+   void print()const{
+      for(int i = 0 ; i < size ; i++ ){
+         std::cout << data[i] << " ";
+      }
+      std::cout << std::endl;
+   }
 };
 
 int main() {
     char oper;
     int value;
-    Evaluator evaluator;
+    Stack stack;
     // Зчитати символ операції, це може одразу бути '='.
     std::cin >> oper;
-    // Зчитувати в циклі операнд і символ наступної операції.
     while (oper != '=') {
-        std::cin >> value;
-        evaluator.eval(oper, value);
+        // Видалити чи додати елемент, залежно від символа.
+        if (oper == '-') {
+            stack.pop();
+        } else {
+            std::cin >> value;
+            stack.push(value);
+        }
+        // Завжди виводити на екран стан стеку.
+        stack.print();
+        // Зчитати наступний символ.
         std::cin >> oper;
     }
-    // Вивести результат, oper має значення '='.
-    std::cout << evaluator.eval(oper) << std::endl;
+
     return 0;
 }
-
