@@ -3144,24 +3144,40 @@
 #include <iostream>
 using namespace std;
 
+// class A{
+//     private:
+//     int res;
+//     public:
+//     A() {
+//         cout << "1" << endl;
+//     };
+//     A (int){ cout << "2 ";};
+// };
+// class B: public A{
+//     private:
+//     int res;
+//     public:
+
+//     B(int x) : A(x){ cout << "3";};
+// };
+
+// int main(){
+//     B a(10);
+//     return 0;
+// }
+
+
 class A{
-    private:
-    int res;
     public:
-    A() {
-        cout << "1" << endl;
-    };
     A (int){ cout << "2 ";};
 };
 class B: public A{
-    private:
-    int res;
     public:
 
-    B(int x) : A(x){ cout << "3";};
+    B() : A(10) { cout << "3";};// B() { cout << "3";}; nima konstructora v A A ()){}};
 };
 
 int main(){
-    B a(10);
+    B a;
     return 0;
 }
