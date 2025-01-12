@@ -2548,7 +2548,7 @@
 
 
 
-#include <iostream>
+// #include <iostream>
 
 // class s {
 // /////////
@@ -2906,59 +2906,262 @@
 
 
 
+// #include <iostream>
+
+// class Stack{
+//    private:
+//    int size = 0;
+//    int data[5];
+
+//    public:
+//    void push(int value){
+//       if (size >= 5){
+//          std::cout << "Cannot push." << std::endl;
+//       }
+//       else{
+//          data[size] = value;
+//          size++;
+//       }
+//    }
+
+//    void pop(){
+//       if (size == 0){
+//          std::cout << "Cannot pop." << std::endl;
+//       }
+//       else{
+//          size -= 1;
+//       }
+//    }
+//    void print()const{
+//       std::cout << "Sack: ";
+//       for(int i = 0 ; i < size ; i++ ){
+//          // std::cout << data[i] << " ";
+//          if (i > 0) {
+//             std::cout << " ";  // Додаємо пробіл перед елементами, окрім першого
+//         }
+//         std::cout << data[i];
+//       }
+//       std::cout << std::endl;
+//    }
+// };
+
+// int main() {
+//     char oper;
+//     int value;
+//     Stack stack;
+//     // Зчитати символ операції, це може одразу бути '='.
+//     std::cin >> oper;
+//     while (oper != '=') {
+//         // Видалити чи додати елемент, залежно від символа.
+//         if (oper == '-') {
+//             stack.pop();
+//         } else {
+//             std::cin >> value;
+//             stack.push(value);
+//         }
+//         // Завжди виводити на екран стан стеку.
+//         stack.print();
+//         // Зчитати наступний символ.
+//         std::cin >> oper;
+//     }
+
+//     return 0;
+// }
+
+// rec
+
+// #include <iostream>
+
+// int main() {
+//     unsigned number;
+//     std::cout << "Enter the number: ";
+//     std::cin >> number;
+
+//     // PUT YOUR CODE HERE
+//     for (unsigned no = 1, n = 0 ;; no *= 2 , n++) {
+//         if (no == number) {
+//             std::cout << number << " is 2 to the power of " << n << std::endl;
+//             break;
+//         }
+//         if (no > number) {
+//             std::cout << number << " is not a power of 2" << std::endl;
+//             break;
+//         }
+//     }
+   
+
+//     return 0;
+// }
+
+// #include <iostream>
+
+// class O {
+// protected:
+//     int o_pr;
+// public:
+//     // функція базового класу
+//     void F(int i) { o_pr = i; }
+// };
+
+// class A : public O {
+// protected:
+//     int a_pr;
+// public:
+//     // функція проміжного класу
+//     void F(int i) { a_pr = i; }
+// };
+
+// class B : public A {
+// protected:
+//     int b_pr;
+// public:
+//     void F(int i) { b_pr = i; }
+
+//     // доступ до члена базового класу
+//     void F1(int i) {
+//         F(i);
+//         A::F(i);
+//         A::O::F(i);
+//         O::F(i);
+//     }
+// };
+
+// int main() {
+//     B b, *p = new B;
+
+//     // доступ до члена базового класу
+//     b.O::F(1); b.A::F(1); b.F(1); b.F1(1);
+
+//     p->A::O::F(2); p->A::F(2); p->F(2); p->F1(2);
+// }
+
+
+
+// #include <iostream>
+
+// class Base {
+// public:
+//     Base() { std::cout << "Base constructor\n"; }
+// };
+
+// class Derived : public Base {
+// public:
+//     Derived() { std::cout << "Derived constructor\n"; }
+// };
+
+// int main() {
+//     Derived d;  // Спочатку викликається конструктор Base, потім конструктор Derived
+// }
+
+
+
+// #include <iostream>
+// #define MESCtor(s) std::cout << " ctor " << s << '\n';
+// #define MESDtor(s) std::cout << " dtor " << s << '\n';
+// #define CtorBody(O)  { O::c = c; MESCtor(c); }
+// #define DtorBody  { MESDtor(c); }
+
+// struct A {
+//     char c;
+//     A(char c) CtorBody(A);
+//     ~A() DtorBody;
+// };
+
+// struct B : public A {
+//     char c;
+//     B(char c, char c1) : A(c1) CtorBody(B);
+//     ~B() DtorBody;
+// };
+
+// struct C : public B {
+//     char c;
+//     C(char c, char c1, char c2) : B(c1, c2)
+//     CtorBody(C);
+//     ~C() DtorBody;
+// };
+
+// int main()  {
+//     C* c = new C('C', 'B', 'A');
+//     delete c;
+// }
+
+
+// #include <iostream>
+
+// struct A {
+//     A() { std::cout << "Constructor of A\n"; }
+//     A(int x) { std::cout << "Constructor of A with parameter " << x << "\n"; }
+// };
+
+// struct B : public A {
+//     B() { std::cout << "Constructor of B\n"; }
+//     B(int x) { std::cout << "Constructor of B with parameter " << x << "\n"; }
+// };
+
+// int main() {
+//     B b1;           // Викликається конструктор A() і B()
+//     B b2(10);        // Викликається конструктор A(10) і B(10)
+// }
+
+
+// struct A {
+//     A() { std::cout << "Constructor of A\n"; }
+//     A(int x) { std::cout << "Constructor of A with parameter " << x << "\n"; }
+// };
+
+// struct B : public A {
+//     B() { std::cout << "Constructor of B\n"; }
+//     B(int x) { std::cout << "Constructor of B with parameter " << x << "\n"; }
+// };
+
+// int main() {
+//     B b1;        // Викликається A() і B()
+//     B b2(10);    // Викликається A(10) і B(10)
+// }
+
+
+
+// #include <iostream>
+
+// struct A {
+//     A() { std::cout << "Constructor of A\n"; }
+//     ~A() { std::cout << "Destructor of A\n"; }  // Тіло деструктора базового класу
+// };
+
+// struct B : public A {
+//     B() { std::cout << "Constructor of B\n"; }
+//     ~B() { 
+//         std::cout << "Destructor of B\n";  // Тіло деструктора похідного класу
+//     }
+// };
+
+// int main() {
+//     B b;  // Створюється об'єкт B
+// }
+
+
+
 #include <iostream>
+using namespace std;
 
-class Stack{
-   private:
-   int size = 0;
-   int data[5];
+class A{
+    private:
+    int res;
+    public:
+    A() {
+        cout << "1" << endl;
+    };
+    A (int){ cout << "2 ";};
+};
+class B: public A{
+    private:
+    int res;
+    public:
 
-   public:
-   void push(int value){
-      if (size >= 5){
-         std::cout << "Cannot push." << std::endl;
-      }
-      else{
-         data[size] = value;
-         size++;
-      }
-   }
-
-   void pop(){
-      if (size == 0){
-         std::cout << "Cannot pop." << std::endl;
-      }
-      else{
-         size -= 1;
-      }
-   }
-   void print()const{
-      for(int i = 0 ; i < size ; i++ ){
-         std::cout << data[i] << " ";
-      }
-      std::cout << std::endl;
-   }
+    B(int x) : A(x){ cout << "3";};
 };
 
-int main() {
-    char oper;
-    int value;
-    Stack stack;
-    // Зчитати символ операції, це може одразу бути '='.
-    std::cin >> oper;
-    while (oper != '=') {
-        // Видалити чи додати елемент, залежно від символа.
-        if (oper == '-') {
-            stack.pop();
-        } else {
-            std::cin >> value;
-            stack.push(value);
-        }
-        // Завжди виводити на екран стан стеку.
-        stack.print();
-        // Зчитати наступний символ.
-        std::cin >> oper;
-    }
-
+int main(){
+    B a(10);
     return 0;
 }
