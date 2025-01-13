@@ -3261,27 +3261,96 @@
 // }
 
 
-class O {
-    public:
-        O() { std::cout << "O constructor" << std::endl; }
-    };
-    class A :public O{
-    public:
-        A(char c) { std::cout << "A constructor: " << c << std::endl; }
-    };
+// class O {
+//     public:
+//         O() { std::cout << "O constructor" << std::endl; }
+//     };
+//     class A :public O{
+//     public:
+//         A(char c) { std::cout << "A constructor: " << c << std::endl; }
+//     };
 
-    class B :public O{
-    public:
-        B(char c) { std::cout << "B constructor: " << c << std::endl; }
-    };
-    class C : public A, public B {
-    public:
-        C(char c1, char c2, char c3) : B(c1), A(c2) {
-            std::cout << "C constructor" << c3 << std::endl;
-        }
-    };
-    int main(){
-        C c('x' , 'y' , 'z');
+//     class B :public O{
+//     public:
+//         B(char c) { std::cout << "B constructor: " << c << std::endl; }
+//     };
+//     class C : public A, public B {
+//     public:
+//         C(char c1, char c2, char c3) : B(c1), A(c2) {
+//             std::cout << "C constructor" << c3 << std::endl;
+//         }
+//     };
+//     int main(){
+//         C c('x' , 'y' , 'z');
         
-        return 0;
-    }
+//         return 0;
+//     }
+
+
+// #include <iostream>
+// #define OUT(S) { std::cout << S << "\n"; }
+
+// struct O {
+//     // виконується першим
+//     O() OUT(" ctor O ");
+//     O(int) OUT(" ctor O(int) ");
+//     // виконується останнім
+//     ~O() OUT(" dtor O ");
+// };
+
+// struct A : public O {
+//     A() OUT(" ctor A ");
+//     A(int) OUT(" ctor A(int) ");
+//     ~A() OUT(" dtor A ");
+// };
+
+// struct B {
+//     B() OUT(" ctor B ");
+//     // B(int) OUT(" ctor B(int) ");
+//     ~B() OUT(" dtor B ");
+// };
+
+// struct C : public A, public B {
+//     // виконується останнім
+//     C() : B(), A() OUT(" ctor C ");
+//     C(int) : A(1)  OUT(" ctor C(int) ");
+//     // виконується першим
+//     ~C() OUT(" dtor C ");
+// };
+
+// int main() {
+//     C* c1 = new C;
+//     delete c1;
+//     std::cout << std::endl;
+//     C* c2 = new C(1);
+//     delete c2;
+// }
+
+
+#include <iostream>
+using namespace std;
+
+struct A {
+    void out() { cout << "class A" << endl; }
+};
+
+struct B : public A {
+    // переозначена функція базового класу
+    void out() { cout << "class B" << endl; }
+};
+
+void F(A a_f) { a_f.out(); } // Функція для A
+void F(A* p) { p->out(); }   // Функція для A
+void FF(B* p) { p->out(); }  // Функція для B
+void FF(B& a_f) { a_f.out(); } // Функція для B
+
+int main() {
+    A a1;   B b1;
+    F(a1); F(&a1);  F(b1); F(&b1); // дозволені виклики
+    A* p = &a1; p->out();
+    p = &b1;    p->out();
+    
+    FF(&b1); FF(b1); FF((B*)&a1); // дозволені виклики FF
+    //FF(&a1); FF(a1); заборонені виклики функції FF
+    return 1;
+}
