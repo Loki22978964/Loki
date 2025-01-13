@@ -3141,8 +3141,8 @@
 
 
 
-#include <iostream>
-using namespace std;
+// #include <iostream>
+// using namespace std;
 
 // class A{
 //     private:
@@ -3167,17 +3167,121 @@ using namespace std;
 // }
 
 
-class A{
-    public:
-    A (int){ cout << "2 ";};
-};
-class B: public A{
-    public:
+// class A{
+//     public:
+//     A (int){ cout << "2 ";};
+// };
+// class B: public A{
+//     public:
 
-    B() : A(10) { cout << "3";};// B() { cout << "3";}; nima konstructora v A A ()){}};
-};
+//     B() : A(10) { cout << "3";};// B() { cout << "3";}; nima konstructora v A A ()){}};
+// };
 
-int main(){
-    B a;
-    return 0;
-}
+// int main(){
+//     B a;
+//     return 0;
+// }
+
+
+
+// #define CTORS(DC, BC) DC() { set(0); } \
+//     DC(DC& c) : BC(c) { set(0); }
+
+// class Line {
+//     double d;
+// protected:
+//     void set(Line& p) { set(p.d); }
+//     void set(double p) { d = p; }
+//     double get() { return d; }
+// public:
+//     Line() { set((double)0); }
+//     Line(Line& p) { set(p); }
+// };
+
+// class Circle : public Line {
+// public:
+//     void set_radius(double r) { set(r); }
+//     double get_radius() { return get(); }
+//     double square() { double r = get(); return 3.14 * r * r; }
+//     CTORS(Circle, Line)
+// };
+
+// class Quadrate : public Line {
+// public:
+//     void set_side(double a) { set(a); }
+//     double get_side() { return get(); }
+//     double square() { double a = get(); return a * a; }
+//     CTORS(Quadrate, Line)
+// };
+
+// int main() {
+//     Quadrate q; q.set_side(10);
+//     // auto b = q.square();
+//         auto b = q.get_side();
+//     Circle c; c.set_radius(100);
+    
+//     std::cout << b;
+// }
+
+
+
+// #include <iostream>
+// #define Out(S){std::cout << S << std::endl;}
+
+// class A{
+//     public:
+//     A(){Out("A+")}
+//     ~A(){
+//         Out("-a")
+//     }
+// };
+
+// class B{
+//     public:
+//     B(){Out("B+")}
+//     ~B(){
+//         Out("-b")
+//     }
+// };
+
+// class C : public B ,public A{
+//     public:
+//     C(){
+//         Out("C+");
+//     }
+//     ~C(){
+//         Out("-c")
+//     }
+// };
+
+// int main (){
+//     C c;
+
+//     return 0;
+// }
+
+
+class O {
+    public:
+        O() { std::cout << "O constructor" << std::endl; }
+    };
+    class A :public O{
+    public:
+        A(char c) { std::cout << "A constructor: " << c << std::endl; }
+    };
+
+    class B :public O{
+    public:
+        B(char c) { std::cout << "B constructor: " << c << std::endl; }
+    };
+    class C : public A, public B {
+    public:
+        C(char c1, char c2, char c3) : B(c1), A(c2) {
+            std::cout << "C constructor" << c3 << std::endl;
+        }
+    };
+    int main(){
+        C c('x' , 'y' , 'z');
+        
+        return 0;
+    }
