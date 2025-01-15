@@ -3327,30 +3327,269 @@
 // }
 
 
+// #include <iostream>
+// using namespace std;
+
+// struct A {
+//     void out() { cout << "class A" << endl; }
+// };
+
+// struct B : public A {
+//     // переозначена функція базового класу
+//     void out() { cout << "class B" << endl; }
+// };
+
+// void F(A a_f) { a_f.out(); } // Функція для A
+// void F(A* p) { p->out(); }   // Функція для A
+// void FF(B* p) { p->out(); }  // Функція для B
+// void FF(B& a_f) { a_f.out(); } // Функція для B
+
+// int main() {
+//     A a1;   B b1;
+//     F(a1); F(&a1);  F(b1); F(&b1); // дозволені виклики
+//     A* p = &a1; p->out();
+//     p = &b1;    p->out();
+    
+//     FF(&b1); FF(b1); FF((B*)&a1); // дозволені виклики FF
+//     //FF(&a1); FF(a1); заборонені виклики функції FF
+//     return 1;
+// }
+
+// #include <iostream>
+// using namespace std;
+
+// class PoweredDevice {
+// public:
+//     int a = 0;
+// };
+
+// class Scanner : virtual public PoweredDevice {
+// public:
+//     Scanner(int i) {
+//         a = i;
+//     }
+// };
+
+// class Printer : virtual public PoweredDevice {
+// public:
+//     void get() {
+//         cout << a;
+//     }
+// };
+
+// class Copier : public Scanner, public Printer {
+// public:
+//     Copier(int i) : Scanner(i) {}
+// };
+
+// int main() {
+//     Copier copier(4);
+//     copier.get(); // Використовує спільну змінну `a` з `PoweredDevice`
+
+//     return 0;
+// }
+
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// class PoweredDevice {
+// public:
+//     int a = 0;
+// };
+
+// class Scanner : virtual public PoweredDevice {
+// public:
+//     Scanner(PoweredDevice& base) {
+//         a = base.a;
+//     }
+// };
+
+// class Printer : virtual public PoweredDevice {
+// public:
+//     void get() {
+//         cout << a;
+//     }
+// };
+
+
+
+// int main() {
+//     PoweredDevice dev;
+//     dev.a = 50;
+//     Scanner sca(dev);
+
+//     Printer  print;
+//     print.a = sca.a;
+//     print.get();
+    
+    
+
+//     return 0;
+// }
+
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// class A{
+//     public:
+//     A(){cout << " A ";}
+//     ~A(){ cout << " -a ";}
+// };
+
+// class B : virtual public A{
+//     public:
+//     B(){cout << " B ";}
+//     ~B(){ cout << " -b ";}
+// };
+
+// class C : virtual public A{
+//     public:
+//     C(){cout << " C ";}
+//     ~C(){ cout << " -c ";}
+// };
+
+// class D : public B , public C{
+//     public:
+//     D(){cout << " D ";}
+//     ~D(){cout << " -d ";}
+// };
+
+
+// int main(){
+//     D d; 
+//    return 0;
+// }
+
+
+
+//     #include <iostream>
+// using namespace std;
+
+// class A {
+// public:
+//     A() { cout << "A "; }
+//     ~A() { cout << "-a "; }
+// };
+
+// class B : virtual public A {
+// public:
+//     B() { cout << "B "; }
+//     ~B() { cout << "-b "; }
+// };
+
+// class C : virtual public A {
+// public:
+//     C() { cout << "C "; }
+//     ~C() { cout << "-c "; }
+// };
+
+// int main() {
+//     B b;  // Створюємо об'єкт класу B
+//     C c;  // Створюємо об'єкт класу C
+//     cout << endl;
+//     return 0;
+// }
+
+
+// (a > b) ? a : b;
+// // ==
+// if (a > b) {
+    
+// }
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// struct A {
+//     void out() { 
+//         cout << "class A" << endl; 
+//     }
+// };
+
+// struct B : public A {
+//     // переозначена функція базового класу
+//     void out() { 
+//         cout << "class B" << endl; 
+//     }
+// };
+
+// void F(A a_f) { 
+//     a_f.out(); 
+// } // Функція для A
+
+// void F(A* p) { 
+//     p->out(); 
+// } // Функція для A
+
+// void FF(B* p) { 
+//     p->out(); 
+// } // Функція для B
+
+// void FF(B& a_f) { 
+//     a_f.out(); 
+// } // Функція для B
+
+// int main() {
+//     A a1;
+//     B b1;
+
+//     // дозволені виклики функцій F
+//     F(a1); 
+//     F(&a1);  
+//     F(b1); 
+//     F(&b1);
+
+//     // робота з вказівниками
+//     // A* p = &a1; 
+//     // p->out();
+//     // p = &b1;    
+//     // p->out();
+
+//     // дозволені виклики функцій FF
+//     FF(&b1); 
+//     FF(b1); 
+//     FF((B*)&a1);
+
+//     // заборонені виклики функцій FF
+//     // FF(&a1); 
+//     // FF(a1);
+
+//     return 1;
+// }
+
+
+
+
 #include <iostream>
 using namespace std;
 
-struct A {
+class A {
+public:
     void out() { cout << "class A" << endl; }
 };
 
-struct B : public A {
-    // переозначена функція базового класу
-    void out() { cout << "class B" << endl; }
+class B : public A {
+public:
+    void out()  { cout << "class B" << endl; }
 };
 
-void F(A a_f) { a_f.out(); } // Функція для A
-void F(A* p) { p->out(); }   // Функція для A
-void FF(B* p) { p->out(); }  // Функція для B
-void FF(B& a_f) { a_f.out(); } // Функція для B
+void callBase(A& a) {
+    a.out(); // Викликає метод базового класу або дочірнього класу
+}
 
 int main() {
-    A a1;   B b1;
-    F(a1); F(&a1);  F(b1); F(&b1); // дозволені виклики
-    A* p = &a1; p->out();
-    p = &b1;    p->out();
-    
-    FF(&b1); FF(b1); FF((B*)&a1); // дозволені виклики FF
-    //FF(&a1); FF(a1); заборонені виклики функції FF
-    return 1;
+    B b;
+    b.out();           
+    callBase(b);
+    b.out(); 
+
+    return 0;
 }
