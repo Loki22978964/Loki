@@ -3615,16 +3615,18 @@
 // void F(B b) { b.show(); }
 
 // int main() {
-//     // D d1;
-//     // d1.show();
-//     // f_1(d1);
-//     // f_1(B(d1));
-//     // // f_2(B(d1));
-//     // f_3((B*)&d1);
-//     // F(d1);
+//     D d1;
+//     d1.show();
+//     f_1(d1);
+//     f_1(B(d1));
+//     // f_2(B(d1));
+//     f_2((B&)d1);
+    
+//     f_3((B*)&d1);
+//     F(d1);
 //     A *p_a = (B*) new D; f_1(*p_a);
-//     // D *p_d = new D; F((B)*p_d);
-//     // f_3((B*)p_d);
+//     D *p_d = new D; F((B)*p_d);
+//     f_3((B*)p_d);
 //     return 1;
 // }
 
@@ -3663,39 +3665,207 @@
 
 
 
+// #include <iostream>
+// using namespace std;
+
+// struct A {
+//     char c_A;
+//     A(char i) { c_A = i; }
+//     // член базового класу
+//     virtual void show() { cout << " -> "; cout << c_A; }
+// };
+
+// struct B : public A {
+//     char c_B;
+//     B(char j, char i) : A(i) {
+//         c_B = j; cout << "Ієрархія класів : ";
+//     }
+//     void show() override ; 
+//     // void show() {
+//     // cout << c_B;
+//     // A::show();
+// // } // член похідного класу
+// };
+
+// // перевизначення функції базового класу
+// // і розширення члена батьківського класу
+// void B::show() { 
+//     cout << c_B;
+//     A::show();
+    
+// }
+
+// int main() {
+//     B b1('B', 'A');
+//     // A* ptr = new B(b1) ;
+//     // ptr->show();
+//     b1.show();
+//     return 1;
+// }
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// void MARK() { cout << "(Single class)"; }
+
+// struct A {
+//     char c_A;
+//     A(char i) { c_A = i; }
+//     // член базового класу
+//     void show() {
+//         cout << "\nBase clas is " << c_A;
+//         MARK();
+//     }
+// };
+
+// struct B : public A {
+//     char c_B;
+//     B(char j, char i) : A(i) { c_B = j; }
+//     void show() {   // перевизначення функції
+//                     // базового класу - обмеження члена
+//         cout << "\nBase clas is " << c_A;
+//     }
+// };
+
+// int main() {
+//     A a1('A'); a1.show();
+//     B b1('B', 'A'); b1.show();
+//     return 0;
+// }
+
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// struct A {
+//     int value_A;
+
+//     A(int v) : value_A(v) {}
+
+//     // Функція, що повертає значення
+//     int getValue() {
+//         return value_A;
+//     }
+// };
+
+// struct B : public A {
+//     int value_B;
+
+//     B(int v1, int v2) : A(v1), value_B(v2) {}
+
+//     // Перевизначена функція, яка сумує значення з обох класів
+//     int getValue()  {
+//         return value_B +  A::getValue();
+//     }
+// };
+
+// int main() {
+//     B b1(5, 10);
+//     cout << "Value from class B: " << b1.getValue() << endl;  // Викликається перевизначена функція getValue() з класу B
+//     return 0;
+// }
+
+
+
+// #include <type_traits>
+// class A { };
+// class B : A { };
+// class C  { };
+// // . . .
+
+//   int main(){
+// std::cout << std::boolalpha << std::is_base_of<A, B>::value << '\n'
+//           << std::is_base_of<B, A>::value << '\n' << std::is_base_of<C, B>::value << '\n';
+
+//           return 0;
+// }
+
+
 #include <iostream>
-using namespace std;
+#include <string>
 
-struct A {
-    char c_A;
-    A(char i) { c_A = i; }
-    // член базового класу
-    void show() { cout << " -> "; cout << c_A; }
-};
+class Transport {
+protected:
+    int speed;
+    int passengers;
 
-struct B : public A {
-    char c_B;
-    B(char j, char i) : A(i) {
-        c_B = j; cout << "Ієрархія класів : ";
+public:
+    Transport(int spd, int pass) : speed(spd), passengers(pass) {}
+
+    virtual void drive() {
+        std::cout << "Транспорт рухається зі швидкістю " << speed << " км/год і перевозить " << passengers << " пасажирів." << std::endl;
     }
-    void show(); 
-    // void show() {
-    // cout << c_B;
-    // A::show();
-// } // член похідного класу
+
+    virtual ~Transport() {}
 };
 
-// перевизначення функції базового класу
-// і розширення члена батьківського класу
-void B::show() { 
-    cout << c_B;
-    A::show();
-}
+class Car : public Transport {
+protected:
+    std::string registrationNumber;
+
+public:
+    Car(int spd, int pass, const std::string& regNumber) 
+        : Transport(spd, pass), registrationNumber(regNumber) {
+        registerCar();
+    }
+
+    void registerCar() {
+        std::cout << "Автомобіль зареєстровано в МРЕО. Реєстраційний номер: " << registrationNumber << std::endl;
+    }
+
+    void drive() override {
+        std::cout << "Автомобіль з реєстраційним номером " << registrationNumber << " рухається." << std::endl;
+        Transport::drive();
+    }
+};
+
+class Hatchback : public Car {
+public:
+    Hatchback(int spd, int pass, const std::string& regNumber)
+        : Car(spd, pass, regNumber) {}
+
+    void drive() override {
+        std::cout << "Хетчбек ";
+        Car::drive();
+    }
+};
+
+class Bus : public Transport {
+public:
+    Bus(int spd, int pass) : Transport(spd, pass) {}
+
+    void drive() override {
+        std::cout << "Автобус рухається." << std::endl;
+        Transport::drive();
+    }
+};
+
+class Bicycle : public Transport {
+public:
+    Bicycle(int spd, int pass) : Transport(spd, pass) {}
+
+    void drive() override {
+        std::cout << "Велосипед рухається." << std::endl;
+        Transport::drive();
+    }
+};
 
 int main() {
-    B b1('B', 'A');
-    // A* ptr = new B(b1) ;
-    // ptr->show();
-    b1.show();
-    return 1;
+    Hatchback hatchback(120, 5, "AB1234CD");
+    hatchback.drive();
+
+    Car car(150, 4, "XY5678Z");
+    car.drive();
+
+    Bus bus(80, 30);
+    bus.drive();
+
+    Bicycle bicycle(20, 1);
+    bicycle.drive();
+
+    return 0;
 }
