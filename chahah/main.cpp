@@ -3596,37 +3596,37 @@
 
 
 
-#include <iostream>
-#define OUT(S)  { std::cout << S << "\n";}
+// #include <iostream>
+// #define OUT(S)  { std::cout << S << "\n";}
 
-struct A {  void show() OUT('A') };
+// struct A {  void show() OUT('A') };
 
-struct B : virtual public A {};
+// struct B : virtual public A {};
 
-struct C : virtual public A {};
+// struct C : virtual public A {};
 
-struct D : public B, public C {
-    void show() OUT('C')
-};
+// struct D : public B, public C {
+//     void show() OUT('C')
+// };
 
-void f_1(A a) { a.show(); }
-void f_2(A& a) { a.show(); }
-void f_3(A* a) { a->show(); }
-void F(B b) { b.show(); }
+// void f_1(A a) { a.show(); }
+// void f_2(A& a) { a.show(); }
+// void f_3(A* a) { a->show(); }
+// void F(B b) { b.show(); }
 
-int main() {
-    D d1;
-    d1.show();
-    f_1(d1);
-    f_1(B(d1));
-    // f_2(B(d1));
-    f_3((B*)&d1);
-    F(d1);
-    A *p_a = (B*) new D; f_1(*p_a);
-    D *p_d = new D; F((B)*p_d);
-    f_3((B*)p_d);
-    return 1;
-}
+// int main() {
+//     // D d1;
+//     // d1.show();
+//     // f_1(d1);
+//     // f_1(B(d1));
+//     // // f_2(B(d1));
+//     // f_3((B*)&d1);
+//     // F(d1);
+//     A *p_a = (B*) new D; f_1(*p_a);
+//     // D *p_d = new D; F((B)*p_d);
+//     // f_3((B*)p_d);
+//     return 1;
+// }
 
 
 
@@ -3660,3 +3660,42 @@ int main() {
 //     b1.show();
 //     return 1;
 // }
+
+
+
+#include <iostream>
+using namespace std;
+
+struct A {
+    char c_A;
+    A(char i) { c_A = i; }
+    // член базового класу
+    void show() { cout << " -> "; cout << c_A; }
+};
+
+struct B : public A {
+    char c_B;
+    B(char j, char i) : A(i) {
+        c_B = j; cout << "Ієрархія класів : ";
+    }
+    void show(); 
+    // void show() {
+    // cout << c_B;
+    // A::show();
+// } // член похідного класу
+};
+
+// перевизначення функції базового класу
+// і розширення члена батьківського класу
+void B::show() { 
+    cout << c_B;
+    A::show();
+}
+
+int main() {
+    B b1('B', 'A');
+    // A* ptr = new B(b1) ;
+    // ptr->show();
+    b1.show();
+    return 1;
+}
