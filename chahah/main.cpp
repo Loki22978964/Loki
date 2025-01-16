@@ -3785,87 +3785,138 @@
 // }
 
 
+// #include <iostream>
+// #include <string>
+
+// class Transport {
+// protected:
+//     int speed;
+//     int passengers;
+
+// public:
+//     Transport(int spd, int pass) : speed(spd), passengers(pass) {}
+
+//     virtual void drive() {
+//         std::cout << "Транспорт рухається зі швидкістю " << speed << " км/год і перевозить " << passengers << " пасажирів." << std::endl;
+//     }
+
+//     virtual ~Transport() {}
+// };
+
+// class Car : public Transport {
+// protected:
+//     std::string registrationNumber;
+
+// public:
+//     Car(int spd, int pass, const std::string& regNumber) 
+//         : Transport(spd, pass), registrationNumber(regNumber) {
+//         registerCar();
+//     }
+
+//     void registerCar() {
+//         std::cout << "Автомобіль зареєстровано в МРЕО. Реєстраційний номер: " << registrationNumber << std::endl;
+//     }
+
+//     void drive() override {
+//         std::cout << "Автомобіль з реєстраційним номером " << registrationNumber << " рухається." << std::endl;
+//         Transport::drive();
+//     }
+// };
+
+// class Hatchback : public Car {
+// public:
+//     Hatchback(int spd, int pass, const std::string& regNumber)
+//         : Car(spd, pass, regNumber) {}
+
+//     void drive() override {
+//         std::cout << "Хетчбек ";
+//         Car::drive();
+//     }
+// };
+
+// class Bus : public Transport {
+// public:
+//     Bus(int spd, int pass) : Transport(spd, pass) {}
+
+//     void drive() override {
+//         std::cout << "Автобус рухається." << std::endl;
+//         Transport::drive();
+//     }
+// };
+
+// class Bicycle : public Transport {
+// public:
+//     Bicycle(int spd, int pass) : Transport(spd, pass) {}
+
+//     void drive() override {
+//         std::cout << "Велосипед рухається." << std::endl;
+//         Transport::drive();
+//     }
+// };
+
+// int main() {
+//     Hatchback hatchback(120, 5, "AB1234CD");
+//     hatchback.drive();
+
+//     Car car(150, 4, "XY5678Z");
+//     car.drive();
+
+//     Bus bus(80, 30);
+//     bus.drive();
+
+//     Bicycle bicycle(20, 1);
+//     bicycle.drive();
+
+//     return 0;
+// }
+
+
+// #include <iostream>
+// using namespace std;
+// class A{
+//     public:
+//     void show(){
+//         cout << " Its A!!! " << endl;
+//     }
+// };
+
+// class B : public A{
+//     public:
+//     void show(){
+//         cout << " Its B!!! " << endl;
+//     }
+// };
+
+// int main(){
+//     B b;
+//     b.show();
+//     A *ptr = new B(b);
+//     ptr->show();
+    
+//     return 0;
+// }
+
 #include <iostream>
-#include <string>
-
-class Transport {
-protected:
-    int speed;
-    int passengers;
-
-public:
-    Transport(int spd, int pass) : speed(spd), passengers(pass) {}
-
-    virtual void drive() {
-        std::cout << "Транспорт рухається зі швидкістю " << speed << " км/год і перевозить " << passengers << " пасажирів." << std::endl;
-    }
-
-    virtual ~Transport() {}
-};
-
-class Car : public Transport {
-protected:
-    std::string registrationNumber;
-
-public:
-    Car(int spd, int pass, const std::string& regNumber) 
-        : Transport(spd, pass), registrationNumber(regNumber) {
-        registerCar();
-    }
-
-    void registerCar() {
-        std::cout << "Автомобіль зареєстровано в МРЕО. Реєстраційний номер: " << registrationNumber << std::endl;
-    }
-
-    void drive() override {
-        std::cout << "Автомобіль з реєстраційним номером " << registrationNumber << " рухається." << std::endl;
-        Transport::drive();
+using namespace std;
+class A{
+    public:
+    virtual void show(){
+        cout << " Its A!!! " << endl;
     }
 };
 
-class Hatchback : public Car {
-public:
-    Hatchback(int spd, int pass, const std::string& regNumber)
-        : Car(spd, pass, regNumber) {}
-
-    void drive() override {
-        std::cout << "Хетчбек ";
-        Car::drive();
+class B : public A{
+    public:
+    void show() override  {
+        cout << " Its B!!! " << endl;
     }
 };
 
-class Bus : public Transport {
-public:
-    Bus(int spd, int pass) : Transport(spd, pass) {}
-
-    void drive() override {
-        std::cout << "Автобус рухається." << std::endl;
-        Transport::drive();
-    }
-};
-
-class Bicycle : public Transport {
-public:
-    Bicycle(int spd, int pass) : Transport(spd, pass) {}
-
-    void drive() override {
-        std::cout << "Велосипед рухається." << std::endl;
-        Transport::drive();
-    }
-};
-
-int main() {
-    Hatchback hatchback(120, 5, "AB1234CD");
-    hatchback.drive();
-
-    Car car(150, 4, "XY5678Z");
-    car.drive();
-
-    Bus bus(80, 30);
-    bus.drive();
-
-    Bicycle bicycle(20, 1);
-    bicycle.drive();
-
+int main(){
+    B b;
+    b.show();
+    A *ptr = new B(b);
+    ptr->show();
+    b.show();
     return 0;
 }
