@@ -3896,27 +3896,99 @@
 //     return 0;
 // }
 
+// #include <iostream>
+// using namespace std;
+// class A{
+//     public:
+//     virtual void show(){
+//         cout << " Its A!!! " << endl;
+//     }
+// };
+
+// class B : public A{
+//     public:
+//     void show() override  {
+//         cout << " Its B!!! " << endl;
+//     }
+//     void pop(){
+//         A::show();
+//     }
+// };
+
+// int main(){
+//     B b;
+//     b.show();
+//     A *ptr = new B(b);
+//     ptr->show();
+//     b.show();
+//     b.pop();
+//     return 0;
+// }
+
+
+// #include <iostream>
+// using namespace std;
+// class A{
+//     public:
+//     virtual void show(){
+//         cout << " Its A!!! " << endl;
+//     }
+// };
+
+// class B : public A{
+//     public:
+//     void show() override  {
+//         cout << " Its B!!! " << endl;
+//     }
+// }
+
+// int main(){
+//     B b;
+//     b.show();
+//     A *ptr = new B(b);
+//     ptr->show();
+//     b.show();
+    
+//     return 0;
+// }
+
+
+
+
 #include <iostream>
 using namespace std;
-class A{
-    public:
-    virtual void show(){
+
+class A {
+public:
+    virtual void show() {
         cout << " Its A!!! " << endl;
     }
 };
 
-class B : public A{
-    public:
-    void show() override  {
+class B : public A {
+public:
+    void show() override {
         cout << " Its B!!! " << endl;
+    }
+
+    void showBase() {
+        // Виклик методу show() базового класу A
+        A::show();
     }
 };
 
-int main(){
+int main() {
     B b;
+
+    cout << "Виклик B::show(): ";
     b.show();
-    A *ptr = new B(b);
+
+    cout << "Виклик A::show() через об'єкт B: ";
+    b.showBase(); // Виклик базового методу show() через B
+
+    A* ptr = new B(b);
+    cout << "Виклик через вказівник типу A: ";
     ptr->show();
-    b.show();
+
     return 0;
 }
