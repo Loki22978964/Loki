@@ -3982,7 +3982,7 @@ int main() {
 
     cout << "Виклик B::show(): ";
     b.show();
-
+    ((A)b).show();
     cout << "Виклик A::show() через об'єкт B: ";
     b.showBase(); // Виклик базового методу show() через B
 
