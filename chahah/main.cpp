@@ -3955,40 +3955,79 @@
 
 
 
-#include <iostream>
-using namespace std;
+// #include <iostream>
+// using namespace std;
 
-class A {
-public:
-    virtual void show() {
-        cout << " Its A!!! " << endl;
-    }
-};
+// class A {
+// public:
+//     virtual void show() {
+//         cout << " Its A!!! " << endl;
+//     }
+// };
 
-class B : public A {
-public:
-    void show() override {
-        cout << " Its B!!! " << endl;
-    }
+// class B : public A {
+// public:
+//     void show() override {
+//         cout << " Its B!!! " << endl;
+//     }
 
-    void showBase() {
-        // Виклик методу show() базового класу A
-        A::show();
-    }
-};
+//     void showBase() {
+//         // Виклик методу show() базового класу A
+//         A::show();
+//     }
+// };
 
-int main() {
-    B b;
+// int main() {
+//     B b;
 
-    cout << "Виклик B::show(): ";
-    b.show();
-    ((A)b).show();
-    cout << "Виклик A::show() через об'єкт B: ";
-    b.showBase(); // Виклик базового методу show() через B
+//     cout << "Виклик B::show(): ";
+//     b.show();
+//     ((A)b).show();
+//     cout << "Виклик A::show() через об'єкт B: ";
+//     b.showBase(); // Виклик базового методу show() через B
 
-    A* ptr = new B(b);
-    cout << "Виклик через вказівник типу A: ";
-    ptr->show();
+//     A* ptr = new B(b);
+//     cout << "Виклик через вказівник типу A: ";
+//     ptr->show();
 
-    return 0;
-}
+//     delete ptr;
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// class A {
+// public:
+//     virtual void show() {
+//         cout << " Its A!!! " << endl;
+//     }
+// };
+
+// class B : public A {
+// public:
+//     void show() override {
+//         cout << " Its B!!! " << endl;
+//     }
+
+//     void showBase() {
+//         // Виклик методу show() базового класу A
+//         A::show();
+//     }
+// };
+
+// int main() {
+//     B b;
+//     A* ptr = new B(b);
+    
+//     ptr->show();      // B
+//     ptr->A::show();  // A
+
+//     delete ptr;
+//     return 0;
+// }
+
+
+
