@@ -4131,17 +4131,40 @@
 // }
 
 
-#include <iostream>
-#define SHOW(S)   { std::cout << " class - " << S << '\n'; }
+// #include <iostream>
+// #define SHOW(S)   { std::cout << " class - " << S << '\n'; }
 
-struct A { virtual void show() {} };
+// struct A { virtual void show() {} };
 
-struct B: public A {};
-struct D: public A { void show()SHOW("D"); };
-struct C: public B { void show()SHOW("C"); };
+// struct B: public A {};
+// struct D: public A { void show()SHOW("D"); };
+// struct C: public B { void show()SHOW("C"); };
 
-void Show1(A* a1) { a1->show(); }
+// void Show1(A* a1) { a1->show(); }
 
-int main() {
-    Show1(new C);
-}
+// int main() {
+//     Show1(new C);
+// }
+
+
+
+class Base { 
+    virtual void method() = 0; 
+    };
+
+ class Constant : virtual public Base { 
+    virtual void method() const {} 
+    };
+
+  class Variable : virtual public Base {
+     virtual void method() {} 
+     };
+   class Derived : public Constant, public Variable {};
+
+   int main(){
+    // Base b;
+    // Constant a;
+    Variable c;
+    Derived d;
+    return 0;
+   }
