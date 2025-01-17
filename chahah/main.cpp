@@ -4030,4 +4030,35 @@
 // }
 
 
+#include <iostream>
+using namespace std;
 
+struct A{
+    virtual void show(){
+        cout << " A ";
+    }
+};
+
+struct B : A{
+    void show() final {
+        cout << " B ";
+    }
+};
+
+struct C : B{
+    // void show()  {
+    //     cout << " C ";
+    // } pomilka tomy scho v bat class ye metod z finale
+};
+struct C1 : B{
+    virtual void show(int i) {
+        cout << " C ";
+    }
+};
+
+
+int main(){
+
+
+    return 0;
+}
