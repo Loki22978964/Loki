@@ -4030,35 +4030,118 @@
 // }
 
 
+// #include <iostream>
+// using namespace std;
+
+// struct A{
+//     virtual void show(){
+//         cout << " A ";
+//     }
+// };
+
+// struct B : A{
+//     void show() final {
+//         cout << " B ";
+//     }
+// };
+
+// struct C : B{
+//     // void show()  {
+//     //     cout << " C ";
+//     // } pomilka tomy scho v bat class ye metod z finale
+// };
+// struct C1 : B{
+//     virtual void show(int i) {
+//         cout << " C ";
+//     }
+// };
+
+
+// int main(){
+
+
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// #define SHOW(M,s) { cout << M << s << "\n"; }
+
+// struct A {
+//     int i;
+//     virtual void f() SHOW(" Virt fun from ", "A");
+//      void f1() SHOW(" FFun from ", "A");
+//     A(int j) { i = j; }
+// };
+
+// struct B : A {
+//     int i;
+//     void f() override SHOW(" Virt fun from ", "B");
+//     void f1()  SHOW(" FFun from ", "B");
+//     B(int j1, int j2): A(j2) { i = j1; }
+// };
+
+// int main() {
+//     A a1(1); // Створення об’єкта класу А
+//     B b1(2, 3); // Створення об’єкта класу В
+//     a1.f(); 
+//     a1.f1();
+    
+//     ((A*)&b1)->f();
+//     ((A*)&b1)->f1();
+//     // B b2(2 , 3);
+//     // b2.A::f1();
+//     // b2.B::f1();
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// class A {
+//     int x;
+// public:
+//     A(int val) : x(val) {}
+//     virtual void show(A &a) {
+//         cout << "Value of A's x: " << a.x << endl;
+//     }
+//     // Оголошуємо клас B як дружній
+//     friend class B;
+// };
+
+// class B {
+// public:
+//     // Ось віртуальна функція, яка є членом класу B і дружньою до класу A
+//     // virtual void show(A &a) {
+//     //     cout << "Value of A's x: " << a.x << endl;
+//     // }
+// };
+
+// int main() {
+//     A a(10);
+//     B b;
+//     b.show(a);  // Викликаємо віртуальну функцію show, що має доступ до приватних членів класу A
+    
+//     return 0;
+// }
+
+
 #include <iostream>
-using namespace std;
+#define SHOW(S)   { std::cout << " class - " << S << '\n'; }
 
-struct A{
-    virtual void show(){
-        cout << " A ";
-    }
-};
+struct A { virtual void show() {} };
 
-struct B : A{
-    void show() final {
-        cout << " B ";
-    }
-};
+struct B: public A {};
+struct D: public A { void show()SHOW("D"); };
+struct C: public B { void show()SHOW("C"); };
 
-struct C : B{
-    // void show()  {
-    //     cout << " C ";
-    // } pomilka tomy scho v bat class ye metod z finale
-};
-struct C1 : B{
-    virtual void show(int i) {
-        cout << " C ";
-    }
-};
+void Show1(A* a1) { a1->show(); }
 
-
-int main(){
-
-
-    return 0;
+int main() {
+    Show1(new C);
 }
