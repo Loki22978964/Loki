@@ -4170,26 +4170,370 @@
 //    }
 
 
+// #include <iostream>
+// #define SHOW(S) {std::cout << "class - " << S << '\n';}
+
+// class A{
+//    public:
+//    virtual void show() = 0;
+//    void Show1(){A::show();};
+// };
+
+// void A::show() SHOW("C");
+
+// class B : public A{
+//    public:
+//    void show(){ A::show();};
+// };
+
+// int main(){
+//    B* p = new B;
+//    p->show();
+//    p->Show1();
+
+//    return 0;
+// }
+
+
+
+// class Ancestor { 
+//   public:
+//    Ancestor(){std::cout << " Ancestor";}
+//  };
+//     class Progenitor {
+      
+//       public:
+//       Progenitor(){std::cout << " Progenitor";}
+//     };
+//     class Parent : Ancestor {
+//       public:
+//       Parent(){std::cout <<" Parent";}
+//       };
+//     class Genitor : Progenitor {
+//       public:
+//       Genitor(){std::cout <<" Genitor";}
+//       };
+//     class Child : Genitor, Parent {
+//       public:
+//       Child(){std::cout << " Child";}
+//       };
+
+//     int main(){
+//       Child a;
+//       return 0;
+//     }
+
+//  #include <iostream>
+    
+    
+
+    
+
+//     class Base {
+//     public:
+//        virtual void method() {
+//            std::cout << "Base" << std::endl;
+//        }
+//     };
+//     class Derived : public Base {
+//     public:
+//        virtual void method() {
+//            std::cout << "Derived" << std::endl;
+//        }
+//     };
+//     int main() {
+//        Derived o;
+//        Base* ptr = &o;
+//        Base& ref = o;
+//        Base obj = o;
+//        ptr->method();
+//        ref.method();
+//        obj.method();
+//        return 0;
+//     }
+
+// #include <iostream>
+// struct Point2 {
+//     int x;
+//     int y;
+
+//     void print() const {
+//         std::cout << '(' << this->x << ','
+//                   << ' ' << this->y << ')';
+//     }
+// };
+
+// struct Point3{
+//   int x; 
+//   int y; 
+//   int z;
+//   void print() const {
+//     std::cout << '(' << this->x << ','
+//       << ' ' << this->y << ',' << ' ' <<
+//        this->z << ')';
+//   }
+// };
+
+// // PUT YOUR CODE HERE
+
+// int main() {
+//     // Зчитати вхідні дані.
+//     std::cout << "Enter the coordinates: ";
+//     int x;
+//     int y;
+//     int z;
+//     std::cin >> x >> y >> z;
+//     // Створити об'єкт Point3 і вивести його на екран.
+//     const Point3 point { x, y, z };
+//     point.print();
+//     std::cout << std::endl;
+//     return 0;
+// }
+
+// #include <iostream>
+// struct Point {
+//     int size;
+//     int* array;
+
+//     Point(int size)
+//         : size(size)
+//         , array(new int[size]) {
+//     }
+
+//     ~Point() {
+//         delete[] array;
+//     }
+
+//     void print() const {
+//         std::cout << '(';
+//         for (int i = 0; i < size - 1; ++i) {
+//             std::cout << array[i] << ',' << ' ';
+//         }
+//         std::cout << array[size - 1] << ')';
+//     }
+// };
+
+// // PUT YOUR CODE HERE
+// struct Point2 : Point{
+//   int& x;
+//   int& y;
+  
+//   Point2() : x(array[0]) , y(array[1]) , Point(2){}
+
+// };
+
+// int main() {
+//    // Створити об'єкт Point2 і зчитати вхідні дані напряму в поля.
+//     std::cout << "Enter the coordinates: ";
+//     Point2 point;
+//     std::cin >> point.x >> point.y;
+    
+//     // Вивести Point2 на екран, використовуючи унаслідуваний метод.
+//     point.print();
+//     std::cout << std::endl;
+//     return 0;
+// }
+
+
+// #include <iostream>
+// struct Point {
+//    int x;
+//    int y;
+
+//    void print() const {
+//        std::cout << '(' << this->x << ','
+//                  << ' ' << this->y << ')';
+//     }
+// };
+
+// class Shape {
+// protected:
+//     int size;
+//     Point* array;
+
+// public:
+//     // Конструктор за замовчуванням, коли кількість точок спочатку невідома.
+//     Shape(): size(0) , array(nullptr) { }
+
+//     // Конструктор з параметром для нащадків, коли кількість точок наперед відома.
+//     Shape(int size)
+//         : size(size)
+//         , array(new Point[size]) {
+//     }
+
+//     virtual ~Shape() {
+//         delete[] array;
+//     }
+
+//     void input() {
+//         // Зчитати кількість точок, якщо вона невідома.
+//         // Алокувати масив точок відповідного розміру.
+//         if (array == nullptr) {
+//             std::cin >> size;
+//             array = new Point[size];
+//         }
+//         // Зчитати координати точок, тут їх кількість точно відома.
+//         for (int i = 0; i < size; ++i) {
+//             std::cin >> array[i].x >> array[i].y;
+//         }
+//     }
+
+//     void print() const {
+//         // Вивести фігуру на екран: ім'я і точки через пробіл.
+//         std::cout << name();
+//         for (int i = 0; i < size; ++i) {
+//             std::cout << ' ';
+//             array[i].print();
+//         }
+//     }
+
+//     virtual const char* name() const {
+//         // Ім'я фігури - має відповідати імені класу.
+//         return "Shape";
+//     }
+// };
+
+// class Square : public Shape{
+//   public:
+//   Square () : Shape(2){}
+
+//   const char* name()  const override{
+//         // Ім'я фігури - має відповідати імені класу.
+//         return "Square";
+//   };
+// };
+
+// class Triangle :public Shape{
+//   public:
+//   Triangle () : Shape(3){}
+//   const char* name() const override {
+//         // Ім'я фігури - має відповідати імені класу.
+//         return "Triangle";
+//   };
+// };
+
+// int main() {
+//      // Прочитати ім'я фігури.
+//     std::cout << "Input a shape (name, points):" << std::endl;
+//     std::string name;
+//     std::cin >> name;
+//     // Створити відповідну фігуру.
+//     Shape* shape;
+//     if (name == "Triangle") {
+//         shape = new Triangle();
+//     } else if (name == "Square") {
+//         shape = new Square();
+//     } else {
+//         shape = new Shape();
+//     }
+//     // Прочитати координати фігури.
+//     shape->input();
+//     // Вивести фігуру на екран.
+//     shape->print();
+//     std::cout << std::endl;
+//     // Звільнити пам'ять.
+//     delete shape;
+//     return 0;
+// }
+
+
+#include <cmath>
+#include <iomanip>
 #include <iostream>
-#define SHOW(S) {std::cout << "class - " << S << '\n';}
+#include <string>
 
-class A{
-   public:
-   virtual void show() = 0;
-   void Show1(){A::show();};
+struct Point {
+    double x;
+    double y;
+
+    void print() const {
+        std::cout << '(' << this->x << ','
+                  << ' ' << this->y << ')';
+    }
+
+    static double length(const Point& a, const Point& b) {
+        return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2));
+    }
 };
 
-void A::show() SHOW("C");
+struct Shape {
+    int size;
+    Point* array;
+    std::string name;
 
-class B : public A{
-   public:
-   void show(){ A::show();};
+    // Конструктор з параметром, кількість точок наперед відома.
+    Shape(int size)
+        : size(size)
+        , array(new Point[size]) {
+    }
+
+    virtual ~Shape() {
+        delete[] array;
+    }
+
+    void input() {
+        for (int i = 0; i < size; ++i) {
+            std::cin >> array[i].x >> array[i].y;
+        }
+    }
+
+    void print() const {
+        // Вивести фігуру на екран: ім'я і точки через пробіл.
+        std::cout << name;
+        for (int i = 0; i < size; ++i) {
+            std::cout << ' ';
+            array[i].print();
+        }
+    }
+    
+    // Оголосіть абстрактний метод area().
+    virtual double area() const = 0;
+    // PUT YOUR CODE HERE
 };
 
-int main(){
-   B* p = new B;
-   p->show();
-   p->Show1();
+// Визначте класи Circle та Square 
+// PUT YOUR CODE HERE
+class Circle : public Shape{
+  public:
+  Circle() : Shape(2){}
+  double area() const{};
+  void print() const{
+    Shape::print();
+  }
+};
 
-   return 0;
+class Square : public Shape{ 
+  public:
+  Square() : Shape(2){}
+  double area() const{};
+  void print() const{
+    Shape::print();
+    double b;
+    b = 0.5 * sqrt((array[1].x - array[0].x)^2 + (array[1].x - array[0].x)^2)^2;
+  }
+};
+
+int main() {
+    // Прочитати ім'я фігури.
+    std::cout << "Input a shape (name, points):" << std::endl;
+    std::string name;
+    std::cin >> name;
+    // Створити відповідну фігуру.
+    Shape* shape;
+    if (name == "Circle") {
+        shape = new Circle();
+    } else if (name == "Square") {
+        shape = new Square();
+    }
+    shape->name = name;
+    // Прочитати координати фігури.
+    shape->input();
+    // Вивести фігуру та її площу на екран.
+    std::cout << std::fixed << std::setprecision(1) << "Area of ";
+    shape->print();
+    std::cout << std::setprecision(2) << " = " << shape->area() << std::endl;
+    // Звільнити пам'ять.
+    delete shape;
+
+    return 0;
 }
