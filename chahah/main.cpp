@@ -4148,23 +4148,48 @@
 
 
 
-class Base { 
-    virtual void method() = 0; 
-    };
+// class Base { 
+//     virtual void method() = 0; 
+//     };
 
- class Constant : virtual public Base { 
-    virtual void method() const {} 
-    };
+//  class Constant : virtual public Base { 
+//     virtual void method() const {} 
+//     };
 
-  class Variable : virtual public Base {
-     virtual void method() {} 
-     };
-   class Derived : public Constant, public Variable {};
+//   class Variable : virtual public Base {
+//      virtual void method() {} 
+//      };
+//    class Derived : public Constant, public Variable {};
 
-   int main(){
-    // Base b;
-    // Constant a;
-    Variable c;
-    Derived d;
-    return 0;
-   }
+//    int main(){
+//     // Base b;
+//     // Constant a;
+//     Variable c;
+//     Derived d;
+//     return 0;
+//    }
+
+
+#include <iostream>
+#define SHOW(S) {std::cout << "class - " << S << '\n';}
+
+class A{
+   public:
+   virtual void show() = 0;
+   void Show1(){A::show();};
+};
+
+void A::show() SHOW("C");
+
+class B : public A{
+   public:
+   void show(){ A::show();};
+};
+
+int main(){
+   B* p = new B;
+   p->show();
+   p->Show1();
+
+   return 0;
+}
