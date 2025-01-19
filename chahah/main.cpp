@@ -4437,103 +4437,269 @@
 // }
 
 
-#include <cmath>
-#include <iomanip>
+// #include <cmath>
+// #include <iomanip>
+// #include <iostream>
+// #include <string>
+
+// struct Point {
+//     double x;
+//     double y;
+
+//     void print() const {
+//         std::cout << '(' << this->x << ','
+//                   << ' ' << this->y << ')';
+//     }
+
+//     static double length(const Point& a, const Point& b) {
+//         return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2));
+//     }
+// };
+
+// struct Shape {
+//     int size;
+//     Point* array;
+//     std::string name;
+
+//     // Конструктор з параметром, кількість точок наперед відома.
+//     Shape(int size)
+//         : size(size)
+//         , array(new Point[size]) {
+//     }
+
+//     virtual ~Shape() {
+//         delete[] array;
+//     }
+
+//     void input() {
+//         for (int i = 0; i < size; ++i) {
+//             std::cin >> array[i].x >> array[i].y;
+//         }
+//     }
+
+//     void print() const {
+//         // Вивести фігуру на екран: ім'я і точки через пробіл.
+//         std::cout << name;
+//         for (int i = 0; i < size; ++i) {
+//             std::cout << ' ';
+//             array[i].print();
+//         }
+//     }
+    
+//     // Оголосіть абстрактний метод area().
+//     virtual double area() const = 0;
+//     // PUT YOUR CODE HERE
+// };
+
+// // Визначте класи Circle та Square 
+// // PUT YOUR CODE HERE
+// class Circle : public Shape{
+//   public:
+//   Circle() : Shape(2){}
+//   double area() const{
+//     double side = Point::length(array[0], array[1]);
+//     return 3.1415 * side * side;
+//   };
+
+
+// };
+
+// class Square : public Shape{ 
+//   public:
+//   Square() : Shape(2){}
+//   double area() const{
+//         double side = Point::length(array[0], array[1]);
+//     return 0.5 * side * side;
+//   };
+
+  
+//   };
+
+// int main() {
+//     // Прочитати ім'я фігури.
+//     std::cout << "Input a shape (name, points):" << std::endl;
+//     std::string name;
+//     std::cin >> name;
+//     // Створити відповідну фігуру.
+//     Shape* shape;
+//     if (name == "Circle") {
+//         shape = new Circle();
+//     } else if (name == "Square") {
+//         shape = new Square();
+//     }
+//     shape->name = name;
+//     // Прочитати координати фігури.
+//     shape->input();
+//     // Вивести фігуру та її площу на екран.
+//     std::cout << std::fixed << std::setprecision(1) << "Area of ";
+//     shape->print();
+//     std::cout << std::setprecision(2) << " = " << shape->area() << std::endl;
+//     // Звільнити пам'ять.
+//     delete shape;
+
+//     return 0;
+// }
+
+
+// #include <iostream>
+// #include <string>
+
+// class Movable {
+// public:
+//     virtual ~Movable() = default;
+
+//     void move() {
+//         std::cout << name() << " is moved." << std::endl;
+//     }
+
+//     void focus() {
+//         std::cout << name() << " is not focusable." << std::endl;
+//     }
+
+//     virtual const char* name() const = 0;
+// };
+
+// class Focusable {
+// public:
+//     virtual ~Focusable() = default;
+
+//     void move() {
+//         std::cout << name() << " is not movable." << std::endl;
+//     }
+
+//     void focus() {
+//         std::cout << name() << " is in focus." << std::endl;
+//     }
+
+//     virtual const char* name() const = 0;
+// };
+
+// // PUT YOUR CODE HERE
+// class Button : public Focusable {
+//     public:
+//     const char* name() const{
+//         return "Button";
+//     };
+// };
+// class Slider : public Movable , public Focusable {
+//     public:
+//     const char* name() const{
+//         return "Slider";
+//     };
+//     void move() {
+//         std::cout << name() << " is moved." << std::endl;
+//     }
+
+//     void focus() {
+//         std::cout << name() << " is not focusable." << std::endl;
+//     }
+// };
+
+// int main() {
+//     // Зчитати віджет і команду.
+//     std::string widget;
+//     std::string command;
+//     std::cin >> widget >> command;
+//     // Виконати команду над віджетом.
+//     if (widget == "Button") {
+//         if (command == "focus") {
+//             Button().focus();
+//         } else {
+//             Button().move();
+//         }
+//     } else if (widget == "Slider") {
+//         if (command == "focus") {
+//             Slider().focus();
+//         } else {
+//             Slider().move();
+//         }
+//     }
+//     return 0;
+// }
+
+
+
 #include <iostream>
 #include <string>
 
-struct Point {
-    double x;
-    double y;
-
-    void print() const {
-        std::cout << '(' << this->x << ','
-                  << ' ' << this->y << ')';
+class Widget {
+public:
+    virtual ~Widget() = default;
+    virtual const char* name() const = 0;
+     virtual void focus() {
+        std::cout << name() << " is not focusable." << std::endl;
+    }
+    virtual void move() {
+        std::cout << name() << " is not movable." << std::endl;
     }
 
-    static double length(const Point& a, const Point& b) {
-        return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2));
-    }
-};
-
-struct Shape {
-    int size;
-    Point* array;
-    std::string name;
-
-    // Конструктор з параметром, кількість точок наперед відома.
-    Shape(int size)
-        : size(size)
-        , array(new Point[size]) {
-    }
-
-    virtual ~Shape() {
-        delete[] array;
-    }
-
-    void input() {
-        for (int i = 0; i < size; ++i) {
-            std::cin >> array[i].x >> array[i].y;
-        }
-    }
-
-    void print() const {
-        // Вивести фігуру на екран: ім'я і точки через пробіл.
-        std::cout << name;
-        for (int i = 0; i < size; ++i) {
-            std::cout << ' ';
-            array[i].print();
-        }
-    }
-    
-    // Оголосіть абстрактний метод area().
-    virtual double area() const = 0;
+    // Перемістити методи з Movable та Focusable
     // PUT YOUR CODE HERE
 };
 
-// Визначте класи Circle та Square 
-// PUT YOUR CODE HERE
-class Circle : public Shape{
-  public:
-  Circle() : Shape(2){}
-  double area() const{};
-  void print() const{
-    Shape::print();
-  }
+//Внести зміни в опис класу згідно умови задачі 
+class Movable : virtual public Widget {
+public:
+    virtual ~Movable() = default;
+    virtual void move() {
+        std::cout << name() << " is moved." << std::endl;
+    }
 };
 
-class Square : public Shape{ 
-  public:
-  Square() : Shape(2){}
-  double area() const{};
-  void print() const{
-    Shape::print();
-    double b;
-    b = 0.5 * sqrt((array[1].x - array[0].x)^2 + (array[1].x - array[0].x)^2)^2;
-  }
+//Внести зміни в опис класу згідно умови задачі 
+class Focusable : virtual public Widget {
+public:
+    virtual ~Focusable() = default;
+    virtual void focus() {
+        std::cout << name() << " is in focus." << std::endl;
+    }
+
+    
+};
+
+// Визначити Image
+// PUT YOUR CODE HERE
+
+class Button : public Focusable {
+    const char* name() const {
+        return "Button";
+    }
+};
+
+class Slider : public Movable, public Focusable {
+public:
+    const char* name() const {
+        return "Slider";
+    }
+};
+class Image : public Widget{
+    public:
+    virtual const char* name() const{
+        return "Image";
+    };
 };
 
 int main() {
-    // Прочитати ім'я фігури.
-    std::cout << "Input a shape (name, points):" << std::endl;
+    // Зчитати віджет і команду.
     std::string name;
-    std::cin >> name;
-    // Створити відповідну фігуру.
-    Shape* shape;
-    if (name == "Circle") {
-        shape = new Circle();
-    } else if (name == "Square") {
-        shape = new Square();
+    std::string command;
+    std::cin >> name >> command;
+    // Створити віджет.
+    Widget* widget = nullptr;
+    if (name == "Button") {
+        widget = new Button();
+    } else if (name == "Slider") {
+        widget = new Slider();
+    } else if (name == "Image") {
+        widget = new Image();
     }
-    shape->name = name;
-    // Прочитати координати фігури.
-    shape->input();
-    // Вивести фігуру та її площу на екран.
-    std::cout << std::fixed << std::setprecision(1) << "Area of ";
-    shape->print();
-    std::cout << std::setprecision(2) << " = " << shape->area() << std::endl;
-    // Звільнити пам'ять.
-    delete shape;
-
+    // Виконати команду.
+    if (command == "focus") {
+        widget->focus();
+    } else {
+        widget->move();
+    }
+    // Видалити віджет.
+    delete widget;
     return 0;
 }
