@@ -4724,25 +4724,49 @@
 // }
 
 
+// #include <iostream>
+
+// struct A{
+//     int i;
+//     A() { i = 0; std::cout << " 000 " << std::endl; }
+//     A(int i) { this->i = i; std::cout << " int " << std::endl;}
+//     A(double d ) { i =(int)d; std::cout << " double " << std::endl;}
+// } a1;
+// void f(A a) {   std::cout << " A is created \n" ;  }
+// int main(){
+//     std::cout << " *******1 " << std::endl;
+//     f(1);
+//     std::cout << " *******2 " << std::endl;
+//     f((A)5);
+//     std::cout << " *******3 " << std::endl;
+//     f(3.14);
+//     std::cout << " *******4 " << std::endl;
+//     f(a1);
+
+//     return 0;
+// }
+
 #include <iostream>
 
-struct A{
+struct A {
     int i;
-    A() { i = 0; std::cout << " 000 " << std::endl; }
-    A(int i) { this->i = i; std::cout << " int " << std::endl;}
-    A(double d ) { i =(int)d; std::cout << " double " << std::endl;}
-} a1;
-void f(A a) {   std::cout << " A is created \n" ;  }
-int main(){
-    std::cout << " *******1 " << std::endl;
-    f(1);
-    std::cout << " *******2 " << std::endl;
-    f((A)5);
-    std::cout << " *******3 " << std::endl;
-    f(3.14);
-    std::cout << " *******4 " << std::endl;
+    A() { i = 0; }
+    A(int i) { this->i = i; }
+    A(double d) { i = (int)d; }
+    A(const A&) = default;
+};
+
+struct B {
+    int i;
+    B() { i = 0; }
+    B(A& a) { i = a.i; };
+};
+
+void f(B b) { std::cout << "B is created \n"; }
+
+int main() {
+    A a1;
     f(a1);
-
-    return 0;
+    A a2 = 1;
+    B b = (B)a2;
 }
-
