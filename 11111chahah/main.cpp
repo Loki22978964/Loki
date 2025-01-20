@@ -4619,87 +4619,130 @@
 
 
 
-#include <iostream>
-#include <string>
+// #include <iostream>
+// #include <string>
 
-class Widget {
-public:
-    virtual ~Widget() = default;
-    virtual const char* name() const = 0;
-     virtual void focus() {
-        std::cout << name() << " is not focusable." << std::endl;
-    }
-    virtual void move() {
-        std::cout << name() << " is not movable." << std::endl;
-    }
+// class Widget {
+// public:
+//     virtual ~Widget() = default;
+//     virtual const char* name() const = 0;
+//      virtual void focus() {
+//         std::cout << name() << " is not focusable." << std::endl;
+//     }
+//     virtual void move() {
+//         std::cout << name() << " is not movable." << std::endl;
+//     }
 
-    // Перемістити методи з Movable та Focusable
-    // PUT YOUR CODE HERE
-};
+//     // Перемістити методи з Movable та Focusable
+//     // PUT YOUR CODE HERE
+// };
 
-//Внести зміни в опис класу згідно умови задачі 
-class Movable : virtual public Widget {
-public:
-    virtual ~Movable() = default;
-    virtual void move() {
-        std::cout << name() << " is moved." << std::endl;
-    }
-};
+// //Внести зміни в опис класу згідно умови задачі 
+// class Movable : virtual public Widget {
+// public:
+//     virtual ~Movable() = default;
+//     virtual void move() {
+//         std::cout << name() << " is moved." << std::endl;
+//     }
+// };
 
-//Внести зміни в опис класу згідно умови задачі 
-class Focusable : virtual public Widget {
-public:
-    virtual ~Focusable() = default;
-    virtual void focus() {
-        std::cout << name() << " is in focus." << std::endl;
-    }
+// //Внести зміни в опис класу згідно умови задачі 
+// class Focusable : virtual public Widget {
+// public:
+//     virtual ~Focusable() = default;
+//     virtual void focus() {
+//         std::cout << name() << " is in focus." << std::endl;
+//     }
 
     
-};
+// };
 
-// Визначити Image
-// PUT YOUR CODE HERE
+// // Визначити Image
+// // PUT YOUR CODE HERE
 
-class Button : public Focusable {
-    const char* name() const {
-        return "Button";
-    }
-};
+// class Button : public Focusable {
+//     const char* name() const {
+//         return "Button";
+//     }
+// };
 
-class Slider : public Movable, public Focusable {
-public:
-    const char* name() const {
-        return "Slider";
-    }
-};
-class Image : public Widget{
-    public:
-    virtual const char* name() const{
-        return "Image";
-    };
-};
+// class Slider : public Movable, public Focusable {
+// public:
+//     const char* name() const {
+//         return "Slider";
+//     }
+// };
+// class Image : public Widget{
+//     public:
+//     virtual const char* name() const{
+//         return "Image";
+//     };
+// };
 
-int main() {
-    // Зчитати віджет і команду.
-    std::string name;
-    std::string command;
-    std::cin >> name >> command;
-    // Створити віджет.
-    Widget* widget = nullptr;
-    if (name == "Button") {
-        widget = new Button();
-    } else if (name == "Slider") {
-        widget = new Slider();
-    } else if (name == "Image") {
-        widget = new Image();
-    }
-    // Виконати команду.
-    if (command == "focus") {
-        widget->focus();
-    } else {
-        widget->move();
-    }
-    // Видалити віджет.
-    delete widget;
+// int main() {
+//     // Зчитати віджет і команду.
+//     std::string name;
+//     std::string command;
+//     std::cin >> name >> command;
+//     // Створити віджет.
+//     Widget* widget = nullptr;
+//     if (name == "Button") {
+//         widget = new Button();
+//     } else if (name == "Slider") {
+//         widget = new Slider();
+//     } else if (name == "Image") {
+//         widget = new Image();
+//     }
+//     // Виконати команду.
+//     if (command == "focus") {
+//         widget->focus();
+//     } else {
+//         widget->move();
+//     }
+//     // Видалити віджет.
+//     delete widget;
+//     return 0;
+// }
+
+// #include <iostream>
+
+// class A{
+//     public:
+//     int f(int){return 1;};
+//     double f( double){return 1;};
+//     void f(){};
+// };
+
+
+// int main(){
+//     A a;
+//     a.f();
+//     a.f(1);
+//     a.f((double)3.1458);
+
+//     return 0;
+// }
+
+
+#include <iostream>
+
+struct A{
+    int i;
+    A() { i = 0; std::cout << " 000 " << std::endl; }
+    A(int i) { this->i = i; std::cout << " int " << std::endl;}
+    A(double d ) { i =(int)d; std::cout << " double " << std::endl;}
+} a1;
+void f(A a) {   std::cout << " A is created \n" ;  }
+int main(){
+    std::cout << " *******1 " << std::endl;
+    f(1);
+    std::cout << " *******2 " << std::endl;
+    f((A)5);
+    std::cout << " *******3 " << std::endl;
+    f(3.14);
+    std::cout << " *******4 " << std::endl;
+    f(a1);
+
     return 0;
 }
+
