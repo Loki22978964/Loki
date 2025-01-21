@@ -4772,6 +4772,51 @@
 // }
 
 
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// struct user{
+//     string name;
+//     string soname;
+//     int id;
+    
+// };
+
+// void bubbleSort(user* words, int n) {
+//     for (int i = 0; i < n - 1; ++i) {
+//         for (int j = 0; j < n - 1 - i; ++j) {
+//             if (words[j].soname > words[j + 1].soname) {
+//                 user temp = words[j];
+//                 words[j] = words[j + 1];
+//                  words[j + 1] = temp;
+//             }
+//         }
+//     }
+// }
+
+// int main(){
+//     int size;
+//     cout << "Enter size of list members: " ; cin >> size;
+//     user* ptr = new user[size];
+//     for(int i =0 ; i < size ; i++){
+//         cout << i+1 << "_____________________________________" << endl;
+//         cout << "Enter name: "; cin >> ptr[i].name;
+//         cout << "Enter soname: "; cin >> ptr[i].soname;
+//         cout << "Enter id: "; cin >> ptr[i].id;
+//     }
+
+//      bubbleSort(ptr, size);
+
+//      for(int i =0 ; i < size ; i++){
+//         cout << i + 1 << ". " << ptr[i].soname  << " " << ptr[i].name << " " <<ptr[i].id << endl;
+//      }
+
+//     delete[] ptr;
+//     return 0;
+// }
+
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -4783,11 +4828,11 @@ struct user{
     
 };
 
-void bubbleSort(user* words, int n) {
+void bubbleSort(user** words, int n) {
     for (int i = 0; i < n - 1; ++i) {
         for (int j = 0; j < n - 1 - i; ++j) {
-            if (words[j].soname > words[j + 1].soname) {
-                user temp = words[j];
+            if (words[j]->soname > words[j + 1]->soname) {
+                user* temp = words[j];
                 words[j] = words[j + 1];
                  words[j + 1] = temp;
             }
@@ -4798,19 +4843,25 @@ void bubbleSort(user* words, int n) {
 int main(){
     int size;
     cout << "Enter size of list members: " ; cin >> size;
-    user* ptr = new user[size];
+    user** ptr = new user*[size];
+    for(int i = 0; i < size ; i++){
+        ptr[i] = new user;
+    }
     for(int i =0 ; i < size ; i++){
         cout << i+1 << "_____________________________________" << endl;
-        cout << "Enter name: "; cin >> ptr[i].name;
-        cout << "Enter soname: "; cin >> ptr[i].soname;
-        cout << "Enter id: "; cin >> ptr[i].id;
+        cout << "Enter name: "; cin >> ptr[i]->name;
+        cout << "Enter soname: "; cin >> ptr[i]->soname;
+        cout << "Enter id: "; cin >> ptr[i]->id;
     }
 
      bubbleSort(ptr, size);
 
      for(int i =0 ; i < size ; i++){
-        cout << i + 1 << ". " << ptr[i].soname  << " " << ptr[i].name << " " <<ptr[i].id << endl;
+        cout << i + 1 << ". " << ptr[i]->soname  << " " << ptr[i]->name << " " <<ptr[i]->id << endl;
      }
+    for (int i = 0; i < size; i++){
+        delete[] ptr[i];
+    }
 
     delete[] ptr;
     return 0;
