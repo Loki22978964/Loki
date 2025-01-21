@@ -4817,52 +4817,123 @@
 // }
 
 
-#include <iostream>
-#include <string>
-using namespace std;
+// #include <iostream>
+// #include <string>
+// using namespace std;
 
-struct user{
-    string name;
-    string soname;
-    int id;
+// struct user{
+//     string name;
+//     string soname;
+//     int id;
     
+// };
+
+// void bubbleSort(user** words, int n) {
+//     for (int i = 0; i < n - 1; ++i) {
+//         for (int j = 0; j < n - 1 - i; ++j) {
+//             if (words[j]->soname > words[j + 1]->soname) {
+//                 user* temp = words[j];
+//                 words[j] = words[j + 1];
+//                  words[j + 1] = temp;
+//             }
+//         }
+//     }
+// }
+
+// int main(){
+//     int size;
+//     cout << "Enter size of list members: " ; cin >> size;
+//     user** ptr = new user*[size];
+//     for(int i = 0; i < size ; i++){
+//         ptr[i] = new user;
+//     }
+//     for(int i =0 ; i < size ; i++){
+//         cout << i+1 << "_____________________________________" << endl;
+//         cout << "Enter name: "; cin >> ptr[i]->name;
+//         cout << "Enter soname: "; cin >> ptr[i]->soname;
+//         cout << "Enter id: "; cin >> ptr[i]->id;
+//     }
+
+//      bubbleSort(ptr, size);
+
+//      for(int i =0 ; i < size ; i++){
+//         cout << i + 1 << ". " << ptr[i]->soname  << " " << ptr[i]->name << " " <<ptr[i]->id << endl;
+//      }
+//     for (int i = 0; i < size; i++){
+//         delete ptr[i];
+//     }
+
+//     delete[] ptr;
+//     return 0;
+// }
+
+
+
+
+// #include <iostream>
+// #include <string>
+
+// // Клас для прикладу
+// class MyClass {
+// private:
+//     int value; // Деяке значення
+// public:
+//     // Конструктори
+//     MyClass(int v = 0) : value(v) {}
+
+//     // Метод для отримання значення
+//     int getValue() const { return value; }
+
+//     // Друзі для доступу до приватних полів
+//     friend MyClass operator+(const MyClass& lhs, const MyClass& rhs);
+// };
+
+// // Глобальне перевизначення оператора +
+// MyClass operator+(const MyClass& lhs, const MyClass& rhs ) {
+//     // Об'єднання значень двох об'єктів
+//     return MyClass(lhs.value + rhs.value );
+// }
+
+// int main() {
+//     MyClass a(10);
+//     MyClass b(20);
+//     MyClass g(10);
+
+//     // Використання перевизначеного оператора
+//     MyClass c = a + b + g;
+//     int z = 5;
+//     int v = 8;
+
+//     std::cout << "Result: " << c.getValue() << " " << z + v <<std::endl;
+
+//     return 0;
+// }
+
+
+
+#include <iostream>
+class A {
+    int i;
+public:
+    int get() { return i; }
+    A() : i(0) {}
+    A(int j) : i(j) {}
+    void show() { std::cout << i << "\n"; }
+    friend bool operator==(A, int);
 };
 
-void bubbleSort(user** words, int n) {
-    for (int i = 0; i < n - 1; ++i) {
-        for (int j = 0; j < n - 1 - i; ++j) {
-            if (words[j]->soname > words[j + 1]->soname) {
-                user* temp = words[j];
-                words[j] = words[j + 1];
-                 words[j + 1] = temp;
-            }
-        }
-    }
+bool operator==(A a, int i) {
+    return (a.i == i);
 }
 
-int main(){
-    int size;
-    cout << "Enter size of list members: " ; cin >> size;
-    user** ptr = new user*[size];
-    for(int i = 0; i < size ; i++){
-        ptr[i] = new user;
-    }
-    for(int i =0 ; i < size ; i++){
-        cout << i+1 << "_____________________________________" << endl;
-        cout << "Enter name: "; cin >> ptr[i]->name;
-        cout << "Enter soname: "; cin >> ptr[i]->soname;
-        cout << "Enter id: "; cin >> ptr[i]->id;
-    }
+A operator+(A a, A b) {
+    return A(a.get() + b.get());
+}
 
-     bubbleSort(ptr, size);
-
-     for(int i =0 ; i < size ; i++){
-        cout << i + 1 << ". " << ptr[i]->soname  << " " << ptr[i]->name << " " <<ptr[i]->id << endl;
-     }
-    for (int i = 0; i < size; i++){
-        delete ptr[i];
-    }
-
-    delete[] ptr;
-    return 0;
+int main() {
+    A a2, a1(1);
+    (a2 == 1) ? std::cout << "TRUE\n" : std::cout << "FALSE\n";
+    a2 = a1 + 10;
+    a2 = 10 + a1;
+    a2.show();
 }
