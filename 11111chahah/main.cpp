@@ -4911,6 +4911,35 @@
 
 
 
+// #include <iostream>
+// class A {
+//     int i;
+// public:
+//     int get() { return i; }
+//     A() : i(0) {}
+//     A(int j) : i(j) {}
+//     void show() { std::cout << i << "\n"; }
+//     friend bool operator==(A, int);
+// };
+
+// bool operator==(A a, int i) {
+//     return (a.i == i);
+// }
+
+// A operator+(A a, A b) {
+//     return A(a.get() + b.get());
+// }
+
+// int main() {
+//     A a2, a1(1);
+//     (a2 == 1) ? std::cout << "TRUE\n" : std::cout << "FALSE\n";
+//     a2 = a1 + 10;
+//     a2 = 10 + a1;
+//     a2.show();
+// }
+
+
+
 #include <iostream>
 class A {
     int i;
@@ -4920,20 +4949,23 @@ public:
     A(int j) : i(j) {}
     void show() { std::cout << i << "\n"; }
     friend bool operator==(A, int);
+    int operator+(A& b) {
+    return (this->get() + b.get());}
 };
-
+A operator+(A a, A b) {
+    return A(a.get() + b.get());
+}
 bool operator==(A a, int i) {
     return (a.i == i);
 }
 
-A operator+(A a, A b) {
-    return A(a.get() + b.get());
-}
+
 
 int main() {
-    A a2, a1(1);
+    A a2, a1(1 );
     (a2 == 1) ? std::cout << "TRUE\n" : std::cout << "FALSE\n";
-    a2 = a1 + 10;
+    a2 = a1 + 15;
+    a2.show();
     a2 = 10 + a1;
     a2.show();
 }
