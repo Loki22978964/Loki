@@ -4746,27 +4746,72 @@
 //     return 0;
 // }
 
+// #include <iostream>
+
+// struct A {
+//     int i;
+//     A() { i = 0; }
+//     A(int i) { this->i = i; }
+//     A(double d) { i = (int)d; }
+//     A(const A&) = default;
+// };
+
+// struct B {
+//     int i;
+//     B() { i = 0; }
+//     B(A& a) { i = a.i; };
+// };
+
+// void f(B b) { std::cout << "B is created \n"; }
+
+// int main() {
+//     A a1;
+//     f(a1);
+//     A a2 = 1;
+//     B b = (B)a2;
+// }
+
+
 #include <iostream>
+#include <string>
+using namespace std;
 
-struct A {
-    int i;
-    A() { i = 0; }
-    A(int i) { this->i = i; }
-    A(double d) { i = (int)d; }
-    A(const A&) = default;
+struct user{
+    string name;
+    string soname;
+    int id;
+    
 };
 
-struct B {
-    int i;
-    B() { i = 0; }
-    B(A& a) { i = a.i; };
-};
+void bubbleSort(user* words, int n) {
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = 0; j < n - 1 - i; ++j) {
+            if (words[j].soname > words[j + 1].soname) {
+                user temp = words[j];
+                words[j] = words[j + 1];
+                 words[j + 1] = temp;
+            }
+        }
+    }
+}
 
-void f(B b) { std::cout << "B is created \n"; }
+int main(){
+    int size;
+    cout << "Enter size of list members: " ; cin >> size;
+    user* ptr = new user[size];
+    for(int i =0 ; i < size ; i++){
+        cout << i+1 << "_____________________________________" << endl;
+        cout << "Enter name: "; cin >> ptr[i].name;
+        cout << "Enter soname: "; cin >> ptr[i].soname;
+        cout << "Enter id: "; cin >> ptr[i].id;
+    }
 
-int main() {
-    A a1;
-    f(a1);
-    A a2 = 1;
-    B b = (B)a2;
+     bubbleSort(ptr, size);
+
+     for(int i =0 ; i < size ; i++){
+        cout << i + 1 << ". " << ptr[i].soname  << " " << ptr[i].name << " " <<ptr[i].id << endl;
+     }
+
+    delete[] ptr;
+    return 0;
 }
