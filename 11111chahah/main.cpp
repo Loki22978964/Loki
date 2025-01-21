@@ -4860,7 +4860,7 @@ int main(){
         cout << i + 1 << ". " << ptr[i]->soname  << " " << ptr[i]->name << " " <<ptr[i]->id << endl;
      }
     for (int i = 0; i < size; i++){
-        delete[] ptr[i];
+        delete ptr[i];
     }
 
     delete[] ptr;
