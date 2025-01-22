@@ -4940,32 +4940,272 @@
 
 
 
+// #include <iostream>
+// class A {
+//     int i;
+// public:
+//     int get() { return i; }
+//     A() : i(0) {}
+//     A(int j) : i(j) {}
+//     void show() { std::cout << i << "\n"; }
+//     friend bool operator==(A, int);
+//     int operator+(A& b) {
+//     return (this->get() + b.get());}
+// };
+// A operator+(A a, A b) {
+//     return A(a.get() + b.get());
+// }
+// bool operator==(A a, int i) {
+//     return (a.i == i);
+// }
+
+
+
+// int main() {
+//     A a2, a1(1 );
+//     (a2 == 1) ? std::cout << "TRUE\n" : std::cout << "FALSE\n";
+//     a2 = a1 + 15;
+//     a2.show();
+//     a2 = 10 + a1;
+//     a2.show();
+// }
+
+
+// #include <iostream>
+// using namespace std;
+
+// class A{
+//     public:
+//     int i;
+//     A(int a) : i(a){}
+//     A operator+(int a){
+//         i = a + i;
+//         return i;
+//     }
+//     void get(){
+//         cout << this-> i ;
+//     }
+// };
+
+// int main(){
+//     A a(5);
+
+//     A a2 = a + 1;
+//   //A a2 = 1 + a; error first come what is already in this type,
+//  //and then what can be converted implicitly
+//     a2.get();
+//     return 0;
+// }
+
+
+
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// class A{
+//     public:
+//     int i;
+//     A(int a) : i(a){}
+//     A operator+( A& a){  // A& a te same bude , ale mona (A)1 + (A)8
+//         this->i = a.i + i;
+//         return this->i;
+//     }
+// };
+
+// int main(){
+//     A a(1);
+//     A a3 =  (A)1 + a;
+//     // A a3 =  (A)1 + (A)8; error becouse A& a 
+//     return 0;
+// }
+
+
+// #include <iostream>
+// using namespace std;
+
+// class A {
+//     public:
+//     int a;
+//     A(int s) : a(s) {}
+//     // int A::*ptr = &A::a;
+// };
+
+
+// int main(){
+//     A a1(44);
+//     A a2(16);
+
+//     // int A::*ptr = &A::a;
+
+//     cout << a1.*ptr << " " << a2.*ptr;
+
+//     return 0;
+// }
+
+
+// #include <iostream>
+
+// class A {
+// public:
+//     int value;
+
+//     void show() {
+//         std::cout << "Value: " << value << std::endl;
+//     }
+
+//     void setValue(int val) {
+//         value = val;
+//     }
+// };
+
+// int main() {
+//     A obj;
+//     obj.value = 42;
+
+//     // Вказівник на поле даних класу
+//     int A::*valuePtr = &A::value;
+
+//     // Вказівник на метод класу без аргументів
+//     void (A::*showPtr)() = &A::show;
+
+//     // Вказівник на метод класу з аргументом
+//     void (A::*setValuePtr)(int) = &A::setValue;
+
+//     // Використання вказівника на поле даних класу з оператором .*
+//     std::cout << "Value using .*: " << obj.*valuePtr << std::endl;
+
+//     // Виклик методу через вказівник на метод
+//     (obj.*showPtr)();
+
+//     // Виклик методу через вказівник на метод з аргументом
+//     (obj.*setValuePtr)(100);
+
+//     // Виклик методу show знову через вказівник на метод
+//     (obj.*showPtr)();
+
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// class A{
+//     public:
+//     void f (){
+//         cout << " A " ;
+//     };
+// };
+
+// class B: public A{
+//     public:
+//     void f(){
+//         cout << " B ";
+//     }
+// };
+
+// int main(){
+//     B b;
+//     A* ptr = new B;
+//     ptr = &b;
+//     ptr->f();
+//     return 0;
+// }
+
+
+// #include <iostream>
+// using namespace std;
+
+// class A{
+//     public:
+//     int i;
+//     A(int a) : i(a){
+//         cout << " asda ";
+//     }
+//     A operator+( A& a){
+//         return a.i + this->i;
+//     }
+// };
+// //  int operator+(A a , A& b){
+// //     return a.i + b.i;
+// //  }
+
+// int main(){
+//     A a(1);
+//     A a3 =  (A)1 + a;
+//     // A a3 =  (A)1 + (A)8; error becouse A& a 
+//     return 0;
+// }
+
+
+
 #include <iostream>
-class A {
+#include <utility>
+
+struct A {
     int i;
-public:
-    int get() { return i; }
-    A() : i(0) {}
-    A(int j) : i(j) {}
-    void show() { std::cout << i << "\n"; }
-    friend bool operator==(A, int);
-    int operator+(A& b) {
-    return (this->get() + b.get());}
+    A(): i(0) { }
+    A(int j) : i(j) { }
+    A& operator= (A& a){
+        i = 2*a.i;
+        return *this;
+    }
+    A& operator= (int j) {
+        i = 0;
+        return *this;
+    }
+    A& operator= (A&& a) {
+        std::cout << "Wow\n";
+        i = a.i + 2;
+        return *this;
+    }
+
+    void show() { std::cout << " i = " << i << "\n"; }
 };
-A operator+(A a, A b) {
-    return A(a.get() + b.get());
-}
-bool operator==(A a, int i) {
-    return (a.i == i);
-}
-
-
 
 int main() {
-    A a2, a1(1 );
-    (a2 == 1) ? std::cout << "TRUE\n" : std::cout << "FALSE\n";
-    a2 = a1 + 15;
-    a2.show();
-    a2 = 10 + a1;
-    a2.show();
+    A a2, a1(10);
+    a2 = a1 ;                 a2.show();
+    a2.operator= (100);       a2.show();
+    a2 = std::move(A(1000));  a2.show();
+}
+
+// expre_Expressions_with_Pointer_Member_Operators2.cpp
+// C2440 expected
+class BaseClass {
+public:
+   BaseClass(); // Base class constructor.
+   void Func1();
+};
+
+// Declare a pointer to member function Func1.
+void (BaseClass::*pmfnFunc1)() = &BaseClass::Func1;
+
+class Derived : public BaseClass {
+public:
+   Derived();  // Derived class constructor.
+   void Func2();
+};
+
+// Declare a pointer to member function Func2.
+void (Derived::*pmfnFunc2)() = &Derived::Func2;
+
+int main() {
+   BaseClass ABase;
+   Derived ADerived;
+
+   (ABase.*pmfnFunc1)();   // OK: defined for BaseClass.
+   (ABase.*pmfnFunc2)();   // Error: cannot use base class to
+                           // access pointers to members of
+                           // derived classes.
+
+   (ADerived.*pmfnFunc1)();   // OK: Derived is unambiguously
+                              // derived from BaseClass.
+   (ADerived.*pmfnFunc2)();   // OK: defined for Derived.
+
+   return 0;
 }
