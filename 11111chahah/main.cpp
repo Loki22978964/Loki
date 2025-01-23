@@ -5143,69 +5143,73 @@
 
 
 
-#include <iostream>
-#include <utility>
+// #include <iostream>
+// #include <utility>
 
-struct A {
-    int i;
-    A(): i(0) { }
-    A(int j) : i(j) { }
-    A& operator= (A& a){
-        i = 2*a.i;
-        return *this;
-    }
-    A& operator= (int j) {
-        i = 0;
-        return *this;
-    }
-    A& operator= (A&& a) {
-        std::cout << "Wow\n";
-        i = a.i + 2;
-        return *this;
-    }
+// struct A {
+//     int i;
+//     A(): i(0) { }
+//     A(int j) : i(j) { }
+//     A& operator= (A& a){
+//         i = 2*a.i;
+//         return *this;
+//     }
+//     A& operator= (int j) {
+//         i = 0;
+//         return *this;
+//     }
+//     A& operator= (A&& a) {
+//         std::cout << "Wow\n";
+//         i = a.i + 2;
+//         return *this;
+//     }
 
-    void show() { std::cout << " i = " << i << "\n"; }
-};
+//     void show() { std::cout << " i = " << i << "\n"; }
+// };
 
-int main() {
-    A a2, a1(10);
-    a2 = a1 ;                 a2.show();
-    a2.operator= (100);       a2.show();
-    a2 = std::move(A(1000));  a2.show();
-}
+// int main() {
+//     A a2, a1(10);
+//     a2 = a1 ;                 a2.show();
+//     a2.operator= (100);       a2.show();
+//     a2 = std::move(A(1000));  a2.show();
+// }
 
-// expre_Expressions_with_Pointer_Member_Operators2.cpp
-// C2440 expected
-class BaseClass {
-public:
-   BaseClass(); // Base class constructor.
-   void Func1();
-};
+// // expre_Expressions_with_Pointer_Member_Operators2.cpp
+// // C2440 expected
+// class BaseClass {
+// public:
+//    BaseClass(); // Base class constructor.
+//    void Func1();
+// };
 
-// Declare a pointer to member function Func1.
-void (BaseClass::*pmfnFunc1)() = &BaseClass::Func1;
+// // Declare a pointer to member function Func1.
+// void (BaseClass::*pmfnFunc1)() = &BaseClass::Func1;
 
-class Derived : public BaseClass {
-public:
-   Derived();  // Derived class constructor.
-   void Func2();
-};
+// class Derived : public BaseClass {
+// public:
+//    Derived();  // Derived class constructor.
+//    void Func2();
+// };
 
-// Declare a pointer to member function Func2.
-void (Derived::*pmfnFunc2)() = &Derived::Func2;
+// // Declare a pointer to member function Func2.
+// void (Derived::*pmfnFunc2)() = &Derived::Func2;
 
-int main() {
-   BaseClass ABase;
-   Derived ADerived;
+// int main() {
+//    BaseClass ABase;
+//    Derived ADerived;
 
-   (ABase.*pmfnFunc1)();   // OK: defined for BaseClass.
-   (ABase.*pmfnFunc2)();   // Error: cannot use base class to
-                           // access pointers to members of
-                           // derived classes.
+//    (ABase.*pmfnFunc1)();   // OK: defined for BaseClass.
+//    (ABase.*pmfnFunc2)();   // Error: cannot use base class to
+//                            // access pointers to members of
+//                            // derived classes.
 
-   (ADerived.*pmfnFunc1)();   // OK: Derived is unambiguously
-                              // derived from BaseClass.
-   (ADerived.*pmfnFunc2)();   // OK: defined for Derived.
+//    (ADerived.*pmfnFunc1)();   // OK: Derived is unambiguously
+//                               // derived from BaseClass.
+//    (ADerived.*pmfnFunc2)();   // OK: defined for Derived.
 
-   return 0;
-}
+//    return 0;
+// }
+
+
+
+c
