@@ -5212,4 +5212,48 @@
 
 
 
-c
+// #include <iostream>
+// struct A {
+//     int i;
+//     A() : i(0) {}
+//     A(int j) : i(j) {}
+//     A operator()(int i){ return A((int)i); }
+
+//     int operator() (int i, int j) { 
+//         return (this->i + i + j); 
+//     }
+//     void show() { 
+//         std::cout << " i=" << i << "\n"; 
+//     }
+// } ;
+
+// int main() {
+//     A a1(1);
+//     a1.show();
+//     (a1(4)).show();
+//     a1.show();
+//     std::cout << "overloaded operator: result - " << a1(3, 4) << '\n';
+// }
+
+
+
+#include <iostream>
+using namespace std;
+
+class A{
+    public:
+    void Method(){
+        cout << " hello " << endl;
+    }
+    void operator() (int s) {
+        for(int i = 0 ; i < s ; i++){
+        this->Method();
+        };
+    };
+};
+
+
+int main(){
+    A a;
+    a(4);
+}
