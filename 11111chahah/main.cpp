@@ -5242,18 +5242,22 @@ using namespace std;
 
 class A{
     public:
+
     void Method(){
         cout << " hello " << endl;
     }
-    void operator() (int s) {
+    A& operator() (int s) {
         for(int i = 0 ; i < s ; i++){
         this->Method();
         };
+        return *this;
     };
 };
 
 
 int main(){
     A a;
-    a(4);
+    a(4).Method(); // TRIBA CHO a(4) povertalo A&
+    
+    a.Method();
 }
