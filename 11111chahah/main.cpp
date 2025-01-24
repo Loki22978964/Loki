@@ -5237,27 +5237,53 @@
 
 
 
+// #include <iostream>
+// using namespace std;
+
+// class A{
+//     public:
+
+//     void Method(){
+//         cout << " hello " << endl;
+//     }
+//     A& operator() (int s) {
+//         for(int i = 0 ; i < s ; i++){
+//         this->Method();
+//         };
+//         return *this;
+//     };
+// };
+
+
+// int main(){
+//     A a;
+//     a(4).Method(); // TRIBA CHO a(4) povertalo A&
+    
+//     a.Method();
+// }
+
+
+
 #include <iostream>
 using namespace std;
 
 class A{
+    private:
+    int i;
     public:
-
-    void Method(){
-        cout << " hello " << endl;
+    A() : i(0){}
+    A(int j) : i(j){}
+    int operator[](int i){return (this->i += i);}
+    void show(){
+        cout << i << endl;
     }
-    A& operator() (int s) {
-        for(int i = 0 ; i < s ; i++){
-        this->Method();
-        };
-        return *this;
-    };
 };
-
 
 int main(){
     A a;
-    a(4).Method(); // TRIBA CHO a(4) povertalo A&
-    
-    a.Method();
+    a.show();
+    int i = a[10];
+    a.show();
+    cout << i;
+
 }
