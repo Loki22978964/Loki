@@ -5264,26 +5264,227 @@
 
 
 
+// #include <iostream>
+// using namespace std;
+
+// class A{
+//     private:
+//     int i;
+//     public:
+//     A() : i(0){}
+//     A(int j) : i(j){}
+//     int operator[](int i){return (this->i += i);}
+//     void show(){
+//         cout << i << endl;
+//     }
+// };
+
+// int main(){
+//     A a;
+//     a.show();
+//     int i = a[10];
+//     a.show();
+//     cout << i;
+
+// }
+
+
+// #include <iostream>
+// using namespace std;
+
+// class Matrix {
+//     int data[20][10]; // Внутрішній двовимірний масив
+// public:
+//     int* operator[](int index) { // Повертаємо посилання на рядок
+//         return data[index];
+//     }
+// };
+
+// int main() {
+//     Matrix a;
+//     a[10][5] = 42; // неможливо[][]
+//     cout << "Value: " << a[10][5] << endl; // неможливо [][]
+
+//     return 0;
+// }
+
+
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// int main() {
+//     // int i = 0;
+    
+//     // // Постфіксна форма (i++)
+//     // int a = i++ ;  // Спочатку a = 5 + 3, потім i змінюється на 6
+//     // cout << "a: " << a << ", i: " << i << endl;  // Виведе: a: 8, i: 6
+    
+//     // i = 0;  // Повертаємо i до 5
+
+//     // // Префіксна форма (++i)
+//     // int b = ++i;  // Спочатку i змінюється на 6, потім b = 6 + 3
+//     // cout << "b: " << b << ", i: " << i << endl;  // Виведе: b: 9, i: 6
+//     for(int i = 0 ; i < 5; ++i){
+//         cout << i << " ";
+//     }
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// struct A {
+//     int i; // Поле для збереження значення
+
+//     // Конструктор за замовчуванням
+//     A() : i(0) {}
+
+//     // Конструктор з параметром
+//     A(int j) : i(j) {}
+
+//     // Постфіксна форма оператора ++ (i++)
+//     int operator++(int) {
+//         int temp = i;  // Зберігаємо поточне значення
+//         i++;           // Збільшуємо значення
+//         return temp;   // Повертаємо початкове значення
+//     }
+
+//     // Префіксна форма оператора ++ (++i)
+//     int operator++() {
+//         i++;           // Збільшуємо значення
+//         return i;      // Повертаємо нове значення
+//     }
+
+//     // Метод для виводу значення поля i
+//     void show() const {
+//         cout << "A::i = " << i << "\n";
+//     }
+// };
+
+// int main() {
+//     A a1(5); // Створення об'єкта з початковим значенням i = 5
+
+//     // Постфіксна форма: a1++
+//     int j = a1++;
+//     cout << "j = " << j << "\n"; // Виведе старе значення i = 5
+//     a1.show();                   // Виведе A::i = 6
+
+//     // Скидаємо значення i назад до 5
+//     a1.i = 5;
+
+//     // Префіксна форма: ++a1
+//     j = ++a1;
+//     cout << "j = " << j << "\n"; // Виведе нове значення i = 6
+//     a1.show();                   // Виведе A::i = 6
+
+//     return 0;
+// }
+
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// struct A {
+//     int i;
+//     A() : i(0) {}
+//     A(int j) : i(j) {}
+//     A& operator++(int) {
+//         int i = this->i;
+//         this->i++;
+//         return *this;
+//     }
+//     int operator++() {
+//         i++;
+//         return i;
+//     }
+//     void show() {
+//         std::cout << "A::i=" << i << "\n";
+//     }
+// };
+
+// int main() {
+//     A a1(5);
+
+//     a1.show();
+//     a1.i = 5;
+//     int j;
+//     j = ++a1;
+//     std::cout << "j=" << j;
+//     a1.show();
+// }
+
+
+// #include <iostream>
+// using namespace std;
+
+// int main(){
+//     int i = 0;
+
+//     cout << i++ << endl; // 0
+//     cout << i << endl; // 1
+
+//     i = 0;
+//     cout << ++i << endl; // 1
+//     cout << i << endl; // 1
+// }
+
+// #include <iostream>
+// using namespace std;
+
+// class A{
+//     public:
+//     int i;
+//     A() : i(0) {}
+//     A(int j) : i(j) {}
+//     operator int(){
+//         cout << " int " << i << endl;
+//         return i;
+//     }
+//     operator int* (){
+//         cout << " *int " << i << endl;
+//         return &i;
+//     }
+// };
+
+
+// int main(){
+//     A a(5);
+
+//     int b = a;
+//     int* c = a;
+//     cout << b << " " << *c;
+
+//     return 0;
+// }
+
+
 #include <iostream>
 using namespace std;
 
 class A{
-    private:
-    int i;
     public:
-    A() : i(0){}
-    A(int j) : i(j){}
-    int operator[](int i){return (this->i += i);}
+    int i;
+    A() : i(0) {}
+    A(int j) : i(j) {}
+    A* operator->(){
+        cout << " this->";
+        return this;
+    }
     void show(){
-        cout << i << endl;
+        cout << "show(){pop}" << endl;
     }
 };
 
+
 int main(){
     A a;
-    a.show();
-    int i = a[10];
-    a.show();
-    cout << i;
-
+    a->show();
+    int b = a->i; cout << b;
 }
