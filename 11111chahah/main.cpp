@@ -5527,29 +5527,211 @@
 // }
 
 
-#include <iostream>
-struct A {
-    int i;
-    A() : i(0) {}
-    A(int j) : i(j) {}
+// #include <iostream>
+// struct A {
+//     int i;
+//     A() : i(0) {}
+//     A(int j) : i(j) {}
     
-    void* operator new(size_t size) {  
-        std::cout << " Memory allocated ";  
-        return malloc(size); 
-    }
+//     void* operator new(size_t size) {  
+//         std::cout << " Memory allocated ";  
+//         return malloc(size); 
+//     }
 
-    void operator delete(void* p) {   
-        std::cout << " memory free";    
-        free(p);   
-    }
+//     void operator delete(void* p) {   
+//         std::cout << " memory free";    
+//         free(p);   
+//     }
 
-    void show() {  
-        std::cout << "\tclass A: i = "<<i << '\n';  
-    }
+//     void show() {  
+//         std::cout << "\tclass A: i = "<<i << '\n';  
+//     }
+// };
+
+// int main() {  
+//     A * a = new A(5);    
+//     a->show();  
+//     delete a;  
+// }
+
+
+// #include <iostream>
+// using namespace std;
+
+// class A{
+//     public:
+//     A() {}
+
+//     void show(){
+//         cout << " 0 " ;
+//     }
+
+//     void operator()(int i){
+//         for (int j = 0 ; j < i ; j++){
+//             show();
+//         }
+//     }
+// };
+
+// int main(){
+//     A a;
+//     a(5);
+
+//     return 0;
+// }
+
+
+// #include <iostream>
+// #include <typeinfo>
+
+// using namespace std;
+
+// class Base{
+//     public:
+//     virtual void f(){};
+// };
+
+// class D1 : public Base{
+//     public:
+//     virtual void f(){};
+// };
+
+// class D2: public Base {
+//     virtual void f(){};
+// };
+
+
+// int main(){
+//     int a;
+//     Base *p , b;
+//     D1 d11;
+//     D2 d22;
+
+//     cout << "Типом змінної а є ";
+//     cout << typeid(a).name() << endl;
+//     p = &b;
+//     cout << "р ВКАЗУЄ на обєкт типу ";
+//     cout << typeid(*p).name() << endl;
+//     p = &d11;
+//     cout << "р ВКАЗУЄ на обєкт типу ";
+//     cout << typeid(*p).name() << endl;
+//     p = &d22;
+//     cout << "р ВКАЗУЄ на обєкт типу ";
+//     cout << typeid(*p).name() << endl;
+
+//     return 1;
+// }
+
+
+
+// #include <iostream>
+// #include <typeinfo>
+
+// class Base {
+// public:
+//     virtual ~Base() = default; // Поліморфізм вимагає віртуального методу
+// };
+
+// class Derived1 : public Base {};
+// class Derived2 : public Base {};
+
+// int main() {
+//     Base* obj1 = new Derived1();
+//     Base* obj2 = new Derived2();
+
+//     std::cout << "Тип obj1: " << typeid(*obj1).name() << std::endl;
+//     std::cout << "Тип obj2: " << typeid(*obj2).name() << std::endl;
+
+//     delete obj1;
+//     delete obj2;
+
+//     return 0;
+// }
+
+
+// #include <iostream>
+// #include <typeinfo>
+
+// void printTypeInfo(const std::type_info& info) {
+//     std::cout << "Ім'я типу: " << info.name() << std::endl;
+// }
+
+// int main() {
+//     int a = 5;
+//     double b = 3.14;
+
+//     printTypeInfo(typeid(a)); // Передача об'єкта type_info як параметра
+//     printTypeInfo(typeid(b));
+
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// #include <typeinfo>
+
+// class Base {
+// public:
+//     virtual ~Base() = default; // Поліморфізм вимагає віртуального методу
+// };
+
+// class Derived1 : public Base {};
+// class Derived2 : public Base {};
+
+// int main() {
+//     Base* obj1 = new Derived1();
+//     Base* obj2 = new Derived2();
+
+//     std::cout << "Тип obj1: " << typeid(*obj1).name() << std::endl;
+//     std::cout << "Тип obj2: " << typeid(*obj2).name() << std::endl;
+
+    
+
+//     delete obj1;
+//     delete obj2;
+
+//     return 0;
+// }
+
+
+
+
+
+
+
+
+#include <iostream>
+#include <typeinfo>
+
+class Base {
+public:
+    virtual ~Base() = default; // Поліморфізм вимагає віртуального методу
 };
 
-int main() {  
-    A * a = new A(5);    
-    a->show();  
-    delete a;  
+class Derived1 : public Base {};
+class Derived2 : public Base {};
+
+int main() {
+    Base* obj1 = new Derived1();
+    Base* obj2 = new Derived2();
+    Base* obj11 = new Derived1();
+    Base* obj22 = new Derived2();
+
+    std::cout << "Тип obj1: " << typeid(*obj1).name() << std::endl;
+    std::cout << "Тип obj2: " << typeid(*obj2).name() << std::endl;
+
+    std::cout << (typeid(*obj1) == typeid(*obj2) ?"Типи obj1 та obj2 однакові! " : "Типи obj1 та obj2 різні! ") << std::endl; 
+    std::cout << (typeid(*obj1) == typeid(*obj11) ?"Типи obj1 та obj11 однакові! " : "Типи obj1 та obj11 різні! ") << std::endl; 
+    std::cout << (typeid(*obj2) == typeid(*obj22) ?"Типи obj2 та obj22 однакові! " : "Типи obj2 та obj22 різні! ") << std::endl; 
+    // std::cout <<  << std::endl;
+
+    std::cout << (typeid(*obj1).before(typeid(*obj2)) ? "Тип obj1 перед obj2" : "Тип obj1 не перед obj2") << std::endl;
+    std::cout << (typeid(*obj11).before(typeid(*obj22)) ? "Тип obj11 перед obj22" : "Тип obj11 не перед obj22") << std::endl;
+
+
+    delete obj1;
+    delete obj2;
+
+    return 0;
 }
