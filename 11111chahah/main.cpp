@@ -5701,37 +5701,120 @@
 
 
 
+// #include <iostream>
+// #include <typeinfo>
+
+// class Base {
+// public:
+//     virtual ~Base() = default; // Поліморфізм вимагає віртуального методу
+// };
+
+// class Derived1 : public Base {};
+// class Derived2 : public Base {};
+
+// int main() {
+//     Base* obj1 = new Derived1();
+//     Base* obj2 = new Derived2();
+//     Base* obj11 = new Derived1();
+//     Base* obj22 = new Derived2();
+
+//     std::cout << "Тип obj1: " << typeid(*obj1).name() << std::endl;
+//     std::cout << "Тип obj2: " << typeid(*obj2).name() << std::endl;
+
+//     std::cout << (typeid(*obj1) == typeid(*obj2) ?"Типи obj1 та obj2 однакові! " : "Типи obj1 та obj2 різні! ") << std::endl; 
+//     std::cout << (typeid(*obj1) == typeid(*obj11) ?"Типи obj1 та obj11 однакові! " : "Типи obj1 та obj11 різні! ") << std::endl; 
+//     std::cout << (typeid(*obj2) == typeid(*obj22) ?"Типи obj2 та obj22 однакові! " : "Типи obj2 та obj22 різні! ") << std::endl; 
+//     // std::cout <<  << std::endl;
+
+//     std::cout << (typeid(*obj1).before(typeid(*obj2)) ? "Тип obj1 перед obj2" : "Тип obj1 не перед obj2") << std::endl;
+//     std::cout << (typeid(*obj11).before(typeid(*obj22)) ? "Тип obj11 перед obj22" : "Тип obj11 не перед obj22") << std::endl;
+
+
+//     delete obj1;
+//     delete obj2;
+
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// #include <typeinfo>
+// #include <string.h>
+// void my(char** s) {
+//     std::cout << "char* function. Agr is " 
+//               << typeid(s).name() << ": " << *s << "\n";
+//     char* p1 = new char[4]; strcpy(p1, "Wow\0");
+//     *s = p1;
+// }
+// void my(int* i) {
+//     std::cout << "int* function (begin). Agr is " 
+//               << typeid(i).name() << ": " << *i << "\n";
+//     *i = 99;
+//     std::cout << "int* function (end). Agr is " 
+//               << typeid(i).name() << ": " << *i << "\n";
+// }
+// #define OUTT(s, s2) std::cout << s2 << " is type - " << typeid(s).name() << ": " << s << "\n";
+// #define OUT(s) OUTT(s, #s)
+
+// int main() {
+//     int n = 20; OUT(n); const int& m = n; OUT(m);
+//     const_cast<int&> (m) = 60;
+//     int& p = const_cast<int&> (m);
+//     OUTT(n, "n new = "); OUTT(m, " m new = ");
+
+//     const int nn = 100;
+//     c mm = &nn;
+//     OUT(nn); OUT(*mm); OUT(mm);
+//     int* p1 = const_cast<int*> (mm);
+//     if (p1)
+//         my(p1);
+//     OUT(nn); OUT(*mm); OUT(mm);
+//     my(const_cast<int*> (&nn));
+//     OUT(nn);
+
+//     const char* const p2 = "My pointer";
+//     OUT(p2); my(const_cast<char**> (&p2)); OUT(p2);
+// }
+
+
+
+
 #include <iostream>
 #include <typeinfo>
-
-class Base {
-public:
-    virtual ~Base() = default; // Поліморфізм вимагає віртуального методу
-};
-
-class Derived1 : public Base {};
-class Derived2 : public Base {};
+#include <string.h>
+void my(char** s) {
+    std::cout << "char* function. Agr is " 
+              << typeid(s).name() << ": " << *s << "\n";
+    char* p1 = new char[4]; strcpy(p1, "Wow\0");
+    *s = p1;
+}
+void my(int** s) {
+    std::cout << "char* function. Agr is " 
+              << typeid(s).name() << ": " << *s << "\n";
+    int* p1 = new int[4]; 
+    *s = p1;
+}
+void my(int* i) {
+    std::cout << "int* function (begin). Agr is " 
+              << typeid(i).name() << ": " << *i << "\n";
+    *i = 99;
+    std::cout << "int* function (end). Agr is " 
+              << typeid(i).name() << ": " << *i << "\n";
+}
+#define OUTT(s, s2) std::cout << s2 << " is type - " << typeid(s).name() << ": " << s << "\n";
+#define OUT(s) OUTT(s, #s)
 
 int main() {
-    Base* obj1 = new Derived1();
-    Base* obj2 = new Derived2();
-    Base* obj11 = new Derived1();
-    Base* obj22 = new Derived2();
-
-    std::cout << "Тип obj1: " << typeid(*obj1).name() << std::endl;
-    std::cout << "Тип obj2: " << typeid(*obj2).name() << std::endl;
-
-    std::cout << (typeid(*obj1) == typeid(*obj2) ?"Типи obj1 та obj2 однакові! " : "Типи obj1 та obj2 різні! ") << std::endl; 
-    std::cout << (typeid(*obj1) == typeid(*obj11) ?"Типи obj1 та obj11 однакові! " : "Типи obj1 та obj11 різні! ") << std::endl; 
-    std::cout << (typeid(*obj2) == typeid(*obj22) ?"Типи obj2 та obj22 однакові! " : "Типи obj2 та obj22 різні! ") << std::endl; 
-    // std::cout <<  << std::endl;
-
-    std::cout << (typeid(*obj1).before(typeid(*obj2)) ? "Тип obj1 перед obj2" : "Тип obj1 не перед obj2") << std::endl;
-    std::cout << (typeid(*obj11).before(typeid(*obj22)) ? "Тип obj11 перед obj22" : "Тип obj11 не перед obj22") << std::endl;
-
-
-    delete obj1;
-    delete obj2;
-
-    return 0;
+    const int i = 52;
+    const int* const pipa = &i;
+    int* p1 = const_cast<int*>(pipa);
+    my(p1);
+    const int pop = 163;
+    const int* popa = &pop;
+    const int* const p3 = popa;
+    my(const_cast<int**> (&p3));
+   
+    const char* const p2 = "My pointer";
+    OUT(p2); my(const_cast<char**> (&p2)); OUT(p2);
 }
