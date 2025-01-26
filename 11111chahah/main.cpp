@@ -5928,3 +5928,43 @@
 
 //     return 0;
 // } 
+
+#include <iostream>
+
+
+class A{
+    private:
+    int INTa;
+    public:
+    void metodA(){
+        std::cout << " metodA was created" << std::endl;
+        INTa = 55;
+    }
+};
+
+class B : public A{
+    private:
+    int INTb;
+    public:
+    void metodB(){
+        std::cout << " metodB was created" << std::endl;
+        INTb =5;
+    }
+};
+
+
+int main(){
+    // A obj1;
+    // B obj2;
+
+    // A* ptr = &obj2;
+    // B* ptr2 = static_cast<B*>(ptr);
+
+    // ptr2->metodB();
+    // ptr2->metodA();
+
+    A objj;
+    A* ptrr = &objj;
+    B* ptrB = static_cast<B*>(ptrr);
+    ptrB->metodB();
+}
