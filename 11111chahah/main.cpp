@@ -5929,42 +5929,105 @@
 //     return 0;
 // } 
 
-#include <iostream>
+// #include <iostream>
 
 
-class A{
-    private:
-    int INTa;
-    public:
-    void metodA(){
-        std::cout << " metodA was created" << std::endl;
-        INTa = 55;
-    }
-};
+// class A{
+//     private:
+//     int INTa;
+//     public:
+//     void metodA(){
+//         std::cout << " metodA was created" << std::endl;
+//         INTa = 55;
+//     }
+// };
 
-class B : public A{
-    private:
-    int INTb;
-    public:
-    void metodB(){
-        std::cout << " metodB was created" << std::endl;
-        INTb =5;
-    }
-};
+// class B : public A{
+//     private:
+//     int INTb;
+//     public:
+//     void metodB(){
+//         std::cout << " metodB was created" << std::endl;
+//         INTb =5;
+//     }
+// };
+
+
+// int main(){
+//     // A obj1;
+//     // B obj2;
+
+//     // A* ptr = &obj2;
+//     // B* ptr2 = static_cast<B*>(ptr);
+
+//     // ptr2->metodB();
+//     // ptr2->metodA();
+
+//     A objj;
+//     A* ptrr = &objj;
+//     B* ptrB = static_cast<B*>(ptrr);
+//     ptrB->metodB();
+// }
+
+
+
+
+// #include <iostream>
+// const int sz = 3;
+
+// struct X {
+//     int a[sz] = {1, 2, 3};
+// };
+
+// void print(X* x0) {
+//     std::cout << '\n' << "1 - ";
+//     for (int i = 0; i < sz; i++)
+//         std::cout << x0->a[i];
+// }
+
+// int main() {
+//     X x1;                         // Ініціалізація структури X, масив `a` містить {1, 2, 3}
+//     print(&x1);                   // Виклик функції `print`, яка виводить значення масиву `a`
+
+//     int* xp = reinterpret_cast<int*>(&x1);  // Приведення вказівника на структуру X до int*
+//     std::cout << '\n' << "2 - ";
+//     for (int i = 0; i < sz; i++)            // Обхід елементів масиву через xp[i]
+//         std::cout << xp[i];
+
+//     std::cout << '\n' << "3 - ";
+//     for (int* i = xp; i < xp + sz; i++)     // Обхід елементів масиву через арифметику вказівників
+//         std::cout << *i;
+
+//     return 1;
+// }
+
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// int main(){
+//     int arr[]= {1 , 2 , 3};
+
+//     int a = 52;
+//     double b = static_cast<double>(a);
+//     cout << b << endl;
+
+//     double d = 155;
+//     int c = static_cast<int>(d);
+//     cout << c << endl;
+
+
+// }
+
 
 
 int main(){
-    // A obj1;
-    // B obj2;
-
-    // A* ptr = &obj2;
-    // B* ptr2 = static_cast<B*>(ptr);
-
-    // ptr2->metodB();
-    // ptr2->metodA();
-
-    A objj;
-    A* ptrr = &objj;
-    B* ptrB = static_cast<B*>(ptrr);
-    ptrB->metodB();
+double arr[3] = {0, 0, 0};
+int* ptr = static_cast<int*>(arr);  
+for(int i = 0 ; i < 3 ; i++ ){
+    std::cout << ptr[i] << " ";
+}
+return 0;
 }
