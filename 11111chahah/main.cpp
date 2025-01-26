@@ -5811,9 +5811,18 @@ int main() {
     int* p1 = const_cast<int*>(pipa);
     my(p1);
     const int pop = 163;
-    const int* popa = &pop;
-    const int* const p3 = popa;
-    my(const_cast<int**> (&p3));
+    const int* const popa = &pop;
+    // const int* const p3 = &popa;
+    my(const_cast<int**> (&popa));
+
+    const int lala = 8;
+    const int* const pp = &lala;
+    my(const_cast<int**>(&pp));
+
+    const int apa = 666;
+    const int* const ipi = &apa;
+    int* opo = const_cast<int*>(ipi);
+    my(opo);
    
     const char* const p2 = "My pointer";
     OUT(p2); my(const_cast<char**> (&p2)); OUT(p2);
