@@ -72,3 +72,46 @@ int main() {
     const char* const p2 = "My pointer";
     OUT(p2); my(const_cast<char**> (&p2)); OUT(p2);
 }
+
+
+
+#include <iostream>
+
+class A {
+private:
+	int a = 10;
+public:
+	void show()const { std::cout << "a= " << a << std::endl; }
+	void chang() { a = 5; }
+
+};
+
+
+int main() {
+	const A pop;
+	const A* ptr = &pop;
+	A* ptr2 = const_cast<A*>(ptr);
+
+	ptr2->show();
+	ptr2->chang();
+	ptr2->show();
+
+
+	const A pro;
+	pro.show();
+	const A* o1 = &pro;
+	A* o2 = const_cast<A*>(o1);
+
+	o2->chang();
+	o2->show();
+
+
+	A pipa;
+	std::cout << " ___________________________" << std::endl;
+	
+	pipa.show();
+	pipa.chang();
+	pipa.show();
+
+	return 0;
+}
