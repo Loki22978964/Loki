@@ -119,43 +119,139 @@
 
 
 
+// #include <iostream>
+// using namespace std;
+
+// enum class A{
+//     Up = 1,
+//     Right,
+//     Left,
+//     Down
+// };
+
+// void Move(const A& der){
+//     switch(der){
+//         case A::Up:
+//             std::cout<< " move Up";
+//             break;
+//         case A::Right:
+//             cout<< " move Right";
+//             break;
+//         case A::Left:
+//             cout<< " move Left";
+//             break;
+//             case A::Down:
+//             cout<< " move Down";
+//             break;
+//             default:
+//             cout<< " nit nit";
+//             break;
+
+//     }
+// }
+
+
+// int main(){
+//     cout << " enterUp = 1 , Right = 2 , Left = 3 , Down = 4 " << endl;
+//     int idmove; cin >> idmove;
+//     A pop = static_cast<A>(idmove);
+//     Move(pop);
+
+//     return 0;
+// } 
+
 #include <iostream>
-using namespace std;
 
-enum class A{
-    Up = 1,
-    Right,
-    Left,
-    Down
+struct Struct {
+   static int method(int);
+   static double method(int  );
+   static double method(double);
+   static std::string method(std::string);
 };
+static char method(char);
+static bool method(bool, bool); 
 
-void Move(const A& der){
-    switch(der){
-        case A::Up:
-            std::cout<< " move Up";
-            break;
-        case A::Right:
-            cout<< " move Right";
-            break;
-        case A::Left:
-            cout<< " move Left";
-            break;
-            case A::Down:
-            cout<< " move Down";
-            break;
-            default:
-            cout<< " nit nit";
-            break;
-
-    }
+int main(){
+    Struct a;
+    return 0;
 }
 
 
-int main(){
-    cout << " enterUp = 1 , Right = 2 , Left = 3 , Down = 4 " << endl;
-    int idmove; cin >> idmove;
-    A pop = static_cast<A>(idmove);
-    Move(pop);
+#include <iostream>
+#include <string>
 
-    return 0;
-} 
+struct smartstring : public std::string {
+    
+    bool isEmpty() const {
+        return this->empty();
+    }
+};
+
+using string_t = smartstring;
+
+int main() 
+{
+    string_t sides;
+    string_t w;
+    string_t h;
+    // Зчитати вхідний рядок - розширення у форматі WxH.
+    std::cout << "Enter the resolution: ";
+    std::getline(std::cin, sides);
+    // Розділити розширення на ширину і висоту.
+    unsigned i = 0;
+    for (; i < sides.size() && sides[i] != 'x'; ++i) {
+        w += sides[i];
+    }
+    for(++i; i< sides.size(); ++i) {
+        h += sides[i];
+    }
+    // Вивести повідомлення.
+    std::cout << "Width:  " << w << std::endl << "Height: " << h << std::endl;
+    if (w.isEmpty() || h.isEmpty()) {
+        std::cout << "Warning: Both dimensions should be set." << std::endl;
+    }
+    return 0;  
+}
+
+
+#include <iostream>
+#include <string>
+
+// PUT YOUR CODE HERE
+struct smartstring : public std::string {
+    using std::string::string;
+
+    bool isEmpty() const {
+        return this->empty();
+    }
+};
+
+using string_t = smartstring;
+
+int main() 
+{
+    string_t sides;
+    string_t w;
+    string_t h;
+    
+    // Зчитати вхідний рядок - розширення у форматі WxH.
+    std::cout << "Enter the resolution: ";
+    std::getline(std::cin, sides);
+    
+    // Розділити розширення на ширину і висоту.
+    unsigned i = 0;
+    for (; i < sides.size() && sides[i] != 'x'; ++i) {
+        w += sides[i];
+    }
+    for (++i; i < sides.size(); ++i) {
+        h += sides[i];
+    }
+    
+    // Вивести повідомлення.
+    std::cout << "Width:  " << w << std::endl << "Height: " << h << std::endl;
+    if (w.isEmpty() || h.isEmpty()) {
+        std::cout << "Warning: Both dimensions should be set." << std::endl;
+    }
+    
+    return 0;  
+}

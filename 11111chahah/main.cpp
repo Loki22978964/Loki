@@ -6023,11 +6023,90 @@
 
 
 
-int main(){
-double arr[3] = {0, 0, 0};
-int* ptr = static_cast<int*>(arr);  
-for(int i = 0 ; i < 3 ; i++ ){
-    std::cout << ptr[i] << " ";
-}
-return 0;
+// int main(){
+// double arr[3] = {0, 0, 0};
+// int* ptr = static_cast<int*>(arr);  
+// for(int i = 0 ; i < 3 ; i++ ){
+//     std::cout << ptr[i] << " ";
+// }
+// return 0;
+// }
+
+
+
+// #include <iostream>
+// #include <string>
+
+// struct smartstring : public std::string {
+    
+//     bool isEmpty() const {
+//         return this->empty();
+//     }
+// };
+
+// using string_t = smartstring;
+
+// int main() 
+// {
+//     string_t sides;
+//     string_t w;
+//     string_t h;
+//     // Зчитати вхідний рядок - розширення у форматі WxH.
+//     std::cout << "Enter the resolution: ";
+//     std::getline(std::cin, sides);
+//     // Розділити розширення на ширину і висоту.
+//     unsigned i = 0;
+//     for (; i < sides.size() && sides[i] != 'x'; ++i) {
+//         w += sides[i];
+//     }
+//     for(++i; i< sides.size(); ++i) {
+//         h += sides[i];
+//     }
+//     // Вивести повідомлення.
+//     std::cout << "Width:  " << w << std::endl << "Height: " << h << std::endl;
+//     if (w.isEmpty() || h.isEmpty()) {
+//         std::cout << "Warning: Both dimensions should be set." << std::endl;
+//     }
+//     return 0;  
+// }
+
+
+
+#include <iostream>
+#include <string>
+
+struct smartstring : public std::string {
+    unsigned operator[](char ch){
+        for(unsigned p = 0 ; p < this->size(); p++){
+            // if(ch == this->at(p)){
+            //     return p;
+                
+            // }
+            if(ch == (*this)[p] ){
+                return p;
+                
+            }
+            
+        }
+        return this->size();
+
+    }
+};
+
+int main() {
+    smartstring string;
+    char letter;
+    // Зчитати рядок і букву, яку потрібно знайти.
+    std::cout << "Enter the string and the letter: ";
+    std::cin >> string >> letter;
+    // Знайти букву і вивести повідомлення.
+    unsigned i = string[letter];
+    std::cout << "Letter " << letter;
+    if (i < string.size()) {
+        std::cout << " is found at " << i;
+    } else {
+        std::cout << " is not found";
+    }
+    std::cout << std::endl;
+    return 0;
 }

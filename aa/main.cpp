@@ -55,3 +55,38 @@
 
 //     return 0;
 // }
+
+#include <iostream>
+#include <string>
+
+struct smartstring : public std::string {
+    // Перевантаження оператора []
+    unsigned operator[](char letter) const {
+        for (unsigned i = 0; i < this->size(); ++i) {
+            if ((*this)[i] == letter) {  // порівнюємо символи
+                return i;  // якщо знайдено, повертаємо індекс
+            }
+        }
+        return this->size();  // якщо не знайдено, повертаємо розмір рядка
+    }
+};
+
+int main() 
+{
+    smartstring string;
+    char letter;
+    // Зчитати рядок і букву, яку потрібно знайти.
+    std::cout << "Enter the string and the letter: ";
+    std::cin >> string >> letter;
+    // Знайти букву і вивести повідомлення.
+    unsigned i = string[letter];
+    std::cout << "Letter " << letter;
+    if (i < string.size()) {
+        std::cout << " is found at " << i;
+    } else {
+        std::cout << " is not found";
+    }
+    std::cout << std::endl;
+  
+    return 0;  
+}
