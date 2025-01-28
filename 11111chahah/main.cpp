@@ -6072,43 +6072,238 @@
 
 
 
+// #include <iostream>
+// #include <string>
+
+// struct smartstring : public std::string {
+//     unsigned operator[](char ch){
+        
+//         for(unsigned p = 0 ; p < std::string::size(); p++){
+//             // if(ch == this->at(p)){
+//             //     return p;    
+//             // }
+//             if(ch == (*this)[p] ){
+//                 return p;   
+//             }
+//         }
+        
+
+//         return this->size();
+        
+
+
+//     }
+// };
+
+// int main() {
+//     smartstring string;
+//     char letter;
+//     // Зчитати рядок і букву, яку потрібно знайти.
+//     std::cout << "Enter the string and the letter: ";
+//     std::cin >> string >> letter;
+//     // Знайти букву і вивести повідомлення.
+//     unsigned i = string[letter];
+//     std::cout << "Letter " << letter;
+//     if (i < string.size()) {
+//         std::cout << " is found at " << i;
+//     } else {
+//         std::cout << " is not found";
+//     }
+//     std::cout << std::endl;
+//     return 0;
+// }
+
+
+// #include <iostream>
+
+// class Array {
+// public:
+//     Array() : size(0), values(nullptr) {}
+//     Array(int size) : size(size), values(new int[size]) {}
+//     ~Array() { delete[] values; }
+
+//     Array& operator=(const Array& other) {
+//         if (this == &other) {
+//             return *this;
+//         }
+
+//         this->size = other.size;
+//         delete[] this->values;
+//         if (size > 0) {
+//             this->values = new int[size];
+//             for (int p = 0; p < size; p++) {
+//                 this->values[p] = other.values[p];
+//             }
+//         } else {
+//             this->values = nullptr;
+//         }
+//         return *this;
+//     }
+
+//     void input() {
+//         for (int i = 0; i < size; ++i) std::cin >> values[i];
+//     }
+
+//     void print() {
+//         std::cout << '[' << size << "] ";
+//         for (int i = 0; i < size; ++i) std::cout << ' ' << values[i];
+//     }
+
+// private:
+//     int size;
+//     int* values;
+// };
+
+// int main() {
+//     // Зчитати.
+//     int size;
+//     std::cin >> size;
+//     Array* arr1 = new Array{size};
+//     arr1->input();
+    
+//     // Скопіювати перший масив в другий.
+//     Array arr2;
+//     arr2 = *arr1;
+    
+//     // Вивести і видалити оригінальний.
+//     std::cout << "Real: ";
+//     arr1->print();
+//     delete arr1;
+    
+//     // Вивести копію.
+//     std::cout << std::endl << "Copy: ";
+//     arr2.print();
+    
+//     // Скопіювати "в себе".
+//     arr2 = arr2;
+//     std::cout << std::endl << "Self: ";
+//     arr2.print();
+//     std::cout << std::endl;
+
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// class Array {
+// public:
+//     Array() : size(0), values(nullptr) {}
+//     Array(int size) : size(size), values(new int[size]) {}
+//     ~Array() { delete[] values; }
+
+//     Array& operator=( Array&& other){
+//         if(this == &other){
+//             return *this;
+//         }
+//         delete[] values;
+//         size = other.size;
+//         values = other.values;
+//         other.size = 0;
+//         other.values = nullptr;
+//         return *this;
+
+//     }
+
+//     void input() {
+//         for (int i = 0; i < size; ++i) std::cin >> values[i];
+//     }
+
+//     void print() {
+//         std::cout << '[' << size << "]";
+//         for (int i = 0; i < size; ++i) std::cout << ' ' << values[i];
+//     }
+// private:
+//     int size;
+//     int* values;
+// };
+
+// int main() {
+//     // Зчитати.
+//     int size;
+//     std::cin >> size;
+//     Array* arr1 = new Array{size};
+//     arr1->input();
+//     // Вивести оригінальний.
+//     std::cout << "Real: ";
+//     arr1->print();
+//     // Вивести переміщений.
+//     Array arr2;
+//     arr2 = std::move(*arr1);
+//     delete arr1;
+//     std::cout << std::endl << "Move: ";
+//     arr2.print();
+//     // Перемістити "в себе".
+//     arr2 = std::move(arr2);
+//     std::cout << std::endl << "Self: ";
+//     arr2.print();
+//     std::cout << std::endl;
+
+//     return 0;
+// }
+
+
 #include <iostream>
 #include <string>
 
-struct smartstring : public std::string {
-    unsigned operator[](char ch){
-        
-        for(unsigned p = 0 ; p < std::string::size(); p++){
-            // if(ch == this->at(p)){
-            //     return p;    
-            // }
-            if(ch == (*this)[p] ){
-                return p;   
+struct Wchar {
+   char bytes[4];
+
+    int compare(const Wchar& other){
+        for(int i = 3; i >= 0; --i){
+            if(bytes[i] < other.bytes[i]){
+                return -1;
+            }
+            if(bytes[i] > other.bytes[i]){
+                return 1;
             }
         }
-        
+        return 0;
+    }
 
-        return this->size();
-        
-
-
+    bool operator<(const Wchar& other){
+        return compare(other) < 0;
+    }
+    bool operator>(const Wchar& other){
+        return compare(other) > 0;
+    }
+    bool operator<=(const Wchar& other){
+        return compare(other) <= 0;
+    }
+    bool operator>=(const Wchar& other){
+        return compare(other) >= 0;
+    }
+    bool operator==(const Wchar& other){
+        return compare(other) == 0;
+    }
+    bool operator!=(const Wchar& other){
+        return compare(other) != 0;
     }
 };
 
+void read(int index, Wchar& w) {
+   std::cout << "Enter bytes for wchar" << index << ": ";
+   for (int i = 3; i >= 0; --i) {
+       int c;
+       std::cin >> c;
+       w.bytes[i] = c;
+   }
+}
+
+#define print_compare(symbol) std::cout \
+   << "wchar1 " #symbol " wchar2 = " \
+   << (wchar1 symbol wchar2) << std::endl
+
 int main() {
-    smartstring string;
-    char letter;
-    // Зчитати рядок і букву, яку потрібно знайти.
-    std::cout << "Enter the string and the letter: ";
-    std::cin >> string >> letter;
-    // Знайти букву і вивести повідомлення.
-    unsigned i = string[letter];
-    std::cout << "Letter " << letter;
-    if (i < string.size()) {
-        std::cout << " is found at " << i;
-    } else {
-        std::cout << " is not found";
-    }
-    std::cout << std::endl;
-    return 0;
+   Wchar wchar1;
+   Wchar wchar2;
+   read(1, wchar1);
+   read(2, wchar2);
+   print_compare(<);
+   print_compare(>);
+   print_compare(<=);
+   print_compare(>=);
+   print_compare(==);
+   print_compare(!=);
+   return 0;
 }
