@@ -6316,9 +6316,10 @@ using namespace std;
 
 void Foo(int value){
     if (value < 0){
-        throw logic_error("sadasd as"); //ok
+        // throw logic_error("sadasd as"); //ok
         // throw logic_error("sadasd as"); //ok
         // throw exeption("sadasd as");//nit , ne ok
+        throw  value;
     }
     
 
@@ -6331,8 +6332,10 @@ int main(){
     try{
     Foo(-55);
     }
-    catch(const exception &ex){
-        cout << "Mi poymali " << ex.what() << endl;
+    catch(const int ex){
+        // catch(const exception ex)
+        //  cout << "Mi poymali " << ex.what() << endl;
+        cout << "Mi poymali " << ex << endl;
     }
     return 0;
 }
