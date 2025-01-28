@@ -6077,18 +6077,20 @@
 
 struct smartstring : public std::string {
     unsigned operator[](char ch){
-        for(unsigned p = 0 ; p < this->size(); p++){
+        
+        for(unsigned p = 0 ; p < std::string::size(); p++){
             // if(ch == this->at(p)){
-            //     return p;
-                
+            //     return p;    
             // }
             if(ch == (*this)[p] ){
-                return p;
-                
+                return p;   
             }
-            
         }
+        
+
         return this->size();
+        
+
 
     }
 };
