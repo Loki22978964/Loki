@@ -6308,6 +6308,57 @@
 //    return 0;
 // }
 
+// #include <iostream>
+// #include <stdexcept>
+// using namespace std;
+
+// void Bar() {
+//     throw runtime_error("Виняток з Bar");
+// }
+
+// void Foo() {
+//     Bar(); // Проброс винятку
+// }
+
+// int main() {
+//     try {
+//         Foo();
+//     } catch (const exception& ex) {
+//         cout << "Оброблено: " << ex.what() << endl;
+//     }
+//     return 0;
+// }
+
+// #include <iostream>
+// using namespace std;
+
+
+// void Foo(int value){
+//     if (value < 0){
+//         // throw logic_error("sadasd as"); //ok
+//         // throw logic_error("sadasd as"); //ok
+//         // throw exeption("sadasd as");//nit , ne ok
+//         throw  value;
+//     }
+    
+
+
+    
+//     cout << " PEREMENIYA= " << value << endl;
+// }
+
+// int main(){
+//     try{
+//     Foo(-55);
+//     }
+//     catch(const int ex){
+//         // catch(const exception ex)
+//         //  cout << "Mi poymali " << ex.what() << endl;
+//         cout << "Mi poymali " << ex << endl;
+//     }
+//     return 0;
+// }
+
 
 
 #include <iostream>
@@ -6319,7 +6370,7 @@ void Foo(int value){
         // throw logic_error("sadasd as"); //ok
         // throw logic_error("sadasd as"); //ok
         // throw exeption("sadasd as");//nit , ne ok
-        throw  value;
+        throw  "Nit Nit";
     }
     
 
@@ -6332,9 +6383,7 @@ int main(){
     try{
     Foo(-55);
     }
-    catch(const int ex){
-        // catch(const exception ex)
-        //  cout << "Mi poymali " << ex.what() << endl;
+    catch(const char *ex){
         cout << "Mi poymali " << ex << endl;
     }
     return 0;
