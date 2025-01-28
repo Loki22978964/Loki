@@ -6243,67 +6243,96 @@
 // }
 
 
+// #include <iostream>
+// #include <string>
+
+// struct Wchar {
+//    char bytes[4];
+
+//     int compare(const Wchar& other){
+//         for(int i = 3; i >= 0; --i){
+//             if(bytes[i] < other.bytes[i]){
+//                 return -1;
+//             }
+//             if(bytes[i] > other.bytes[i]){
+//                 return 1;
+//             }
+//         }
+//         return 0;
+//     }
+
+//     bool operator<(const Wchar& other){
+//         return compare(other) < 0;
+//     }
+//     bool operator>(const Wchar& other){
+//         return compare(other) > 0;
+//     }
+//     bool operator<=(const Wchar& other){
+//         return compare(other) <= 0;
+//     }
+//     bool operator>=(const Wchar& other){
+//         return compare(other) >= 0;
+//     }
+//     bool operator==(const Wchar& other){
+//         return compare(other) == 0;
+//     }
+//     bool operator!=(const Wchar& other){
+//         return compare(other) != 0;
+//     }
+// };
+
+// void read(int index, Wchar& w) {
+//    std::cout << "Enter bytes for wchar" << index << ": ";
+//    for (int i = 3; i >= 0; --i) {
+//        int c;
+//        std::cin >> c;
+//        w.bytes[i] = c;
+//    }
+// }
+
+// #define print_compare(symbol) std::cout \
+//    << "wchar1 " #symbol " wchar2 = " \
+//    << (wchar1 symbol wchar2) << std::endl
+
+// int main() {
+//    Wchar wchar1;
+//    Wchar wchar2;
+//    read(1, wchar1);
+//    read(2, wchar2);
+//    print_compare(<);
+//    print_compare(>);
+//    print_compare(<=);
+//    print_compare(>=);
+//    print_compare(==);
+//    print_compare(!=);
+//    return 0;
+// }
+
+
+
 #include <iostream>
-#include <string>
+using namespace std;
 
-struct Wchar {
-   char bytes[4];
 
-    int compare(const Wchar& other){
-        for(int i = 3; i >= 0; --i){
-            if(bytes[i] < other.bytes[i]){
-                return -1;
-            }
-            if(bytes[i] > other.bytes[i]){
-                return 1;
-            }
-        }
-        return 0;
+void Foo(int value){
+    if (value < 0){
+        throw logic_error("sadasd as"); //ok
+        // throw logic_error("sadasd as"); //ok
+        // throw exeption("sadasd as");//nit , ne ok
     }
+    
 
-    bool operator<(const Wchar& other){
-        return compare(other) < 0;
-    }
-    bool operator>(const Wchar& other){
-        return compare(other) > 0;
-    }
-    bool operator<=(const Wchar& other){
-        return compare(other) <= 0;
-    }
-    bool operator>=(const Wchar& other){
-        return compare(other) >= 0;
-    }
-    bool operator==(const Wchar& other){
-        return compare(other) == 0;
-    }
-    bool operator!=(const Wchar& other){
-        return compare(other) != 0;
-    }
-};
 
-void read(int index, Wchar& w) {
-   std::cout << "Enter bytes for wchar" << index << ": ";
-   for (int i = 3; i >= 0; --i) {
-       int c;
-       std::cin >> c;
-       w.bytes[i] = c;
-   }
+    
+    cout << " PEREMENIYA= " << value << endl;
 }
 
-#define print_compare(symbol) std::cout \
-   << "wchar1 " #symbol " wchar2 = " \
-   << (wchar1 symbol wchar2) << std::endl
-
-int main() {
-   Wchar wchar1;
-   Wchar wchar2;
-   read(1, wchar1);
-   read(2, wchar2);
-   print_compare(<);
-   print_compare(>);
-   print_compare(<=);
-   print_compare(>=);
-   print_compare(==);
-   print_compare(!=);
-   return 0;
+int main(){
+    try{
+    Foo(-55);
+    }
+    catch(const exception &ex){
+        cout << "Mi poymali " << ex.what() << endl;
+    }
+    return 0;
 }
