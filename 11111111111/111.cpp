@@ -214,44 +214,122 @@ int main()
 }
 
 
+// #include <iostream>
+// #include <string>
+
+// // PUT YOUR CODE HERE
+// struct smartstring : public std::string {
+//     using std::string::string;
+
+//     bool isEmpty() const {
+//         return this->empty();
+//     }
+// };
+
+// using string_t = smartstring;
+
+// int main() 
+// {
+//     string_t sides;
+//     string_t w;
+//     string_t h;
+    
+//     // Зчитати вхідний рядок - розширення у форматі WxH.
+//     std::cout << "Enter the resolution: ";
+//     std::getline(std::cin, sides);
+    
+//     // Розділити розширення на ширину і висоту.
+//     unsigned i = 0;
+//     for (; i < sides.size() && sides[i] != 'x'; ++i) {
+//         w += sides[i];
+//     }
+//     for (++i; i < sides.size(); ++i) {
+//         h += sides[i];
+//     }
+    
+//     // Вивести повідомлення.
+//     std::cout << "Width:  " << w << std::endl << "Height: " << h << std::endl;
+//     if (w.isEmpty() || h.isEmpty()) {
+//         std::cout << "Warning: Both dimensions should be set." << std::endl;
+//     }
+    
+//     return 0;  
+// }
+
+
+
+// #include <iostream>
+
+// void func1() {
+//     throw std::runtime_error("Error in func1");  // Викидається виключення
+// }
+
+// int F2(int i) throw {  // Функція може передавати виключення, але не генерувати нові
+//     try {
+//         func1();  // Викликається func1, яка викидає виключення
+//     } catch (const std::runtime_error& e) {
+//         // Тут ми просто передаємо виключення далі
+//         throw;  // Передаємо виключення далі
+//     }
+//     return i;
+// }
+
+// int main(){
+//     try {
+//         F2(5);  // F2 викликає func1, яка викидає виключення
+//     } catch (const std::runtime_error& e) {
+//         std::cout << "Caught exception: " << e.what() << std::endl;
+//     }
+//     return 0;
+// }
+
+
+
 #include <iostream>
-#include <string>
+class DivideByZero{};
 
-// PUT YOUR CODE HERE
-struct smartstring : public std::string {
-    using std::string::string;
+double f (double x) throw (DivideByZero) {
+    if (x == 5)
+        throw DivideByZero();
+    else
+        return (x+5)/(x-5);
+}
 
-    bool isEmpty() const {
-        return this->empty();
+int main(){
+    try {
+        double y = f(5);
+        std::cout << " y = " << y;
+        return 0;
     }
-};
+    catch (DivideByZero) {
+        std::cout << "f call is aborted";
+        return 1;
+    }
+}
 
-using string_t = smartstring;
 
-int main() 
-{
-    string_t sides;
-    string_t w;
-    string_t h;
+#include <iostream>
+
+class DivideByZero {};
+
+double f(double x) throw (DivideByZero) {
+    if (x == 5)
+        throw DivideByZero();  // Генерація виключення
+    else{
+        std::cout << " num = " << x;
     
-    // Зчитати вхідний рядок - розширення у форматі WxH.
-    std::cout << "Enter the resolution: ";
-    std::getline(std::cin, sides);
-    
-    // Розділити розширення на ширину і висоту.
-    unsigned i = 0;
-    for (; i < sides.size() && sides[i] != 'x'; ++i) {
-        w += sides[i];
+        return (x + 5) / (x - 5);
+        }// Виконується тільки для x != 5
+}
+
+int main() {
+    try {
+        double y = f(8);  // Генерується виключення, оскільки x == 5
+        std::cout << " y = " << y;
     }
-    for (++i; i < sides.size(); ++i) {
-        h += sides[i];
+    catch (const DivideByZero&) {  // Коректне перехоплення виключення
+        std::cout << "f call is aborted";  // Виконується, якщо x == 5
     }
-    
-    // Вивести повідомлення.
-    std::cout << "Width:  " << w << std::endl << "Height: " << h << std::endl;
-    if (w.isEmpty() || h.isEmpty()) {
-        std::cout << "Warning: Both dimensions should be set." << std::endl;
-    }
-    
-    return 0;  
+
+    return 0;  // Завершення програми без помилок
 }

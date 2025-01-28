@@ -6361,30 +6361,49 @@
 
 
 
+// #include <iostream>
+// using namespace std;
+
+
+// void Foo(int value){
+//     if (value < 0){
+//         // throw logic_error("sadasd as"); //ok
+//         // throw logic_error("sadasd as"); //ok
+//         // throw exeption("sadasd as");//nit , ne ok
+//         throw;
+//     }
+    
+
+
+    
+//     cout << " PEREMENIYA= " << value << endl;
+// }
+
+// int main(){
+//     try{
+//     Foo(-55);
+//     }
+//     catch(){
+//         cout << "Mi poymali " << endl;
+//     }
+//     return 0;
+// }
+
+
+
+
 #include <iostream>
-using namespace std;
 
-
-void Foo(int value){
-    if (value < 0){
-        // throw logic_error("sadasd as"); //ok
-        // throw logic_error("sadasd as"); //ok
-        // throw exeption("sadasd as");//nit , ne ok
-        throw  "Nit Nit";
-    }
-    
-
-
-    
-    cout << " PEREMENIYA= " << value << endl;
+int F(int i) {
+    if (i == 1) throw "exception int"; // генерація виключень типу char*
+    if (i > 10) throw char(20);         // генерація виключень типу char
+    if (i == 0) throw double(10);      // генерація виключень типу double
+    else throw i;                      // генерація виключень типу int
+    return 10; // ніколи не виконається
 }
 
-int main(){
-    try{
-    Foo(-55);
-    }
-    catch(const char *ex){
-        cout << "Mi poymali " << ex << endl;
-    }
-    return 0;
+int main() {
+    
+    F(0); // згенерується неявно виключення "exception int" типу char*
+    return 1;
 }
