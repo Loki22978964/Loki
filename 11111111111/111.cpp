@@ -341,7 +341,7 @@ using namespace std;
 
 void F(int i) { // генератор виключень
     switch (i) {
-    case 0:  break;
+    case 0:  throw "string Exсeption"; break;
     case 1: throw double(i); break;
     case 2: throw i; break;
     }
@@ -349,13 +349,14 @@ void F(int i) { // генератор виключень
 
 int main() {
     try {
-        try { F(2); }
+        try { F(0); }
         // обробник внутрішнього блока try
         catch (const char* c) {
             cout << "inside TRY-Bloсk " << "\n" <<
                 c << "\n";
         }
         // генерація КС у зовнішньому блоці
+        // throw (double)1; -> catch (double)
         throw 1;
     }
     // обробники зовнішнього блока try
