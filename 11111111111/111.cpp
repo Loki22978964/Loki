@@ -344,12 +344,14 @@ void F(int i) { // генератор виключень
     case 0:  throw "string Exсeption"; break;
     case 1: throw double(i); break;
     case 2: throw i; break;
+    case 3: throw (float)i; break;
     }
-}
+    }
+
 
 int main() {
     try {
-        try { F(0); }
+        try { F(3); }
         // обробник внутрішнього блока try
         catch (const char* c) {
             cout << "inside TRY-Bloсk " << "\n" <<
