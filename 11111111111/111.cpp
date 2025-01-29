@@ -160,58 +160,58 @@
 //     return 0;
 // } 
 
-#include <iostream>
+// #include <iostream>
 
-struct Struct {
-   static int method(int);
-   static double method(int  );
-   static double method(double);
-   static std::string method(std::string);
-};
-static char method(char);
-static bool method(bool, bool); 
+// struct Struct {
+//    static int method(int);
+//    static double method(int  );
+//    static double method(double);
+//    static std::string method(std::string);
+// };
+// static char method(char);
+// static bool method(bool, bool); 
 
-int main(){
-    Struct a;
-    return 0;
-}
+// int main(){
+//     Struct a;
+//     return 0;
+// }
 
 
-#include <iostream>
-#include <string>
+// #include <iostream>
+// #include <string>
 
-struct smartstring : public std::string {
+// struct smartstring : public std::string {
     
-    bool isEmpty() const {
-        return this->empty();
-    }
-};
+//     bool isEmpty() const {
+//         return this->empty();
+//     }
+// };
 
-using string_t = smartstring;
+// using string_t = smartstring;
 
-int main() 
-{
-    string_t sides;
-    string_t w;
-    string_t h;
-    // Зчитати вхідний рядок - розширення у форматі WxH.
-    std::cout << "Enter the resolution: ";
-    std::getline(std::cin, sides);
-    // Розділити розширення на ширину і висоту.
-    unsigned i = 0;
-    for (; i < sides.size() && sides[i] != 'x'; ++i) {
-        w += sides[i];
-    }
-    for(++i; i< sides.size(); ++i) {
-        h += sides[i];
-    }
-    // Вивести повідомлення.
-    std::cout << "Width:  " << w << std::endl << "Height: " << h << std::endl;
-    if (w.isEmpty() || h.isEmpty()) {
-        std::cout << "Warning: Both dimensions should be set." << std::endl;
-    }
-    return 0;  
-}
+// int main() 
+// {
+//     string_t sides;
+//     string_t w;
+//     string_t h;
+//     // Зчитати вхідний рядок - розширення у форматі WxH.
+//     std::cout << "Enter the resolution: ";
+//     std::getline(std::cin, sides);
+//     // Розділити розширення на ширину і висоту.
+//     unsigned i = 0;
+//     for (; i < sides.size() && sides[i] != 'x'; ++i) {
+//         w += sides[i];
+//     }
+//     for(++i; i< sides.size(); ++i) {
+//         h += sides[i];
+//     }
+//     // Вивести повідомлення.
+//     std::cout << "Width:  " << w << std::endl << "Height: " << h << std::endl;
+//     if (w.isEmpty() || h.isEmpty()) {
+//         std::cout << "Warning: Both dimensions should be set." << std::endl;
+//     }
+//     return 0;  
+// }
 
 
 // #include <iostream>
@@ -285,51 +285,90 @@ int main()
 
 
 
-#include <iostream>
-class DivideByZero{};
+// #include <iostream>
+// class DivideByZero{};
 
-double f (double x) throw (DivideByZero) {
-    if (x == 5)
-        throw DivideByZero();
-    else
-        return (x+5)/(x-5);
-}
+// double f (double x) throw (DivideByZero) {
+//     if (x == 5)
+//         throw DivideByZero();
+//     else
+//         return (x+5)/(x-5);
+// }
 
-int main(){
-    try {
-        double y = f(5);
-        std::cout << " y = " << y;
-        return 0;
-    }
-    catch (DivideByZero) {
-        std::cout << "f call is aborted";
-        return 1;
-    }
-}
+// int main(){
+//     try {
+//         double y = f(5);
+//         std::cout << " y = " << y;
+//         return 0;
+//     }
+//     catch (DivideByZero) {
+//         std::cout << "f call is aborted";
+//         return 1;
+//     }
+// }
 
 
-#include <iostream>
+// #include <iostream>
 
-class DivideByZero {};
+// class DivideByZero {};
 
-double f(double x) throw (DivideByZero) {
-    if (x == 5)
-        throw DivideByZero();  // Генерація виключення
-    else{
-        std::cout << " num = " << x;
+// double f(double x) throw (DivideByZero) {
+//     if (x == 5)
+//         throw DivideByZero();  // Генерація виключення
+//     else{
+//         std::cout << " num = " << x;
     
-        return (x + 5) / (x - 5);
-        }// Виконується тільки для x != 5
+//         return (x + 5) / (x - 5);
+//         }// Виконується тільки для x != 5
+// }
+
+// int main() {
+//     try {
+//         double y = f(8);  // Генерується виключення, оскільки x == 5
+//         std::cout << " y = " << y;
+//     }
+//     catch (const DivideByZero&) {  // Коректне перехоплення виключення
+//         std::cout << "f call is aborted";  // Виконується, якщо x == 5
+//     }
+
+//     return 0;  // Завершення програми без помилок
+// }
+
+
+
+#include <iostream>
+using namespace std;
+
+void F(int i) { // генератор виключень
+    switch (i) {
+    case 0: throw "string Exсeption"; break;
+    case 1: throw double(i); break;
+    case 2: throw i; break;
+    }
 }
 
 int main() {
     try {
-        double y = f(8);  // Генерується виключення, оскільки x == 5
-        std::cout << " y = " << y;
+        try { F(2); }
+        // обробник внутрішнього блока try
+        catch (const char* c) {
+            cout << "inside TRY-Bloсk " << "\n" <<
+                c << "\n";
+        }
+        // генерація КС у зовнішньому блоці
+        throw 1;
     }
-    catch (const DivideByZero&) {  // Коректне перехоплення виключення
-        std::cout << "f call is aborted";  // Виконується, якщо x == 5
+    // обробники зовнішнього блока try
+    catch (double) {
+        cout << "outside TRY-Bloсk " << "\n" <<
+            "double Exсeption" << "\n";
     }
-
-    return 0;  // Завершення програми без помилок
+    catch (int) {
+        cout << "outside TRY-Bloсk " << "\n " <<
+            "int Exсeption" << "\n";
+    }
+    catch (...) {
+        cout << "outside TRY-Bloсk " << "\n " <<
+            "ALL Exсeption" << "\n";
+    }
 }
