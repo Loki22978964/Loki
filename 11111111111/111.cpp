@@ -341,7 +341,7 @@ using namespace std;
 
 void F(int i) { // генератор виключень
     switch (i) {
-    case 0: throw "string Exсeption"; break;
+    case 0:  break;
     case 1: throw double(i); break;
     case 2: throw i; break;
     }
