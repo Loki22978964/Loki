@@ -336,42 +336,325 @@
 
 
 
+// #include <iostream>
+// using namespace std;
+
+// void F(int i) { // генератор виключень
+//     switch (i) {
+//     case 0:  throw "string Exсeption"; break;
+//     case 1: throw double(i); break;
+//     case 2: throw i; break;
+//     case 3: throw (float)i; break;
+//     }
+//     }
+
+
+// int main() {
+//     try {
+//         try { F(3); }
+//         // обробник внутрішнього блока try
+//         catch (const char* c) {
+//             cout << "inside TRY-Bloсk " << "\n" <<
+//                 c << "\n";
+//         }
+//         // генерація КС у зовнішньому блоці
+//         // throw (double)1; -> catch (double)
+//         throw 1;
+//     }
+//     // обробники зовнішнього блока try
+//     catch (double) {
+//         cout << "outside TRY-Bloсk " << "\n" <<
+//             "double Exсeption" << "\n";
+//     }
+//     catch (int) {
+//         cout << "outside TRY-Bloсk " << "\n " <<
+//             "int Exсeption" << "\n";
+//     }
+//     catch (...) {
+//         cout << "outside TRY-Bloсk " << "\n " <<
+//             "ALL Exсeption" << "\n";
+//     }
+// }
+
+
+
+// #include<iostream> 
+// struct errBase {   
+//   int i; 
+//   errBase() { i = 0; message(); }  
+//   errBase(int j) : i(j){}  
+//   void message() {   
+//     std::cout << " Base Exception: "   
+//       << i << "\n";  
+//   }  
+// };  
+// struct errDer : public errBase {   
+//   int i;   
+//   errDer() :errBase() { i = 0; message(); }  
+//   errDer(int j1, int j2) :errBase(j1), i(j2){}  
+//   void message() {   
+//     std::cout << " Derivate Exception:"   
+//       << i << "\n";   
+//   }  
+// };  
+// struct A {   
+//   A(int i, int j){   
+//     if (i) throw errBase(i);   
+//     if (j) throw errDer(i, j);   
+//   }  
+// };  
+
+
+
+
+// int main(){   
+//   try {   
+//     A a(2,0);   
+//   }   
+//   catch (errDer& er){   
+//     er.message();   
+//   }   
+//   catch (errBase& er){   
+//     er.message();   
+//   }   
+//   return 1;   
+// }
+
+
+
+// #include <iostream>
+// #include <exception>
+// #include <string>
+// using namespace std;
+
+// unsigned cnt = 0;
+
+// #define HANDLER_Creator(NAme)  \
+// void NAme (exception_ptr e) {  \
+//     try {                      \
+//         if (e) {               \
+//             ::cnt++;           \
+//             rethrow_exception(e); \
+//         }                      \
+//     }                          \
+//     catch (...) {              \
+//         cerr << "Exception (" << cnt << "): " << "\n"; \
+//     }                          \
+// }
+
+// HANDLER_Creator(handler)
+// HANDLER_Creator(handler2)
+
+// int main() {
+//     exception_ptr e, e2;
+//     // обгортання звичайного виключення
+//     try {
+//         cnt++;
+//         throw 1;
+//     }
+//     catch (int& i) {
+//         cout << "Exception (" << cnt << "): " << "\n";
+//         e = current_exception();
+//         e2 = make_exception_ptr(e);
+//     }
+//     handler(e);
+//     handler(e2);
+
+//     // створення копії існуючого
+//     try {
+//         cnt++;
+//         string("abcd").substr(42);
+//     }
+//     catch (exception& ex) {
+//         cerr << "Exception (" << cnt << "): " << ex.what() << "\n";
+//         e = current_exception();
+//         e2 = make_exception_ptr(ex);
+//     }
+//     handler2(e);
+//     handler2(e2);
+
+//     return 1;
+// }
+
+
+
+// #include <iostream>
+// #include <exception>
+
+// void throwError() {
+//     throw std::runtime_error("Something went wrong!");
+// }
+
+// int main() {
+//     std::exception_ptr e_ptr;
+
+//     try {
+//         throwError();  // Викидаємо виняток
+//     } catch (const std::exception& e) {
+//         e_ptr = std::current_exception();  // Захоплюємо поточне виключення
+//     }
+
+//     // Тепер повторно генеруємо захоплений виняток
+//     if (e_ptr) {
+//         try {
+//             std::rethrow_exception(e_ptr);  // Повторно генеруємо виключення
+//         } catch (const std::exception& e) {
+//             std::cout << "Caught exception: " << e.what() << std::endl;
+//         }
+//     }
+
+//     return 0;
+// }
+
+
+// #include <iostream>
+// #include <exception>
+// #include <string>
+
+// using namespace std;
+
+// unsigned cnt = 0;
+
+// #define HANDLER_Creator(Name) \
+//     void Name(exception_ptr e) { \
+//         try { \
+//             if (e) { \
+//                 ::cnt++; \
+//                 rethrow_exception(e); \
+//             } \
+//         } catch (...) { \
+//             cerr << "Exception (" << cnt << "): " << "\n"; \
+//         } \
+//     }
+
+// // Створення обробників
+// HANDLER_Creator(handler)
+// HANDLER_Creator(handler2)
+
+// int main() {
+//     exception_ptr e, e2;
+
+//     // Обгортання звичайного виключення
+//     try {
+//         cnt++;
+//         throw 1; // Кидаємо помилку типу int
+//     } catch (int& i) {
+//         cout << "Exception (" << cnt << "): " << "\n";
+//         e = current_exception(); // Зберігаємо поточне виключення
+//         e2 = make_exception_ptr(e); // Створюємо копію виключення
+//     }
+
+//     // Обробка через handler
+//     handler(e);
+//     handler(e2);
+
+//     // Створення копії існуючого виключення
+//     try {
+//         cnt++;
+//         string("abcd").substr(42); // Кидаємо помилку при некоректному доступі до підрядка
+//     } catch (exception& ex) {
+//         cerr << "Exception (" << cnt << "): " << ex.what() << "\n";
+//         e = current_exception(); // Зберігаємо поточне виключення
+//         e2 = make_exception_ptr(ex); // Створюємо копію виключення
+//     }
+
+//     // Обробка через handler2
+//     handler2(e);
+//     handler2(e2);
+
+//     return 1;
+// }
+
+
+
+// #include <iostream>
+// #include <new>
+
+// int main() {
+//     try {
+//         int* arr = new int[100000000000000000];  // Нереально великий масив
+//     } catch (const std::bad_alloc& e) {
+//         std::cout << "Помилка виділення пам’яті: " << e.what() << "\n";
+//     }
+// }
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// class A{
+//     public:
+//     virtual void show(){ cout << "A";}
+// };
+
+// class B : public A{
+//     public:
+//     void show() override { cout << "B";}
+// };
+
+
+
+// int main() {
+//    B d;
+//     A* b =  dynamic_cast<A*>(&d);
+//     b->show();
+//     b->A::show();
+
+
+// }
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// class A{
+//     public:
+//     virtual void show(){ cout << "A";}
+// };
+
+// class B : public A{
+//     public:
+//     void show() override { cout << "B";}
+// };
+
+
+
+// int main() {
+//    B d;
+//     A* b =  dynamic_cast<A*>(&d);
+//     b->show();
+//     b->A::show();
+
+
+// }
+
+
+
 #include <iostream>
-using namespace std;
+#include <exception>  // Для std::bad_cast
 
-void F(int i) { // генератор виключень
-    switch (i) {
-    case 0:  throw "string Exсeption"; break;
-    case 1: throw double(i); break;
-    case 2: throw i; break;
-    case 3: throw (float)i; break;
-    }
-    }
+class Base {
+public:
+    virtual ~Base() {}
+};
 
+class Derived : public Base {};
 
 int main() {
+    Base* bb2 = new Derived;
     try {
-        try { F(3); }
-        // обробник внутрішнього блока try
-        catch (const char* c) {
-            cout << "inside TRY-Bloсk " << "\n" <<
-                c << "\n";
-        }
-        // генерація КС у зовнішньому блоці
-        // throw (double)1; -> catch (double)
-        throw 1;
+        Base* b =  dynamic_cast<Base*>(bb2);
+        Derived& d = dynamic_cast<Derived&>(*b);  // Невдале приведення
+        
+    } catch (const std::bad_cast& e) {
+        std::cout << "Помилка приведення типу: " << e.what() << "\n";
+        
     }
-    // обробники зовнішнього блока try
-    catch (double) {
-        cout << "outside TRY-Bloсk " << "\n" <<
-            "double Exсeption" << "\n";
-    }
-    catch (int) {
-        cout << "outside TRY-Bloсk " << "\n " <<
-            "int Exсeption" << "\n";
-    }
-    catch (...) {
-        cout << "outside TRY-Bloсk " << "\n " <<
-            "ALL Exсeption" << "\n";
-    }
+
+
+    std::cout << "Fuck you " << std::endl;
+    delete bb2;
+    return 0;
 }
