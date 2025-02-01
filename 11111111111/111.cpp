@@ -765,60 +765,85 @@
 
 
 
-#include <iostream>
-struct Object {
-   virtual ~Object() = default;
-};
+// #include <iostream>
+// struct Object {
+//    virtual ~Object() = default;
+// };
 
 
-struct Rock : public Object {};
-struct Paper : public Object {};
-struct Scissors : public Object {};
+// struct Rock : public Object {};
+// struct Paper : public Object {};
+// struct Scissors : public Object {};
 
 
-Object* create(const std::string& name) {
-   if (name == "rock") return new Rock();
-   if (name == "paper") return new Paper();
-   if (name == "scissors") return new Scissors();
-   return nullptr;
-}
+// Object* create(const std::string& name) {
+//    if (name == "rock") return new Rock();
+//    if (name == "paper") return new Paper();
+//    if (name == "scissors") return new Scissors();
+//    return nullptr;
+// }
 
 
-int compare(const Object& l, const Object& r) {
-    if((typeid(r) == typeid(Rock) && typeid(l) == typeid(Scissors)) || 
-            (typeid(r) == typeid(Scissors) && typeid(l) == typeid(Paper)) ||
-            (typeid(r) == typeid(Paper) && typeid(l) == typeid(Rock))
-             ){
-        return -1;
-    }
-    else if((typeid(l) == typeid(Rock) && typeid(r) == typeid(Scissors)) || 
-            (typeid(l) == typeid(Scissors) && typeid(r) == typeid(Paper)) ||
-            (typeid(l) == typeid(Paper) && typeid(r) == typeid(Rock))){
-        return 1;
-    }
-    else{
-        return 0;
-    }
+// int compare(const Object& l, const Object& r) {
+//     if((typeid(r) == typeid(Rock) && typeid(l) == typeid(Scissors)) || 
+//             (typeid(r) == typeid(Scissors) && typeid(l) == typeid(Paper)) ||
+//             (typeid(r) == typeid(Paper) && typeid(l) == typeid(Rock))
+//              ){
+//         return -1;
+//     }
+//     else if((typeid(l) == typeid(Rock) && typeid(r) == typeid(Scissors)) || 
+//             (typeid(l) == typeid(Scissors) && typeid(r) == typeid(Paper)) ||
+//             (typeid(l) == typeid(Paper) && typeid(r) == typeid(Rock))){
+//         return 1;
+//     }
+//     else{
+//         return 0;
+//     }
    
+// }
+
+
+// int main() {
+//    // Зчитати і створити об'єкти.
+//    std::string name1;
+//    std::string name2;
+//    std::cin >> name1 >> name2;
+//    Object* o1 = create(name1);
+//    Object* o2 = create(name2);
+//    // Проаналізувати і вивести результат.
+//    int result = compare(*o1, *o2);
+//    if (result == 0) {
+//        std::cout << name1 << " against " << name2 << " is a draw.";
+//    } else if (result > 0) {
+//        std::cout << name1 << " beats " << name2 << '.';
+//    } else {
+//        std::cout << name1 << " loses to " << name2 << '.';
+//    }
+//    std::cout << std::endl;
+//    return 0;
+// }
+
+
+
+#include <iostream>
+#include <stdexcept>
+
+
+void readtext() {
+   char buffer[100];
+   std::cin.getline(buffer, sizeof(buffer));
+   throw std::runtime_error(buffer);
 }
 
 
 int main() {
-   // Зчитати і створити об'єкти.
-   std::string name1;
-   std::string name2;
-   std::cin >> name1 >> name2;
-   Object* o1 = create(name1);
-   Object* o2 = create(name2);
-   // Проаналізувати і вивести результат.
-   int result = compare(*o1, *o2);
-   if (result == 0) {
-       std::cout << name1 << " against " << name2 << " is a draw.";
-   } else if (result > 0) {
-       std::cout << name1 << " beats " << name2 << '.';
-   } else {
-       std::cout << name1 << " loses to " << name2 << '.';
-   }
-   std::cout << std::endl;
+   try {
+   std::cout << "Enter the text: ";
+   readtext();
+   } catch (std::runtime_error& e) {
+       std::cout << "Caught: " << e.what() << std::endl;
+       return 0;
+   } catch (...) {}
+   std::cout << "No runtime error." << std::endl;
    return 0;
 }
