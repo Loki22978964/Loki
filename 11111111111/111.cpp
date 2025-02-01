@@ -632,29 +632,55 @@
 
 
 
+// #include <iostream>
+// #include <exception>  // Для std::bad_cast
+
+// class Base {
+// public:
+//     virtual ~Base() {}
+// };
+
+// class Derived : public Base {};
+
+// int main() {
+//     Base* bb2 = new Derived;
+//     try {
+//         Base* b =  dynamic_cast<Base*>(bb2);
+//         Derived& d = dynamic_cast<Derived&>(*b);  // Невдале приведення
+        
+//     } catch (const std::bad_cast& e) {
+//         std::cout << "Помилка приведення типу: " << e.what() << "\n";
+        
+//     }
+
+
+//     std::cout << "Fuck you " << std::endl;
+//     delete bb2;
+//     return 0;
+// }
+
+
+
 #include <iostream>
-#include <exception>  // Для std::bad_cast
+#include <exception>
 
-class Base {
-public:
-    virtual ~Base() {}
-};
+struct A { };
 
-class Derived : public Base {};
+void unexpectedHandler() { 
+    std::cout << "std::unexpected() called\n"; 
+    throw;  // Повторно викинути поточне виключення
+}
+
+void exceptThrow() throw (A) { 
+    throw 1;  // Викинути виключення іншого типу
+}
 
 int main() {
-    Base* bb2 = new Derived;
-    try {
-        Base* b =  dynamic_cast<Base*>(bb2);
-        Derived& d = dynamic_cast<Derived&>(*b);  // Невдале приведення
-        
-    } catch (const std::bad_cast& e) {
-        std::cout << "Помилка приведення типу: " << e.what() << "\n";
-        
-    }
-
-
-    std::cout << "Fuck you " << std::endl;
-    delete bb2;
+    std::set_unexpected(unexpectedHandler);
+    try { 
+        exceptThrow();
+    } catch (...) { 
+        std::cout << "Caught an exception\n";
+    } 
     return 0;
 }
