@@ -661,26 +661,103 @@
 
 
 
+// #include <iostream>
+// #include <exception>
+
+// struct A { };
+
+// void unexpectedHandler() { 
+//     std::cout << "std::unexpected() called\n"; 
+//     throw;  // Повторно викинути поточне виключення
+// }
+
+// void exceptThrow() throw (A) { 
+//     throw 1;  // Викинути виключення іншого типу
+// }
+
+// int main() {
+//     std::set_unexpected(unexpectedHandler);
+//     try { 
+//         exceptThrow();
+//     } catch (...) { 
+//         std::cout << "Caught an exception\n";
+//     } 
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// #include <exception>
+
+// struct A { 
+//     int i;
+//     ~A(){
+//         if (int count = std::uncaught_exception() > 0)
+//         std::cout<<"Yes - " << count << "\n";
+//     }
+// };
+
+
+// int main() {
+//     try{ A a; throw 1;}
+//     catch(...){  std::cout << "Universal " ; }
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// #include <exception>
+
+// // Функція обробки непередбачених виключень
+// void my_unexpected() {
+//     std::cout << "Unexpected exception!" << std::endl;
+//     std::terminate();  // Завершує програму
+// }
+
+// void throw_unexpected() {
+//     throw 42;  // Кидає виключення типу int
+// }
+
+// int main() {
+//     // Встановлюємо обробник для непередбачених виключень
+//     std::set_unexpected(my_unexpected);
+
+//     try {
+//         throw_unexpected();  // Кидаємо непередбачене виключення
+//     } catch (const std::exception& e) {
+//         std::cout << "Caught exception: " << e.what() << std::endl;
+//     } catch (...) {
+//         std::cout << "Caught unknown exception" << std::endl;
+//     }
+
+//     return 0;
+// }
+
+
+
 #include <iostream>
 #include <exception>
 
-struct A { };
-
-void unexpectedHandler() { 
-    std::cout << "std::unexpected() called\n"; 
-    throw;  // Повторно викинути поточне виключення
-}
-
-void exceptThrow() throw (A) { 
-    throw 1;  // Викинути виключення іншого типу
-}
+struct A {
+    int i;
+    ~A() {
+        // Перевіряємо, чи є неперехоплені виключення
+        if (std::uncaught_exceptions() > 0) {
+            std::cout << "Yes - " << std::uncaught_exceptions() << "\n";
+        }
+    }
+};
 
 int main() {
-    std::set_unexpected(unexpectedHandler);
-    try { 
-        exceptThrow();
-    } catch (...) { 
-        std::cout << "Caught an exception\n";
-    } 
+    try {
+        A a1;  // Створюємо об'єкт A
+        throw 1;  // Кидаємо виключення типу int
+    }
+    catch (...) {
+        std::cout << "Universal soldier\n";  // Ловимо будь-який виняток
+    }
+
     return 0;
 }
