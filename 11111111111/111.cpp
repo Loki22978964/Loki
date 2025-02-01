@@ -737,27 +737,88 @@
 
 
 
-#include <iostream>
-#include <exception>
+// #include <iostream>
+// #include <exception>
 
-struct A {
-    int i;
-    ~A() {
-        // Перевіряємо, чи є неперехоплені виключення
-        if (std::uncaught_exceptions() > 0) {
-            std::cout << "Yes - " << std::uncaught_exceptions() << "\n";
-        }
-    }
+// struct A {
+//     int i;
+//     ~A() {
+//         // Перевіряємо, чи є неперехоплені виключення
+//         if (std::uncaught_exceptions() > 0) {
+//             std::cout << "Yes - " << std::uncaught_exceptions() << "\n";
+//         }
+//     }
+// };
+
+// int main() {
+//     try {
+//         A a1;  // Створюємо об'єкт A
+//         throw 1;  // Кидаємо виключення типу int
+//     }
+//     catch (...) {
+//         std::cout << "Universal soldier\n";  // Ловимо будь-який виняток
+//     }
+
+//     return 0;
+// }
+
+
+
+
+#include <iostream>
+struct Object {
+   virtual ~Object() = default;
 };
 
-int main() {
-    try {
-        A a1;  // Створюємо об'єкт A
-        throw 1;  // Кидаємо виключення типу int
-    }
-    catch (...) {
-        std::cout << "Universal soldier\n";  // Ловимо будь-який виняток
-    }
 
-    return 0;
+struct Rock : public Object {};
+struct Paper : public Object {};
+struct Scissors : public Object {};
+
+
+Object* create(const std::string& name) {
+   if (name == "rock") return new Rock();
+   if (name == "paper") return new Paper();
+   if (name == "scissors") return new Scissors();
+   return nullptr;
+}
+
+
+int compare(const Object& l, const Object& r) {
+    if((typeid(r) == typeid(Rock) && typeid(l) == typeid(Scissors)) || 
+            (typeid(r) == typeid(Scissors) && typeid(l) == typeid(Paper)) ||
+            (typeid(r) == typeid(Paper) && typeid(l) == typeid(Rock))
+             ){
+        return -1;
+    }
+    else if((typeid(l) == typeid(Rock) && typeid(r) == typeid(Scissors)) || 
+            (typeid(l) == typeid(Scissors) && typeid(r) == typeid(Paper)) ||
+            (typeid(l) == typeid(Paper) && typeid(r) == typeid(Rock))){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+   
+}
+
+
+int main() {
+   // Зчитати і створити об'єкти.
+   std::string name1;
+   std::string name2;
+   std::cin >> name1 >> name2;
+   Object* o1 = create(name1);
+   Object* o2 = create(name2);
+   // Проаналізувати і вивести результат.
+   int result = compare(*o1, *o2);
+   if (result == 0) {
+       std::cout << name1 << " against " << name2 << " is a draw.";
+   } else if (result > 0) {
+       std::cout << name1 << " beats " << name2 << '.';
+   } else {
+       std::cout << name1 << " loses to " << name2 << '.';
+   }
+   std::cout << std::endl;
+   return 0;
 }
