@@ -6392,18 +6392,61 @@
 
 
 
-#include <iostream>
+// #include <iostream>
 
-int F(int i) {
-    if (i == 1) throw "exception int"; // генерація виключень типу char*
-    if (i > 10) throw char(20);         // генерація виключень типу char
-    if (i == 0) throw double(10);      // генерація виключень типу double
-    else throw i;                      // генерація виключень типу int
-    return 10; // ніколи не виконається
-}
+// int F(int i) {
+//     if (i == 1) throw "exception int"; // генерація виключень типу char*
+//     if (i > 10) throw char(20);         // генерація виключень типу char
+//     if (i == 0) throw double(10);      // генерація виключень типу double
+//     else throw i;                      // генерація виключень типу int
+//     return 10; // ніколи не виконається
+// }
 
-int main() {
+// int main() {
     
-    F(0); // згенерується неявно виключення "exception int" типу char*
-    return 1;
+//     F(0); // згенерується неявно виключення "exception int" типу char*
+//     return 1;
+// }
+
+
+
+#include <iostream>
+using namespace std;
+
+class A{
+    public:
+    virtual void show(){ cout << "A "; }
+    virtual void show_() { cout << "A1 "; }
+};
+
+class B : virtual public A {
+    public:
+    void show() override { cout << "B "; }
+    void show_() override { cout << "B1 "; }
+};
+class C : virtual public A {
+    public:
+    void show() override { cout << "B "; }
+    void show_() override { cout << "B1 "; }
+};
+class D : public B , public C{
+    public:
+    void show() override{cout << "Ban";}
+     void show_() override { cout << "Ban2"; }
+};
+
+int main(){
+    B b;
+    A* ptr = new B(b);
+    ptr->show();
+    ptr->show_();
+
+    // B b1;
+    // A* ptr = new B(b1);
+    // B* ptr2 =  dynamic_cast<B*>(ptr);
+    // ptr2->show();
+    // ptr2->show_();
+
+
+    return 0;
 }
