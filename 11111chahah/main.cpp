@@ -6483,3 +6483,47 @@
 
 
 
+// #include <iostream>
+// #include <stdexcept>
+
+// void divide(
+//    int dividend,
+//    int divisor,
+//    int& quotient,
+//    int& remainder) {
+//    if(dividend > 1000){
+//         throw std::domain_error("Dividend must be less than 1000.");
+//    }
+//    if(divisor > 1000){
+//          throw std::domain_error("Divisor must be less than 1000.");
+//    }
+//    if(divisor == 0){
+//         throw std::invalid_argument("Divisor is 0.");
+//    }
+//    quotient = dividend / divisor;
+//    remainder = dividend % divisor;
+// }
+
+// int main() {
+//    int dividend;
+//    int divisor;
+//    int quotient;
+//    int remainder;
+//    std::cout << "Enter the operands: ";
+//    std::cin >> dividend >> divisor;
+//    try {
+//        divide(dividend, divisor, quotient, remainder);
+//        std::cout << dividend << " / " << divisor << " = "
+//                  << quotient << " (" << remainder << ")" << std::endl;
+//    }
+//    catch (const std::domain_error& e) {
+//        std::cout << "Domain error: " << e.what() << std::endl;
+//    }
+//    catch (const std::invalid_argument& e) {
+//        std::cout << "Invalid argument: " << e.what() << std::endl;
+//    }
+//    catch (const std::exception& e) {
+//        std::cout << "Unknown exception: " << e.what() << std::endl;
+//    }
+//    return 0;
+// }
