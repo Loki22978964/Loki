@@ -6410,43 +6410,76 @@
 
 
 
-#include <iostream>
-using namespace std;
+// #include <iostream>
+// using namespace std;
 
-class A{
-    public:
-    virtual void show(){ cout << "A "; }
-    virtual void show_() { cout << "A1 "; }
-};
+// class A{
+//     public:
+//     virtual void show(){ cout << "A "; }
+//     virtual void show_() { cout << "A1 "; }
+// };
 
-class B : virtual public A {
-    public:
-    void show() override { cout << "B "; }
-    void show_() override { cout << "B1 "; }
-};
-class C : virtual public A {
-    public:
-    void show() override { cout << "B "; }
-    void show_() override { cout << "B1 "; }
-};
-class D : public B , public C{
-    public:
-    void show() override{cout << "Ban";}
-     void show_() override { cout << "Ban2"; }
-};
+// class B : virtual public A {
+//     public:
+//     void show() override { cout << "B "; }
+//     void show_() override { cout << "B1 "; }
+// };
+// class C : virtual public A {
+//     public:
+//     void show() override { cout << "B "; }
+//     void show_() override { cout << "B1 "; }
+// };
+// class D : public B , public C{
+//     public:
+//     void show() override{cout << "Ban";}
+//      void show_() override { cout << "Ban2"; }
+// };
 
-int main(){
-    B b;
-    A* ptr = new B(b);
-    ptr->show();
-    ptr->show_();
+// int main(){
+//     B b;
+//     A* ptr = new B(b);
+//     ptr->show();
+//     ptr->show_();
 
-    // B b1;
-    // A* ptr = new B(b1);
-    // B* ptr2 =  dynamic_cast<B*>(ptr);
-    // ptr2->show();
-    // ptr2->show_();
+//     // B b1;
+//     // A* ptr = new B(b1);
+//     // B* ptr2 =  dynamic_cast<B*>(ptr);
+//     // ptr2->show();
+//     // ptr2->show_();
 
 
-    return 0;
-}
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// #include <stdexcept>
+
+// void validate(const char* buffer) {
+//    if (!buffer[0]) {
+//        throw "The string is empty.";
+//    } else if (buffer[0] == '-') {
+//        throw -1;
+//    }
+// }
+
+// int main() {
+//    try {
+//        std::cout << "Enter the number: ";
+//        char buffer[100];
+//        std::cin.getline(buffer, sizeof(buffer));
+//        validate(buffer);
+//        std::cout << "No error." << std::endl;
+//    }
+//    catch( const char* ex){
+//     std::cout<< ex;
+//    }
+//    catch (...) {
+//        std::cout << "Unknown error." << std::endl;
+//    }
+//    return 0;
+// }
+
+
+
