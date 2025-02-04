@@ -1,40 +1,122 @@
-#include <iostream>
-using namespace std;
+// #include <iostream>
+// using namespace std;
 
-class A{
-    public:
-    virtual void show(){ cout << "A "; }
-    virtual void show_() { cout << "A1 "; }
-};
+// template <class T , class T2 , class ma> 
+// ma dis(T a , T2 a2){
+//     cout<< sizeof(a) << " " << a << endl;;
+//      cout<< sizeof(a2) << " " << a2;
+// };
 
-class B : virtual public A {
-    public:
-    void show() override { cout << "B "; }
-    void show_() override { cout << "B1 "; }
-};
-class C : virtual public A {
-    public:
-    void show() override { cout << "B "; }
-    void show_() override { cout << "B1 "; }
-};
-class D : public B , public C{
-    public:
-    void show() override{cout << "Ban";}
-     void show_() override { cout << "Ban2"; }
-};
-
-int main(){
-    B b;
-    A* ptr = new B(b);
-    ptr->show();
-    ptr->show_();
-
-    // B b1;
-    // A* ptr = new B(b1);
-    // B* ptr2 =  dynamic_cast<B*>(ptr);
-    // ptr2->show();
-    // ptr2->show_();
+// int main(){
+//     dis<int,int , void>(4 , 5);
+// }
 
 
-    return 0;
-}
+
+
+// #include <iostream>
+
+// template <class T, class T1> // прототип FT
+// T min(T value, T1 value1, const char*);
+
+// struct A {
+//     bool operator <(A& ) { return true; }
+// };
+
+// std::ostream& operator<< (std::ostream& s, A&) {
+//     s << "Wow";
+//     return s;
+// }
+
+// int main() {
+//     int j = 2; 
+//     float f = 0.5; 
+//     char c = 'a'; 
+//     A a, b; 
+//     const char* mes = "Min value is: "; 
+
+//     // використання з даними різних типів 
+//     min(f, i, mes); 
+//     min(f, c, mes); 
+//     min(a, b, mes); 
+//     min<double, double>(f, c, mes); 
+// }
+
+// // оголошення FT
+// template <class T, class T1>  
+// T min(T value, T1 value1, const char* mes) { 
+//     // використання в тілі шаблонного типу 
+//     T v = (T)value1; 
+//     if (value<value1) v = value; 
+//     std::cout << mes << v << "\n"; 
+//     return v;
+// }
+
+
+// #include <iostream>
+
+// template <class T, class T1> // прототип FT
+// T min(T value, T1 value1, const char*);
+
+// struct A {
+//     bool operator <(A& ) { return true; }
+// };
+
+// std::ostream& operator<< (std::ostream& s, A&) {
+//     s << "Wow";
+//     return s;
+// }
+
+// int main() {
+//     int j = 2; 
+//     float f = 0.5; 
+//     char c = 'a'; 
+//     A a, b; 
+//     const char* mes = "Min value is: "; 
+
+//     // використання з даними різних типів 
+//     min(f, j, mes); 
+//     min(f, c, mes); 
+//     min(a, b, mes); 
+//     min<double, double>(f, c, mes); 
+// }
+
+// // оголошення FT
+// template <class T, class T1>  
+// T min(T value, T1 value1, const char* mes) { 
+//     // використання в тілі шаблонного типу 
+//     T v = (T)value1; 
+//     if (value<value1) v = value; 
+//     std::cout << mes << v << "\n"; 
+//     return v;
+// }
+
+
+
+
+// #include <iostream>
+
+// template <class T, class T1>
+// T min(T v, T1 v1, char p = 'M') {
+//   std::cout << typeid(T).name() << " "
+//     << typeid(T1).name() << " "
+//     << p << "\n";
+//   return v;
+// };
+
+// // явне інстанціювання
+// template char min(char, char, char);
+
+// int main() { // неявне інстанціювання
+// //   // call double min<double, char>(double, char, char);
+// //   min(double(3), '1');
+// //   // call char min<char, char>(char, char, char);
+// //   min('3', '1', 'W');
+// //   // call float min<float, float>(float, float, char);
+// //   min((float)3, (float)1);
+//   // call float min<float, int>(float, int, char);
+//   min<float>((float)3, (int)1);
+// //   // call float min<float, int>(float, int, char);
+// //   min<float, int>((float)3, (int)1);
+// //   return 1;
+// }
