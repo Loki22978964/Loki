@@ -6592,35 +6592,45 @@
 
 
 
-1. #include <iostream> // підключення стандартної бібліотеки вводу-виводу
-2. #define CLASS(CL,m) T m;\ // макрос для створення членської змінної та конструкторів
-   CL() : m(T(0)) { } CL(T n) { m = n; }
-3. #define TMPLT template <class T> // макрос для шаблону
-4. class A {}; // базовий клас
-5. // похідний клас B
-6. TMPLT struct B : public A {
-7.  CLASS(B, i); // використання макросу для створення членської змінної 'i' та конструкторів
-8. };
-9. // шаблонний клас C
-10. TMPLT struct C {
-11.  CLASS(C, j); // використання макросу для створення членської змінної 'j' та конструкторів
-12. };
-13. // похідний клас D
-14. // наслідує від класу B<T> та шаблонного класу C<char>
-15. TMPLT struct D : public B<T>, public C<char> {
-16.  CLASS (D, z); // використання макросу для створення членської змінної 'z' та конструкторів
-17.  D(T, T); // оголошення конструктора
-18.  void show(); // оголошення методу show
-19. };
-20. // реалізація конструктора класу D
-21. TMPLT D<T>::D(T n1, T n2) :
-22. B<T>(n1), C('b'), z(n2) {}
-23. // реалізація методу show класу D
-24. TMPLT void D<T>::show(){
-25.  std::cout << "Члени об'єкта: " << z << ' ' << B<T>::i << ' ' << j;
-26. }
-27. int main() {
-28.  D<int> d(1, 2); // створення об'єкта d типу D<int> та ініціалізація значеннями 1 та 2
-29.  d.j = 'a'; // встановлення значення членської змінної j
-30.  d.show(); // виклик методу show для друку значень членських змінних
-31. }
+#include <iostream>
+#include <vector>
+#include <list>
+#include <forward_list>
+#include <iterator>
+
+using namespace std;
+
+#define ITER_CALL template< class iter > \
+void iter_call(iter, iter, 
+
+ITER_CALL std::bidirectional_iterator_tag) { 
+    std::cout << "Bidirec. iterator is used\n";
+}
+
+ITER_CALL std::random_access_iterator_tag) { 
+    std::cout << "Random iterator is used\n";
+}
+
+ITER_CALL std::forward_iterator_tag) { 
+    std::cout << "Forward iterator is used\n"; 
+}
+
+template< class Iter >
+void iter_call(Iter first, Iter last) { 
+    iter_call(first, last, 
+    typename std::iterator_traits<Iter>:: 
+    iterator_category()); 
+}
+
+int main() { 
+    std::vector<int> v; 
+    iter_call(v.begin(), v.end()); 
+
+    std::list<int> l; 
+    iter_call(l.begin(), l.end()); 
+
+    std::forward_list<int> q; 
+    iter_call(q.begin(), q.end()); 
+
+    return 0; 
+}
