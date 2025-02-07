@@ -6592,45 +6592,161 @@
 
 
 
+// #include <iostream>
+// #include <vector>
+// #include <list>
+// #include <forward_list>
+// #include <iterator>
+
+// using namespace std;
+
+// #define ITER_CALL template< class iter > \
+// void iter_call(iter, iter, 
+
+// ITER_CALL std::bidirectional_iterator_tag) { 
+//     std::cout << "Bidirec. iterator is used\n";
+// }
+
+// ITER_CALL std::random_access_iterator_tag) { 
+//     std::cout << "Random iterator is used\n";
+// }
+
+// ITER_CALL std::forward_iterator_tag) { 
+//     std::cout << "Forward iterator is used\n"; 
+// }
+
+// template< class Iter >
+// void iter_call(Iter first, Iter last) { 
+//     iter_call(first, last, 
+//     typename std::iterator_traits<Iter>:: 
+//     iterator_category()); 
+// }
+
+// int main() { 
+//     std::vector<int> v; 
+//     iter_call(v.begin(), v.end()); 
+
+//     std::list<int> l; 
+//     iter_call(l.begin(), l.end()); 
+
+//     std::forward_list<int> q; 
+//     iter_call(q.begin(), q.end()); 
+
+//     return 0; 
+// }
+
+
+
+// #include <iostream>
+// #include <map>
+
+// int main() {
+    //** 1 */ 
+        // std::map<int, std::string> myMap = { {1 , "one"}, {2 , "two"} };
+    // std::map<int, std::string> myMapp = { {3 , "three"}, {4 , "four"} };
+    
+    // myMap.merge(myMapp);
+
+    // for (const auto& [key, value] : myMap) {
+    //     std::cout << key << ": " << value << std::endl;
+    // }
+
+
+    //** 2 */
+
+//     std::map<int, std::string> myMap = {{1, "one"}, {3, "three"}, {4, "four"}};
+// auto it = myMap.lower_bound(4);
+// if (it != myMap.end()) {
+//     std::cout << "Lower bound: " << it->second << std::endl;
+// }
+
+
+
+    //** 3 */
+
+//     std::map<int, std::string> myMap = {{1, "one"}, {2, "two"}, {3, "three"}};
+// auto range = myMap.equal_range(2);
+// for (auto it = range.first; it != range.second; ++it) {
+//     std::cout << "Equal range: " << it->second << std::endl;
+// }
+
+
+
+//     std::map<int, std::string> myMap = { {1, "one"}, {2, "two"}, {3, "three"}, {4, "four"} };
+
+//     // Змінюємо значення елементів з ключами 2 та 3
+//     auto it1 = myMap.find(2);
+//     auto it2 = myMap.find(3);
+
+    
+//     std::swap(it1->second, it2->second);
+
+
+//     // Виведення зміненого вмісту мапи
+//     for (const auto& [key, value] : myMap) {
+//         std::cout << key << ": " << value << std::endl;
+//     }
+
+//     return 0;
+
+
+
+// }
+
+
+
+
+
 #include <iostream>
-#include <vector>
-#include <list>
-#include <forward_list>
-#include <iterator>
+#include <map>
+#include <string>
+#include <utility>
 
 using namespace std;
 
-#define ITER_CALL template< class iter > \
-void iter_call(iter, iter, 
+typedef map<int, char*, less<int>> MAP;
+#define MIter MAP::iterator
+#define PRNElemnts(w) cout << "(" << (*w).first << "," << (*w).second << ") ";
 
-ITER_CALL std::bidirectional_iterator_tag) { 
-    std::cout << "Bidirec. iterator is used\n";
+void print(string s, MAP &M) {
+    cout << "\n" << s;
+    if (M.empty()) {cout << "Map is empty";}
+    else
+        for (auto&& n : M){
+            cout << "(" << n.first << "," << n.second << ") ";
+        }
+
 }
 
-ITER_CALL std::random_access_iterator_tag) { 
-    std::cout << "Random iterator is used\n";
-}
+int main() {
+    char* NUMBERS[] = { "One", "Two", "Three", "Four", "Five" };
+    MAP M1, M2; // Порожні словники
 
-ITER_CALL std::forward_iterator_tag) { 
-    std::cout << "Forward iterator is used\n"; 
-}
+    for (int i = 0; i < sizeof(NUMBERS) / sizeof(char*); i++) {
+        M1.insert(MAP::value_type(i, NUMBERS[i]));
+        M2.emplace(make_pair(i, NUMBERS[i]));
+    }
 
-template< class Iter >
-void iter_call(Iter first, Iter last) { 
-    iter_call(first, last, 
-    typename std::iterator_traits<Iter>:: 
-    iterator_category()); 
-}
+    print(" M1 - ", M1);
+    print(" M2 - ", M2);
 
-int main() { 
-    std::vector<int> v; 
-    iter_call(v.begin(), v.end()); 
+    cout << "\n M1 is reverse form - ";
+    for (auto i = M1.rbegin(); i != M1.rend(); i++)
+        PRNElemnts(i)
 
-    std::list<int> l; 
-    iter_call(l.begin(), l.end()); 
+    cout << "\n #size - M1 : " << M1.size()
+         << ", M2 : " << M2.size()
+         << "\n #max size - M1 : " << M1.max_size()
+         << ", M2 : " << M2.max_size()
+         << "\n #count '5' - M1 : " << M1.count(5)
+         << ", M2 : " << M2.count(4);
 
-    std::forward_list<int> q; 
-    iter_call(q.begin(), q.end()); 
+    M1.erase(M1.find(3));
+    print(" Delete '3' element in M1 - ", M1);
 
-    return 0; 
+    M1.erase(M1.find(2), M1.end());
+    print(" Delete 2 last element in M1 - ", M1);
+
+    M1.clear();
+    print(" Clear M1 - ", M1);
 }
