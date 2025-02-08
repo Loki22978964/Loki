@@ -6753,55 +6753,97 @@
 
 
 
+// #include <iostream>
+// #include <map>
+// #include <string>
+// #include <utility>
+
+// using namespace std;
+
+// typedef map<int, char*, less<int> > MAP;
+// #define MIter MAP::iterator
+// #define PRNElemnts(w) cout << "(" << (*w).first << "," << (*w).second << ") ";
+
+// void print(string s, MAP &M) {
+//     cout << "\n" << s;
+//     if (M.empty()) cout << "Map is empty";
+//     else
+//         for (auto&& n : M)
+//             cout << "(" << n.first << "," << n.second<<") ";
+// }
+
+// int main() {
+//     char* NUMBERS[] = { "One", "Two", "Three", "Four", "Five" };
+//     MAP M1, M2; // Порожні словники
+
+//     for (unsigned i = 0; i < 10; i++) {
+//         if (i < 2) M1.insert(MAP::value_type(2, "Two"));
+//         if (i < 2 && i < 5) M1.insert(MAP::value_type(7, "Seven"));
+//         if (i > 5) M1.insert(MAP::value_type(10, "Ten"));
+//     }
+
+//     print(" New created M1 -", M1);
+//     swap(M1, M2);
+//     print(" Swap M1 - ", M1);
+//     print(" Swap M2 - ", M2);
+
+//     cout << "\n M2 range of '10' elements -";
+//     for (MIter where = M2.lower_bound(10); where != M2.end(); where++)
+//         PRNElemnts(where)
+
+//     cout << "\n M2 range of '2' elements -";
+//     for (MIter where = M2.begin(); where != M2.upper_bound(2); where++)
+//         PRNElemnts(where)
+
+//     cout << "\n M2 range of '0' elements -";
+//     for (MIter where = M2.equal_range(2).first; where != M2.equal_range(10).second; where++)
+//         PRNElemnts(where)
+
+//     cout << "\n operator [ ] & M2 - ";
+//     for (MIter where = M2.begin(); where != M2.end(); where++)
+//         cout << "(" << (*where).first << "," << M2[(*where).first] << ") ";
+
+//     if (M1 <= M2) cout << "\n M1 <= M2";
+// }
+
+
+
+
 #include <iostream>
-#include <map>
+#include <stack>
+#include <vector>
+#include <deque>
+#include <list>
 #include <string>
-#include <utility>
+#include <algorithm>
+#include <initializer_list>
+#include <cstring>
+#include <functional>
+#include <memory>
 
 using namespace std;
 
-typedef map<int, char*, less<int> > MAP;
-#define MIter MAP::iterator
-#define PRNElemnts(w) cout << "(" << (*w).first << "," << (*w).second << ") ";
-
-void print(string s, MAP &M) {
-    cout << "\n" << s;
-    if (M.empty()) cout << "Map is empty";
-    else
-        for (auto&& n : M)
-            cout << "(" << n.first << "," << n.second<<") ";
-}
-
 int main() {
-    char* NUMBERS[] = { "One", "Two", "Three", "Four", "Five" };
-    MAP M1, M2; // Порожні словники
-
-    for (unsigned i = 0; i < 10; i++) {
-        if (i < 2) M1.insert(MAP::value_type(2, "Two"));
-        if (i < 2 && i < 5) M1.insert(MAP::value_type(7, "Seven"));
-        if (i > 5) M1.insert(MAP::value_type(10, "Ten"));
+    stack< char > v;
+    for (unsigned i = 0; i < 3; ++i) {
+        v.push(char('a' + i));
+        cout << " v added: " << char('a' + i) << " ";
     }
-
-    print(" New created M1 -", M1);
-    swap(M1, M2);
-    print(" Swap M1 - ", M1);
-    print(" Swap M2 - ", M2);
-
-    cout << "\n M2 range of '10' elements -";
-    for (MIter where = M2.lower_bound(10); where != M2.end(); where++)
-        PRNElemnts(where)
-
-    cout << "\n M2 range of '2' elements -";
-    for (MIter where = M2.begin(); where != M2.upper_bound(2); where++)
-        PRNElemnts(where)
-
-    cout << "\n M2 range of '0' elements -";
-    for (MIter where = M2.equal_range(2).first; where != M2.equal_range(10).second; where++)
-        PRNElemnts(where)
-
-    cout << "\n operator [ ] & M2 - ";
-    for (MIter where = M2.begin(); where != M2.end(); where++)
-        cout << "(" << (*where).first << "," << M2[(*where).first] << ") ";
-
-    if (M1 <= M2) cout << "\n M1 <= M2";
+    stack< char > v1(v);
+    deque< char > s2{ 'a','b','c' };
+    stack< char > v2(s2);
+    deque< char >&& s3{ 'a','b','c' };
+    stack< char > v3(s3);
+    stack< char > v4(deque< char >{'a', 'b', 'c'});
+    stack< char > v5(deque< char >
+        (initializer_list< char > {'a', 'b', 'c'}));
+    char *p = &s2[0];
+    cout << endl << " *p = " << *p << " s[0] = " << s2[0] << endl
+         << " *(p+2) = " << *(p+2) << " v2 top: " << v2.top() << " s[2] = " << s2[2];
+    *(p+2) = '*';
+    cout << endl << " *(p+2) = " << *(p+2) << " v2 top: " << v2.top();
+    char& p2 = std::ref(v2.top());
+    p2 = 'z';
+    cout << endl << " v2 top: " << v2.top() << s2[3] << '*' << '\n';
+    return 0;
 }
