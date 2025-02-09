@@ -7053,35 +7053,131 @@
 
 
 
+// #include <iostream>
+// #include <algorithm>
+// #include <iterator>
+// #include <vector>
+
+// using namespace std;
+
+// #define ALL(v) v.begin(), v.end()
+// #define OUT(v, s) cout <<"\n" << s; copy( ALL(v), ostream_iterator<int>(cout, ", "));
+// #define POS(v, p) cout << "\n value - \'" << *(p) << "\' position - " << p - v.begin() << ":";
+
+// int main() {
+//     // vector<int> v = { -1, 1, -2, -1, 3, 1, 2, 1,-1, 4 };
+//     // OUT(v,"input: ");
+//     // POS(v, v.begin() + 2);
+//     // nth_element(v.begin(), v.begin() + 2, v.end());
+//     // OUT(v,"ordered: ");
+
+//     // v = { -1, 1, -2, -1, 1, 1, 2, 3,-1, 4 };
+//     // OUT(v, "input: ");
+//     // POS(v, v.end() - 1);
+//     // nth_element(v.begin(), v.end() - 1, v.end());
+//     // OUT(v, "ordered: ");
+
+//     vector<int> v = { -1, 1, -2, -1, 1, 1, 2, 3,-1, 4 };
+//     OUT(v, "input: ");
+//     POS(v, v.begin());
+//     nth_element(v.begin(), v.begin(), v.end());
+//     OUT(v, "ordered: ");
+
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+
+// int main() {
+//     std::vector<int> v = {1, 2, 3, 4, 3, 5};
+//     std::vector<int> result;
+
+//     // Копіювання всіх елементів, що не дорівнюють 3
+//     auto p =std::remove(v.begin(), v.end(), 3);
+    
+//     v.erase(p, v.end());
+//     for (int num : v) {
+//         std::cout << num << " ";  // 1 2 4 5
+//     }
+
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+
+// int main() {
+//     std::vector<int> v = {1, 2, 3, 2, 4};
+//     std::vector<int> result;
+
+//     // Копіюємо елементи з заміною всіх 2 на 5
+//     std::replace_copy(v.begin(), v.end(), std::back_inserter(result), 2, 5);
+
+//     for (int num : result) {
+//         std::cout << num << " ";  // 1 5 3 5 4
+//     }
+
+//     return 0;
+// }
+
+
+// #include <iostream>
+// #include <algorithm>
+// #include <vector>
+
+// int main() {
+//     std::vector<int> v = {1, 2, 3, 4};
+
+//     std::iter_swap(v.begin(), v.begin() + 2);
+
+//     for (int num : v) {
+//         std::cout << num << " ";  // 4 2 3 1
+//     }
+
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+// #include <cstdlib>
+
+// int main() {
+//     std::vector<int> v = {1, 2, 3, 4, 5};
+
+//     std::random_shuffle(v.begin(), v.end());
+
+//     for (int num : v) {
+//         std::cout << num << " ";  // Випадковий порядок
+//     }
+// }
+
+
+
 #include <iostream>
-#include <algorithm>
-#include <iterator>
 #include <vector>
-
-using namespace std;
-
-#define ALL(v) v.begin(), v.end()
-#define OUT(v, s) cout <<"\n" << s; copy( ALL(v), ostream_iterator<int>(cout, ", "));
-#define POS(v, p) cout << "\n value - \'" << *(p) << "\' position - " << p - v.begin() << ":";
+#include <algorithm>
+#include <random>
 
 int main() {
-    // vector<int> v = { -1, 1, -2, -1, 3, 1, 2, 1,-1, 4 };
-    // OUT(v,"input: ");
-    // POS(v, v.begin() + 2);
-    // nth_element(v.begin(), v.begin() + 2, v.end());
-    // OUT(v,"ordered: ");
+    std::vector<int> v = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::vector<int> result(3);  // Виділяємо місце для 3 випадкових чисел
 
-    // v = { -1, 1, -2, -1, 1, 1, 2, 3,-1, 4 };
-    // OUT(v, "input: ");
-    // POS(v, v.end() - 1);
-    // nth_element(v.begin(), v.end() - 1, v.end());
-    // OUT(v, "ordered: ");
+    std::random_device rd;
+    std::mt19937 gen(rd());  // Генератор випадкових чисел
 
-    vector<int> v = { -1, 1, -2, -1, 1, 1, 2, 3,-1, 4 };
-    OUT(v, "input: ");
-    POS(v, v.begin());
-    nth_element(v.begin(), v.begin(), v.end());
-    OUT(v, "ordered: ");
+    std::sample(v.begin(), v.end(), result.begin(), 3, gen);
 
-    return 0;
+    for (int num : result) {
+        std::cout << num << " ";  // Випадкові 3 числа з вектора
+    }
 }
