@@ -7163,21 +7163,79 @@
 
 
 
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+// #include <random>
+
+// int main() {
+//     std::vector<int> v = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+//     std::vector<int> result(3);  // Виділяємо місце для 3 випадкових чисел
+
+//     std::random_device rd;
+//     std::mt19937 gen(rd());  // Генератор випадкових чисел
+
+//     std::sample(v.begin(), v.end(), result.begin(), 3, gen);
+
+//     for (int num : result) {
+//         std::cout << num << " ";  // Випадкові 3 числа з вектора
+//     }
+// }
+
+
+
 #include <iostream>
-#include <vector>
 #include <algorithm>
-#include <random>
+#include <iterator>
+#include <vector>
+
+using namespace std;
+
+#define ALL v.begin(), v.end()
+#define OUT copy(ALL, ostream_iterator<int>(cout, ", "));
+#define OUTALLM(s) cout << "\n " << s; \
+OUT; cout << " v.size: " << v.size();
+
+bool pr(int &i) {
+    return i == 1;
+}
+
+vector<int> v = {-1, 1, -2, -1, 1, 1, 2, 3, -1, 6};
+
+void vout(vector<int>::iterator pp, char *s) {
+    cout << s;
+    for (auto it = v.begin(); it != v.end(); ++it)
+        cout << *it << ((it == pp) ? "(*)" : "") << ",";
+}
 
 int main() {
-    std::vector<int> v = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    std::vector<int> result(3);  // Виділяємо місце для 3 випадкових чисел
+    OUTALLM("\n v: ")
+    auto p2 = remove(ALL, 1);
+    vout(p2, "\n\n 2. v(remove: 1): ");
+    cout << "\n v.size: " << v.size() << "\n"
+         << " *p2: " << *p2 << "\n" << " index: "
+         << p2 - v.begin() << "\n" << " last:"
+         << *(v.end() - 1);
 
-    std::random_device rd;
-    std::mt19937 gen(rd());  // Генератор випадкових чисел
+    // v = {-1, 1, -2, -1, 1, 1, 2, 3, -1, 4};
+    // p2 = remove_if(ALL, pr);
+    // v.resize(p2 - v.begin());
+    // OUTALLM("\n 3. v(resize & remove_if: 1) : ");
+    
+    // v = {-1, 1, -2, -1, 1, 1, 2, 3, -1, 4};
+    // v.erase(std::remove(ALL, 1), v.end());
+    // OUTALLM("\n 4. v(erase & remove: 1): ");
 
-    std::sample(v.begin(), v.end(), result.begin(), 3, gen);
+    // v = {-1, 1, -2, -1, 1, 1, 2, 3, -1, 4};
+    // cout << "\n\n 5. v(remove_copy: 1): ";
+    // remove_copy(v.begin(), v.end(), ostream_iterator<int>(std::cout), 1);
+    // OUTALLM(" v is preserved: ");
 
-    for (int num : result) {
-        std::cout << num << " ";  // Випадкові 3 числа з вектора
-    }
+    // v = {-1, 1, -2, -1, 1, 1, 2, 3, -1, 4};
+    // cout << "\n\n 6. v(remove_copy_if: 1): ";
+    // remove_copy_if(v.begin(), v.end(), ostream_iterator<int>(std::cout), [&](int &i) {
+    //     return i == 1;
+    // });
+    // OUTALLM(" v is preserved: ");
 }
+
