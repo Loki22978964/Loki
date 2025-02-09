@@ -120,3 +120,34 @@
 // //   min<float, int>((float)3, (int)1);
 // //   return 1;
 // }
+
+
+
+
+#include <algorithm>
+#include <vector>
+#include <iostream>
+
+int main() {
+    std::vector<int> vec = {3, 2, 1};
+    for (int i = 0 ; i < 5 ; i++){
+    std::prev_permutation(vec.begin(), vec.end());
+    
+    
+    for (int v : vec) std::cout << v << " ";
+    std::cout << "\n";
+    }
+    std::cout << "????????????" << std::endl;
+     std::vector<int> vec1 = {1, 2, 3};
+     
+    for (int i = 0 ; i < 5 ; i++){
+    std::next_permutation(vec1.begin(), vec1.end());
+    
+    
+    for (int v : vec) std::cout << v << " ";
+    std::cout << "\n";
+    }
+    
+    
+    return 0;
+}
