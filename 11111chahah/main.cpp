@@ -6809,41 +6809,228 @@
 
 
 
-#include <iostream>
-#include <stack>
+// #include <iostream>
+// #include <stack>
+// #include <vector>
+// #include <deque>
+// #include <list>
+// #include <string>
+// #include <algorithm>
+// #include <initializer_list>
+// #include <cstring>
+// #include <functional>
+// #include <memory>
+
+// using namespace std;
+
+// int main() {
+//     stack< char > v;
+//     for (unsigned i = 0; i < 3; ++i) {
+//         v.push(char('a' + i));
+//         cout << " v added: " << char('a' + i) << " ";
+//     }
+//     stack< char > v1(v);
+//     deque< char > s2{ 'a','b','c' };
+//     stack< char > v2(s2);
+//     deque< char >&& s3{ 'a','b','c' };
+//     stack< char > v3(s3);
+//     stack< char > v4(deque< char >{'a', 'b', 'c'});
+//     stack< char > v5(deque< char >
+//         (initializer_list< char > {'a', 'b', 'c'}));
+//     char *p = &s2[0];
+//     cout << endl << " *p = " << *p << " s[0] = " << s2[0] << endl
+//          << " *(p+2) = " << *(p+2) << " v2 top: " << v2.top() << " s[2] = " << s2[2];
+//     *(p+2) = '*';
+//     cout << endl << " *(p+2) = " << *(p+2) << " v2 top: " << v2.top();
+//     char& p2 = std::ref(v2.top());
+//     p2 = 'z';
+//     cout << endl << " v2 top: " << v2.top() << s2[3] << '*' << '\n';
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+// #include <list>
+// #include <functional>
+// #define ALL(v) v.begin(), v.end()
+// #define END << endl;
+// using namespace std;
+
+// struct __is_odd {
+//     bool operator()(const int x) const
+//     { return (x % 2 == 0); }
+//     bool operator()(const int x, const int y) const
+//     { return ((x + y) % 2 == 0); }
+// };
+
+// bool in(const int& i) { return i > 1; }
+
+// template <class T = int > bool IN1(const T& i)
+// { return (i >= 1) && (i <= 10); }
+
+// auto fn = [](int i)->bool {return (i % 3 == 0); };
+
+// int main() {
+//     int a[] = { 3, 2, 5 };
+//     vector <int> b = { 1, 1, 5 };
+//     list <int> c = { 0, 1, 5 };
+//     cout << " кiлькiсть непарних елементiв - "
+//          << count_if(a,  a + sizeof(a) / sizeof(int),
+//          __is_odd())END
+//     cout << " індекс елемента бiльшого за 1 - "
+//          << distance(b.begin(), find_if( ALL(b), in)) END
+//     cout << " індекс елемента більшого за 1 - "
+//          << distance(b.begin(), find_if(ALL(b), ref(in))) END
+
+//     auto k1 = function<bool(int, int)>(__is_odd());
+//     auto k2 = function<bool(int)>(__is_odd());
+//     cout << " кількість парних елементів - "
+//          << count_if(a, a + sizeof(a) / sizeof(int), k2) END
+//     cout << " кількість елементів з [1,10] - " << count_if( ALL(c), IN1<int>) END
+//     cout << " кількість із значенням 5 - " << count_if( ALL(c), [](int i)->bool {return i == 5; } ) END
+// }
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// int main(){
+//     int size;
+//     cout << " Enter size" ; cin >> size;
+//     int* arr = new int[size];
+    
+//     for(int i = 0 ; i < size ; i++){
+//         cin >> arr[i];
+//     }
+
+   
+//     for(int j = 0 ; j < size ; j++){
+//         for(int i = 0 ; i <size - j; i++){
+//             if(i + 1 != size && arr[i] > arr[i+1]){
+//                 int p = arr[i];
+//                 arr[i] = arr[i+1];
+//                 arr[i+1] = p;;
+//             }
+//         }
+//     }
+
+
+//     for(int i = 0 ; i < size ; i++){
+//         cout<< arr[i] << " ";
+//     }
+
+//     return 0;
+// }
+
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+
+// int main() {
+//     std::vector<int> v1 = {1, 2, 3, 4};
+//     std::vector<int> v2 = {5, 6, 2, 8};
+//     auto it = std::find_first_of(v1.begin(), v1.end(), v2.begin(), v2.end());
+//     if (it != v1.end() && (*it % 2 == 0)) {
+//         std::cout << "Found even number: " << *it << std::endl;  // Выведет 2
+//     }
+
+//     return 0;
+// }
+
+
+
+
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+
+// int main() {
+//     std::vector<int> v = {1, 2, 3, 4, 2, 3, 5};
+//     std::vector<int> sub = {2, 3};
+
+//     // std::find шукає ОДИН ЕЛЕМЕНТ (перше входження "3")
+//     auto it_find = std::find(v.begin(), v.end(), 3);
+//     if (it_find != v.end()) {
+//         std::cout << "Find: " << std::distance(v.begin(), it_find) << std::endl;
+//     }
+
+//     // std::search шукає ПІДПОСЛІДОВНІСТЬ (перше входження {2, 3})
+//     auto it_search = std::search(v.begin(), v.end(), sub.begin(), sub.end());
+//     if (it_search != v.end()) {
+//         std::cout << "Search: " << std::distance(v.begin(), it_search) << std::endl;
+//     }
+// }
+
+
+
 #include <vector>
-#include <deque>
-#include <list>
-#include <string>
+#include <iostream>
 #include <algorithm>
-#include <initializer_list>
-#include <cstring>
-#include <functional>
-#include <memory>
+#include <vector>
+#include <iterator>
 
 using namespace std;
 
+vector<int> v{ 1,1,1,3,3,4,4,6,7,7,9,10 };
+
+#define ALL v.begin(), v.end()
+#define OUT(s, it) cout << s << "\n - Index: " << \
+    it - v.begin() << " Value: " << *it << "\n";
+
+#define OUT_Pair cout << \
+    "\n - First Index: " << p.first - v.begin() << \
+    " Value: " << *p.first << "\n - Last Index: " << \
+    p.second - v.begin() << " Value: " << *p.second << "\n";
+
+#define IS_EMPTY (p.first == p.second) ? \
+    cout << " \n - range is empty" << \
+    endl : OUT_Pair
+
+struct Comparator {
+    bool operator() (int& s, int i) { return s < i; }
+    bool operator() (int i, int& s) { return i < s; }
+};
+
+bool cmp(const int& a, const int& b) {
+    return a + b < 4;
+}
+
 int main() {
-    stack< char > v;
-    for (unsigned i = 0; i < 3; ++i) {
-        v.push(char('a' + i));
-        cout << " v added: " << char('a' + i) << " ";
-    }
-    stack< char > v1(v);
-    deque< char > s2{ 'a','b','c' };
-    stack< char > v2(s2);
-    deque< char >&& s3{ 'a','b','c' };
-    stack< char > v3(s3);
-    stack< char > v4(deque< char >{'a', 'b', 'c'});
-    stack< char > v5(deque< char >
-        (initializer_list< char > {'a', 'b', 'c'}));
-    char *p = &s2[0];
-    cout << endl << " *p = " << *p << " s[0] = " << s2[0] << endl
-         << " *(p+2) = " << *(p+2) << " v2 top: " << v2.top() << " s[2] = " << s2[2];
-    *(p+2) = '*';
-    cout << endl << " *(p+2) = " << *(p+2) << " v2 top: " << v2.top();
-    char& p2 = std::ref(v2.top());
-    p2 = 'z';
-    cout << endl << " v2 top: " << v2.top() << s2[3] << '*' << '\n';
+    cout << " In vector: ";
+    copy(ALL, ostream_iterator<int>(cout, ", "));
+    cout << "\n";
+
+    auto it = lower_bound(ALL, 1);
+    OUT(" lower_bound >= 1", it)
+
+    it = lower_bound(ALL, 2);
+    OUT(" lower_bound >= 2", it)
+
+    it = upper_bound(ALL, 4);
+    OUT(" upper_bound > 4", it)
+
+    it = upper_bound(ALL, 5);
+    OUT(" upper_bound > 5", it)
+
+    it = lower_bound(ALL, 2, cmp);
+    OUT(" lower_bound (Comp = a + 2 < 4)", it);
+
+    cout << " equal_range = 7";
+    auto p = std::equal_range(ALL, 7);
+    IS_EMPTY
+
+    cout << " equal_range = 8";
+    p = std::equal_range(ALL, 8);
+    IS_EMPTY
+
+    cout << " equal_range by Comparator = 1";
+    p = std::equal_range(ALL, 1, Comparator());
+    IS_EMPTY
+
     return 0;
 }
+
