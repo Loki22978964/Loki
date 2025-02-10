@@ -7184,38 +7184,38 @@
 
 
 
-#include <iostream>
-#include <algorithm>
-#include <iterator>
-#include <vector>
+// #include <iostream>
+// #include <algorithm>
+// #include <iterator>
+// #include <vector>
 
-using namespace std;
+// using namespace std;
 
-#define ALL v.begin(), v.end()
-#define OUT copy(ALL, ostream_iterator<int>(cout, ", "));
-#define OUTALLM(s) cout << "\n " << s; \
-OUT; cout << " v.size: " << v.size();
+// #define ALL v.begin(), v.end()
+// #define OUT copy(ALL, ostream_iterator<int>(cout, ", "));
+// #define OUTALLM(s) cout << "\n " << s; \
+// OUT; cout << " v.size: " << v.size();
 
-bool pr(int &i) {
-    return i == 1;
-}
+// bool pr(int &i) {
+//     return i == 1;
+// }
 
-vector<int> v = {-1, 1, -2, -1, 1, 1, 2, 3, -1, 6};
+// vector<int> v = {-1, 1, -2, -1, 1, 1, 2, 3, -1, 6};
 
-void vout(vector<int>::iterator pp, char *s) {
-    cout << s;
-    for (auto it = v.begin(); it != v.end(); ++it)
-        cout << *it << ((it == pp) ? "(*)" : "") << ",";
-}
+// void vout(vector<int>::iterator pp, char *s) {
+//     cout << s;
+//     for (auto it = v.begin(); it != v.end(); ++it)
+//         cout << *it << ((it == pp) ? "(*)" : "") << ",";
+// }
 
-int main() {
-    OUTALLM("\n v: ")
-    auto p2 = remove(ALL, 1);
-    vout(p2, "\n\n 2. v(remove: 1): ");
-    cout << "\n v.size: " << v.size() << "\n"
-         << " *p2: " << *p2 << "\n" << " index: "
-         << p2 - v.begin() << "\n" << " last:"
-         << *(v.end() - 1);
+// int main() {
+//     OUTALLM("\n v: ")
+//     auto p2 = remove(ALL, 1);
+//     vout(p2, "\n\n 2. v(remove: 1): ");
+//     cout << "\n v.size: " << v.size() << "\n"
+//          << " *p2: " << *p2 << "\n" << " index: "
+//          << p2 - v.begin() << "\n" << " last:"
+//          << *(v.end() - 1);
 
     // v = {-1, 1, -2, -1, 1, 1, 2, 3, -1, 4};
     // p2 = remove_if(ALL, pr);
@@ -7237,5 +7237,73 @@ int main() {
     //     return i == 1;
     // });
     // OUTALLM(" v is preserved: ");
+// }
+
+
+
+// #include <iostream>
+// #include <algorithm>
+// #include <iterator>
+// #include <vector>
+// using namespace std;
+
+// #define ALL(v) v.begin(), v.end()
+// #define OUT(v, s) cout <<"\n" << s; copy( ALL(v), ostream_iterator<int>(cout, ", "));
+
+
+
+// vector<int> v = { 1, 6, 9, 3, 4, 5, 6 };
+// vector<int> v1 = { 1, 1, 3, 3, 4, 5, 6 };
+// vector<int> v2 = { 4, 5, 6, 6, 7, 7, 8, 9 };
+
+// int main() {
+//     OUT(v, "input: ");
+//     inplace_merge(v.begin(), v.begin() + 3, v.end());
+//     OUT(v, "inplace_merge - output: ");
+    
+//     v.clear();
+//     OUT(v1, "input 1: ");
+//     OUT(v2, "input 2: ");
+    
+//     set_symmetric_difference(ALL(v1), ALL(v2), std::back_inserter(v));
+//     OUT(v, "set_symmetric_difference - output: ");
+    
+//     return 0;
+// }
+
+
+#include <iostream>
+#include <algorithm>
+#include <iterator>
+#include <vector>
+#include <list>
+#include <numeric>
+using namespace std;
+
+#define ALL(v) v.begin(), v.end()
+#define OUT(v, s) cout <<"\n" << s; \
+copy( ALL(v), ostream_iterator<int>(cout, ", "))
+#define OUTM(v, sz, s) cout <<"\n" << s; \
+copy(v, v + sz , \
+ostream_iterator<int>(cout, ", "))
+
+int main() {
+    const int sz = 7;
+    int m[sz] = { 1, 3, 4, 5, 7, 8, 9 };
+    OUTM(m, sz, "input arr m - ");
+    list<int> l(m, m+sz);
+    list<int> l_res(l.size());
+    adjacent_difference(l.begin(), l.end(),
+    l_res.begin());
+    OUT(l_res, "adjacent_difference list l_res -");
+    int m_res[sz];
+    vector< int> v(m, m+sz);
+    vector< int> v2(v.size());
+    OUT(v, "input vector v - ");
+    partial_sum(m, m + sz, m_res);
+    OUTM(m_res, sz, "partial sum arr m - ");
+    partial_sum(v.begin(), v.end(), v2.begin());
+    OUT(v2, "partial sum vector v2 -");
 }
+
 
