@@ -7308,24 +7308,35 @@
 
 
 
-// #include <iostream>
-// using namespace std;
-// class A{
-//     int x , y;
-//     public:
-//     A(int i , int p) : x(i) , y(p){}
-//     friend ostream& operator<<(ostream& , A&);
-// };
+#include <iostream>
+using namespace std;
+class A{
+    int x , y;
+    public:
+    A(int i , int p) : x(i) , y(p){}
+    friend ostream& operator<<(ostream& , A&);
 
-// ostream& operator<<(ostream& s, A& a){
-//     s << a.x << " " << a.y << endl;
-//     return s;
-// }
 
-// int main(){
+    friend istream& operator>>(istream& , A&);
+};
 
-//     A c(1 , 1) , b(5 , 8);
-//     cout << c << b << endl;
+ostream& operator<<(ostream& s, A& a){
+    s << a.x << " " << a.y << endl;
+    return s;
+}
 
-//     return 0;
-// }
+istream& operator>>(istream& s , A& a){
+    s >> a.x >> a.y;
+    return s;
+}
+
+int main(){
+
+    A c(1 , 1) , b(5 , 8);
+    cout << c << b << endl;
+    cin >> c >> b;
+    cout << "SSSSSSSSSSSSSSSS" << endl;
+    cout << c << b << endl;
+
+    return 0;
+}
