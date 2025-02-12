@@ -7308,35 +7308,55 @@
 
 
 
+// #include <iostream>
+// using namespace std;
+// class A{
+//     int x , y;
+//     public:
+//     A(int i , int p) : x(i) , y(p){}
+//     friend ostream& operator<<(ostream& , A&);
+
+
+//     friend istream& operator>>(istream& , A&);
+// };
+
+// ostream& operator<<(ostream& s, A& a){
+//     s << a.x << " " << a.y << endl;
+//     return s;
+// }
+
+// istream& operator>>(istream& s , A& a){
+//     s >> a.x >> a.y;
+//     return s;
+// }
+
+// int main(){
+
+//     A c(1 , 1) , b(5 , 8);
+//     cout << c << b << endl;
+//     cin >> c >> b;
+//     cout << "SSSSSSSSSSSSSSSS" << endl;
+//     cout << c << b << endl;
+
+//     return 0;
+// }
+
+
 #include <iostream>
 using namespace std;
-class A{
-    int x , y;
-    public:
-    A(int i , int p) : x(i) , y(p){}
-    friend ostream& operator<<(ostream& , A&);
-
-
-    friend istream& operator>>(istream& , A&);
-};
-
-ostream& operator<<(ostream& s, A& a){
-    s << a.x << " " << a.y << endl;
-    return s;
-}
-
-istream& operator>>(istream& s , A& a){
-    s >> a.x >> a.y;
-    return s;
-}
 
 int main(){
+    ios::fmtflags f;
+    f = cout.flags(ios::right);
+    
 
-    A c(1 , 1) , b(5 , 8);
-    cout << c << b << endl;
-    cin >> c >> b;
-    cout << "SSSSSSSSSSSSSSSS" << endl;
-    cout << c << b << endl;
+    if (f && ios::left){
+        cout << "left-mask is switch on\n";
+    } 
+    else{
+        cout << "left-mask is switch off\n";
+        cout.setf(ios::left);
+    }
 
     return 0;
 }
