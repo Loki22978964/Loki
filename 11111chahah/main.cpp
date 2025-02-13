@@ -7385,14 +7385,29 @@
 
 
 
-#include <iostream>
-#include <iomanip> 
+// #include <iostream>
+// #include <iomanip> 
 
-using namespace std;
+// using namespace std;
 
-int main() {
-    cout << setw(10) << "Woow - ";                 // Встановлюємо ширину поля 10 для тексту
-    cout << setfill('%')  << setprecision(2) << 1.123       // Виводимо число з 2 знаками після коми
-         << endl;
-    return 0;
-}
+// int main() {
+//     cout << setw(10) << "Woow - ";                 // Встановлюємо ширину поля 10 для тексту
+//     cout << setfill('%')  << setprecision(2) << 1.123       // Виводимо число з 2 знаками після коми
+//          << endl;
+//     return 0;
+// }
+
+
+// #include <iostream>
+// using namespace std;
+
+// ostream& setup(ostream& s){
+//     s.width(2);
+//     s.fill('#');
+//     return s;
+// }
+
+// int main() {
+//     cout << setup << 1;
+//     return 0;
+// }
