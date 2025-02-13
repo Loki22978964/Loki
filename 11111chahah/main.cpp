@@ -7363,22 +7363,36 @@
 
 
 
+// #include <iostream>
+// using namespace std;
+
+// int main() {
+//     ios::fmtflags f;
+//     f = cout.flags();
+//     // f &= ~ios::left;
+
+//     if (f & ios::left) // перевірка left маски
+//         cout << "left-mask is switch on\n";
+//     else {
+//         cout << "left-mask is switch off\n";
+//         cout.setf(ios::left);  // встановлення left маски
+//     }
+//     cout.setf(ios::dec | ios::showpos); // встановлення ще двох масок через setf
+//     ios::fmtflags t = ios::showpoint | ios::skipws;
+//     cout.flags(t); // встановлення ще двох масок через flags
+//     return 0;
+// }
+
+
+
 #include <iostream>
+#include <iomanip> 
+
 using namespace std;
 
 int main() {
-    ios::fmtflags f;
-    f = cout.flags();
-    // f &= ~ios::left;
-
-    if (f & ios::left) // перевірка left маски
-        cout << "left-mask is switch on\n";
-    else {
-        cout << "left-mask is switch off\n";
-        cout.setf(ios::left);  // встановлення left маски
-    }
-    cout.setf(ios::dec | ios::showpos); // встановлення ще двох масок через setf
-    ios::fmtflags t = ios::showpoint | ios::skipws;
-    cout.flags(t); // встановлення ще двох масок через flags
+    cout << setw(10) << "Woow - ";                 // Встановлюємо ширину поля 10 для тексту
+    cout << setfill('%')  << setprecision(2) << 1.123       // Виводимо число з 2 знаками після коми
+         << endl;
     return 0;
 }
