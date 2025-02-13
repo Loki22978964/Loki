@@ -7411,3 +7411,51 @@
 //     cout << setup << 1;
 //     return 0;
 // }
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+#define DTOR(S) { cout << "dtor " << S << " \n"; }
+#define END return s;
+
+struct manip {
+    char c;
+    int w;
+    double d;
+
+    manip(char i) : c(i), w(0), d(0) { DTOR("manip(char)") }
+    manip(char i, int s) : c(i), w(s), d(0) { DTOR("manip(char, int)") }
+
+    manip* operator ()(char c, int w, double d) {
+        this->c = c;
+        this->w = w;
+        this->d = d;
+        return this;
+    }
+};
+
+ostream& operator << (ostream& s, manip&& m) {
+    s << "&&: " << setfill(m.c) << setw(m.w) << right << m.d;
+    END
+}
+
+ostream& operator << (ostream& s, manip* p) {
+    s << "*: " << setfill(p->c) << setw(p->w) << p->d << right;
+    END
+}
+
+ostream& operator << (ostream& s, const manip& m) {
+    s << "&: " << setfill(m.c) << setw(100) << left << m.d;
+    END
+}
+
+int main() {
+    cout << manip('#', 10) << 1.2 << endl;  // This should now print the manip object with width and the value 1.2
+    manip mmm('=');
+    manip* p = new manip(mmm);
+    cout  << p;
+    manip m('*');
+    cout << m << 1.2 << endl;  // This should also print the manip object with the value 1.2
+    return 0;
+}
