@@ -7342,21 +7342,43 @@
 // }
 
 
+// #include <iostream>
+// using namespace std;
+
+// int main(){
+//     ios::fmtflags f;
+//     f = cout.flags(ios::right);
+    
+
+//     if (f && ios::left){
+//         cout << "left-mask is switch on\n";
+//     } 
+//     else{
+//         cout << "left-mask is switch off\n";
+//         cout.setf(ios::left);
+//     }
+
+//     return 0;
+// }
+
+
+
 #include <iostream>
 using namespace std;
 
-int main(){
+int main() {
     ios::fmtflags f;
-    f = cout.flags(ios::right);
-    
+    f = cout.flags();
+    // f &= ~ios::left;
 
-    if (f && ios::left){
+    if (f & ios::left) // перевірка left маски
         cout << "left-mask is switch on\n";
-    } 
-    else{
+    else {
         cout << "left-mask is switch off\n";
-        cout.setf(ios::left);
+        cout.setf(ios::left);  // встановлення left маски
     }
-
+    cout.setf(ios::dec | ios::showpos); // встановлення ще двох масок через setf
+    ios::fmtflags t = ios::showpoint | ios::skipws;
+    cout.flags(t); // встановлення ще двох масок через flags
     return 0;
 }
