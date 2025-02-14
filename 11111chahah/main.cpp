@@ -7412,50 +7412,163 @@
 //     return 0;
 // }
 
+// #include <iostream>
+// #include <iomanip>
+// using namespace std;
+
+// #define DTOR(S) { cout << "dtor " << S << " \n"; }
+// #define END return s;
+
+// struct manip {
+//     char c;
+//     int w;
+//     double d;
+
+//     manip(char i) : c(i), w(0), d(0) { DTOR("manip(char)") }
+//     manip(char i, int s) : c(i), w(s), d(0) { DTOR("manip(char, int)") }
+
+//     manip* operator ()(char c, int w, double d) {
+//         this->c = c;
+//         this->w = w;
+//         this->d = d;
+//         return this;
+//     }
+// };
+
+// ostream& operator << (ostream& s, manip&& m) {
+//     s << "&&: " << setfill(m.c) << setw(m.w) << right << m.d;
+//     END
+// }
+
+// ostream& operator << (ostream& s, manip* p) {
+//     s << "*: " << setfill(p->c) << setw(p->w) << p->d << right;
+//     END
+// }
+
+// ostream& operator << (ostream& s, const manip& m) {
+//     s << "&: " << setfill(m.c) << setw(100) << left << m.d;
+//     END
+// }
+
+// int main() {
+//     cout << manip('#', 10) << 1.2 << endl;  // This should now print the manip object with width and the value 1.2
+//     manip mmm('=');
+//     manip* p = new manip(mmm);
+//     cout  << p;
+//     manip m('*');
+//     cout << m << 1.2 << endl;  // This should also print the manip object with the value 1.2
+//     return 0;
+// }
+
+
+// #include <iostream>  // Підключаємо бібліотеку для вводу/виводу
+// #include <string>    // Підключаємо бібліотеку для роботи з рядками
+// #include <fstream>   // Підключаємо бібліотеку для роботи з файлами
+
+// using namespace std; // Використовуємо стандартний простір імен
+
+// int main() {
+//     string in, out; // Змінні для імені вхідного та вихідного файлів
+
+//     // Запитуємо у користувача ім'я вхідного файлу
+//     cout << "Source file: "; 
+//     cin >> in; 
+
+//     // Запитуємо у користувача ім'я вихідного файлу
+//     cout << "Destination file: "; 
+//     cin >> out;
+
+//     // Відкриваємо вхідний файл для читання
+//     ifstream fin(in); 
+//     // Відкриваємо вихідний файл для запису
+//     ofstream fout(out); 
+
+//     // Перевірка, чи вдалося відкрити вихідний файл
+//     if (!fout) {  
+//         cout << "Error of " << out << " opening\n"; 
+//         return 1; // Якщо не вдалося, завершуємо програму з кодом помилки
+//     }
+
+//     // Перевірка, чи вдалося відкрити вхідний файл
+//     if (!fin) {  
+//         cout << "Error of " << in << " opening\n"; 
+//         return 1; // Якщо не вдалося, завершуємо програму з кодом помилки
+//     }
+
+//     char c, cIn, cOut;  // Змінні для зберігання поточного символу, символу для пошуку та символу для заміни
+
+//     // Запитуємо у користувача символ для пошуку
+//     cout << "\nSearch char: "; 
+//     cin >> cIn; 
+
+//     // Запитуємо у користувача символ для заміни
+//     cout << "\nReplace char: "; 
+//     cin >> cOut; 
+
+//     // Вимикаємо пропуск пробілів при читанні файлу
+//     fin.unsetf(ios::skipws); 
+
+//     // Цикл для читання всіх символів з вхідного файлу
+//     while (!fin.eof()) { 
+//         fin >> c;  // Читаємо символ з файлу
+//         if (c == cIn) c = cOut;  // Якщо символ співпадає з тим, що шукаємо, замінюємо його
+
+//         // Перевірка, щоб не записувати після кінця файлу
+//         if (!fin.eof()) fout << c;  // Якщо не досягнуто кінця файлу, записуємо символ у вихідний файл
+//     }
+
+//     // Закриваємо файли після завершення роботи
+//     fin.close(); 
+//     fout.close(); 
+
+//     return 0; // Успішне завершення програми
+// }
+
+
+
+// #include <iostream>
+// #include <sstream>
+// using namespace std;
+
+// int main() {
+//     int ival = 1024;
+//     int *pival = &ival;
+//     double dval = 3.14159;
+//     double *pdval = &dval;
+
+//     ostringstream format_message;
+//     format_message << "ival: " << ival
+//                   << " адреса ival: " << pival << '\n'
+//                   << "dval: " << dval << '\n'
+//                   << " адреса dval: " << pdval << endl;
+
+//     string msg = format_message.str();
+//     cout << " розмір рядка повідомлення: " << msg.size() 
+//          << " повідомлення: " << msg << endl;
+//          cout << " розмір рядка повідомлення: " << msg.size() 
+//          << " повідомлення: " << format_message.str() << endl;
+
+//     return 0;
+// }
+
+
+
 #include <iostream>
-#include <iomanip>
+#include <sstream>
 using namespace std;
 
-#define DTOR(S) { cout << "dtor " << S << " \n"; }
-#define END return s;
-
-struct manip {
-    char c;
-    int w;
-    double d;
-
-    manip(char i) : c(i), w(0), d(0) { DTOR("manip(char)") }
-    manip(char i, int s) : c(i), w(s), d(0) { DTOR("manip(char, int)") }
-
-    manip* operator ()(char c, int w, double d) {
-        this->c = c;
-        this->w = w;
-        this->d = d;
-        return this;
-    }
-};
-
-ostream& operator << (ostream& s, manip&& m) {
-    s << "&&: " << setfill(m.c) << setw(m.w) << right << m.d;
-    END
-}
-
-ostream& operator << (ostream& s, manip* p) {
-    s << "*: " << setfill(p->c) << setw(p->w) << p->d << right;
-    END
-}
-
-ostream& operator << (ostream& s, const manip& m) {
-    s << "&: " << setfill(m.c) << setw(100) << left << m.d;
-    END
-}
-
 int main() {
-    cout << manip('#', 10) << 1.2 << endl;  // This should now print the manip object with width and the value 1.2
-    manip mmm('=');
-    manip* p = new manip(mmm);
-    cout  << p;
-    manip m('*');
-    cout << m << 1.2 << endl;  // This should also print the manip object with the value 1.2
+    int ival = 1024;
+    int *pival = &ival;
+    double dval = 3.14159;
+    double *pdval = &dval;
+
+    ostringstream f_str;
+     f_str << ival << " " << pival << " "
+     << dval << " " << pdval << endl;
+     istringstream i_str(f_str.str());
+
+     i_str >> ival >> *pival   >> dval >> *pdval;
+
     return 0;
 }
