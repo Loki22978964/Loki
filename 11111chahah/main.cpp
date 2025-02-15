@@ -7628,24 +7628,48 @@
 
 
 
+// #include <iostream>
+// #include <thread>
+// #include <chrono>
+
+// void printNumbers() {
+//     for (int i = 0; i < 5; ++i) {
+//         std::cout << i << " ";
+//         std::this_thread::yield(); // Уступает управление другим потокам
+//     }
+// }
+
+// int main() {
+//     std::thread t1(printNumbers);
+//     std::thread t2(printNumbers);
+
+//     t1.join();
+//     t2.join();
+
+//     std::cout << "\nDone!" << std::endl;
+//     return 0;
+// }
+
+
+// #include <iostream>
+// #include <thread>
+
+// int main() {
+//     unsigned int cores = std::thread::hardware_concurrency();
+//     std::cout << "Number of CPU cores: " << cores << std::endl;
+//     return 0;
+// }
+
 #include <iostream>
 #include <thread>
-#include <chrono>
 
-void printNumbers() {
-    for (int i = 0; i < 5; ++i) {
-        std::cout << i << " ";
-        std::this_thread::yield(); // Уступает управление другим потокам
-    }
-}
+using namespace std;
 
-int main() {
-    std::thread t1(printNumbers);
-    std::thread t2(printNumbers);
+void t_f(){cout << this_thread::get_id() << endl;}
 
-    t1.join();
-    t2.join();
-
-    std::cout << "\nDone!" << std::endl;
-    return 0;
+int main(){
+    thread th(t_f);
+    
+    thread::id th_id = th.get_id();
+    cout << th_id << endl;
 }
