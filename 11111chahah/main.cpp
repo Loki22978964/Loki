@@ -7574,54 +7574,78 @@
 // }
 
 
+// #include <iostream>
+// #include <thread>
+// #include <atomic>
+// #include <string>
+// #include <stdio.h>
+// #include <system_error>
+
+// using namespace std;
+
+// void say(string& s){
+//     cout << "its me first say " << s << endl;
+// }
+
+// void say_all(){
+//     cout << "its me second say_all " << endl;
+// }
+
+// void say_one(int i, double d, const string s){
+//     cout << "its me third say_one " << s << endl;
+// }
+
+// void say_error(int& i){
+//     cout << "its me third say_one " << i << endl;
+// }
+
+
+// int main(){
+//     try{
+//         thread thr0;
+//         string mes{"Thread"};
+//         thread thr1(say , ref(mes));
+//         thread thr2(say_all);
+//         thread thr3(say_one , 1 , 3.14 , "pencil");
+//         int n = -1;
+//         thread thr4(say_error, ref(n));
+//         thread thr5(move(thr4));
+
+//         thr1.join();
+//         thr2.join();
+//         thr3.join();
+//         // thr4.join();
+//         thr5.join();
+
+
+//     }
+//     catch(const system_error e){ 
+//         cout << "prog fined the error";
+//         return 1;}
+
+//     return 0;
+// }
+
+
+
 #include <iostream>
 #include <thread>
-#include <atomic>
-#include <string>
-#include <stdio.h>
-#include <system_error>
+#include <chrono>
 
-using namespace std;
-
-void say(string& s){
-    cout << "its me first say " << s << endl;
-}
-
-void say_all(){
-    cout << "its me second say_all " << endl;
-}
-
-void say_one(int i, double d, const string s){
-    cout << "its me third say_one " << s << endl;
-}
-
-void say_error(int& i){
-    cout << "its me third say_one " << i << endl;
-}
-
-
-int main(){
-    try{
-        thread thr0;
-        string mes{"Thread"};
-        thread thr1(say , ref(mes));
-        thread thr2(say_all);
-        thread thr3(say_one , 1 , 3.14 , "pencil");
-        int n = -1;
-        thread thr4(say_error, ref(n));
-        thread thr5(move(thr4));
-
-        thr1.join();
-        thr2.join();
-        thr3.join();
-        // thr4.join();
-        thr5.join();
-
-
+void printNumbers() {
+    for (int i = 0; i < 5; ++i) {
+        std::cout << i << " ";
+        std::this_thread::yield(); // Уступает управление другим потокам
     }
-    catch(const system_error e){ 
-        cout << "prog fined the error";
-        return 1;}
+}
 
+int main() {
+    std::thread t1(printNumbers);
+    std::thread t2(printNumbers);
+
+    t1.join();
+    t2.join();
+
+    std::cout << "\nDone!" << std::endl;
     return 0;
 }
