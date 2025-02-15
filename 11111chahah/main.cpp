@@ -7553,22 +7553,75 @@
 
 
 
+// #include <iostream>
+// #include <sstream>
+// using namespace std;
+
+// int main() {
+//     int ival = 1024;
+//     int *pival = &ival;
+//     double dval = 3.14159;
+//     double *pdval = &dval;
+
+//     ostringstream f_str;
+//      f_str << ival << " " << pival << " "
+//      << dval << " " << pdval << endl;
+//      istringstream i_str(f_str.str());
+
+//      i_str >> ival >> *pival   >> dval >> *pdval;
+
+//     return 0;
+// }
+
+
 #include <iostream>
-#include <sstream>
+#include <thread>
+#include <atomic>
+#include <string>
+#include <stdio.h>
+#include <system_error>
+
 using namespace std;
 
-int main() {
-    int ival = 1024;
-    int *pival = &ival;
-    double dval = 3.14159;
-    double *pdval = &dval;
+void say(string& s){
+    cout << "its me first say " << s << endl;
+}
 
-    ostringstream f_str;
-     f_str << ival << " " << pival << " "
-     << dval << " " << pdval << endl;
-     istringstream i_str(f_str.str());
+void say_all(){
+    cout << "its me second say_all " << endl;
+}
 
-     i_str >> ival >> *pival   >> dval >> *pdval;
+void say_one(int i, double d, const string s){
+    cout << "its me third say_one " << s << endl;
+}
+
+void say_error(int& i){
+    cout << "its me third say_one " << i << endl;
+}
+
+
+int main(){
+    try{
+        thread thr0;
+        string mes{"Thread"};
+        thread thr1(say , ref(mes));
+        thread thr2(say_all);
+        thread thr3(say_one , 1 , 3.14 , "pencil");
+        int n = -1;
+        thread thr4(say_error, ref(n));
+        thread thr5(move(thr4));
+
+        thr1.join();
+        thr2.join();
+        thr3.join();
+        // thr4.join();
+        thr5.join();
+
+
+    }
+    catch(const system_error e){ 
+        cout << "prog fined the error";
+        return 1;}
 
     return 0;
 }
