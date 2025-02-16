@@ -7660,16 +7660,52 @@
 //     return 0;
 // }
 
+// #include <iostream>
+// #include <thread>
+
+// using namespace std;
+
+// void t_f(){cout << this_thread::get_id() << endl;}
+
+// int main(){
+//     thread th(t_f);
+    
+//     thread::id th_id = th.get_id();
+//     cout << th_id << endl;
+// }
+
+
+
 #include <iostream>
 #include <thread>
+#include <mutex>
 
 using namespace std;
 
-void t_f(){cout << this_thread::get_id() << endl;}
+mutex mtx;
+
+int p;
+
+void print(){
+   
+    p++;
+    {
+    lock_guard<mutex> guard(mtx);
+    for(int i = 0 ; i < 5 ; i++){
+        cout << i << " ";
+    }
+    cout << endl;
+    }
+    cout << "P: " << p << " ";
+}
+
 
 int main(){
-    thread th(t_f);
-    
-    thread::id th_id = th.get_id();
-    cout << th_id << endl;
+    thread thr1(print);
+    thread thr2(print);
+    thread thr3(print);
+    thr1.join();
+    thr2.join();
+    thr3.join();
+    return 0;
 }
