@@ -7676,36 +7676,79 @@
 
 
 
-#include <iostream>
-#include <thread>
-#include <mutex>
+// #include <iostream>
+// #include <thread>
+// #include <mutex>
 
-using namespace std;
+// using namespace std;
 
-mutex mtx;
+// mutex mtx;
 
-int p;
+// int p;
 
-void print(){
+// void print(){
    
-    p++;
-    {
-    lock_guard<mutex> guard(mtx);
-    for(int i = 0 ; i < 5 ; i++){
-        cout << i << " ";
-    }
-    cout << endl;
-    }
-    cout << "P: " << p << " ";
+//     p++;
+//     {
+//     lock_guard<mutex> guard(mtx);
+//     for(int i = 0 ; i < 5 ; i++){
+//         cout << i << " ";
+//     }
+//     cout << endl;
+//     }
+//     cout << "P: " << p << " ";
+// }
+
+
+
+// int main(){
+//     thread thr1(print);
+//     thread thr2(print);
+//     thread thr3(print);
+//     thr1.join();
+//     thr2.join();
+//     thr3.join();
+//     return 0;
+// }
+
+
+#include <iostream>
+#include <shared_mutex>
+#include <thread>
+#include <vector>
+
+std::shared_mutex sh_mtx;
+int data = 0;
+
+// Читаючий потік (студент)
+void reader(int id) {
+    sh_mtx.lock_shared();  // Захоплюємо спільне блокування
+    std::cout << "Студент " << id << " бачить: " << data << std::endl;
+    sh_mtx.unlock_shared();  // Звільняємо спільне блокування
 }
 
+// Пишучий потік (вчитель)
+void writer(int value) {
+    sh_mtx.lock();  // Захоплюємо ексклюзивне блокування
+    data = value;
+    std::cout << "Вчитель змінив значення на: " << data << std::endl;
+    sh_mtx.unlock();  // Звільняємо ексклюзивне блокування
+}
 
-int main(){
-    thread thr1(print);
-    thread thr2(print);
-    thread thr3(print);
-    thr1.join();
-    thr2.join();
-    thr3.join();
+int main() {
+    std::vector<std::thread> threads;
+    
+    // Запускаємо кілька читаючих потоків
+    for (int i = 1; i <= 3; ++i) {
+        threads.push_back(std::thread(reader, i));
+    }
+    
+    // Запускаємо один пишучий потік
+    threads.push_back(std::thread(writer, 100));
+    
+    // Приєднуємо всі потоки
+    for (auto& th : threads) {
+        th.join();
+    }
     return 0;
 }
