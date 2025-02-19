@@ -7897,53 +7897,102 @@
 // }
 
 
+// #include <iostream>
+// #include <string>
+
+// enum Compression {
+//    NONE = 0,
+//    H264 = 1,
+//    H265 = 2,
+// };
+
+// template <typename T>
+// T convert(const std::string& s);
+
+// template <>
+// std::string convert(const std::string& s){
+//     return s;
+// }
+
+// template <>
+// int convert(const std::string& s){
+//     return std::stoi(s);
+// }
+
+
+// template <>
+// Compression convert(const std::string& s){
+//    if (s == "H264"){return Compression::H264;}
+//    if (s == "H264"){return Compression::H265;}
+//    return Compression::NONE;
+// }
+
+// // PUT YOUR CODE HERE
+
+// int main() {
+//    std::cout << "Enter video configuration: ";
+//    Compression type;
+//    std::string size;
+//    int rate;
+//    for (int i = 0; i < 3; ++i) {
+//        std::string config, value;
+//        std::cin >> config >> value;
+//        if (config == "type") type = convert<Compression>(value);
+//        if (config == "size") size = convert<std::string>(value);
+//        if (config == "rate") rate = convert<int>(value);
+//    }
+//    std::cout << "Parsed configuration:" << std::endl
+//              << "Compression: " << type << std::endl
+//              << "Resolution: " << size << std::endl
+//              << "Framerate: " << rate << std::endl;
+//    return 0;
+// }
+
+
+
+
+
 #include <iostream>
+#include <iomanip>
+#include <sstream>
 #include <string>
+#include <map>
 
-enum Compression {
-   NONE = 0,
-   H264 = 1,
-   H265 = 2,
-};
 
-template <typename T>
-T convert(const std::string& s);
-
-template <>
-std::string convert(const std::string& s){
-    return s;
+void filter(std::map<std::string, int>& students, int low, int high) {
+   for(auto it = students.begin() ; it != students.end(); ){
+    if(it->second < low || it->second > high){
+        it = students.erase(it);
+    }
+    else{
+        it++;
+    }
+   }
 }
 
-template <>
-int convert(const std::string& s){
-    return std::stoi(s);
-}
-
-
-template <>
-Compression convert(const std::string& s){
-   if (s == "H264"){return Compression::H264;}
-   if (s == "H264"){return Compression::H265;}
-   return Compression::NONE;
-}
-
-// PUT YOUR CODE HERE
 
 int main() {
-   std::cout << "Enter video configuration: ";
-   Compression type;
-   std::string size;
-   int rate;
-   for (int i = 0; i < 3; ++i) {
-       std::string config, value;
-       std::cin >> config >> value;
-       if (config == "type") type = convert<Compression>(value);
-       if (config == "size") size = convert<std::string>(value);
-       if (config == "rate") rate = convert<int>(value);
+   char student_data[100];
+   std::map<std::string, int> students;
+   std::cout << "Enter students and scores:" << std::endl;
+   while (true) {
+       std::cin.getline(student_data, sizeof(student_data));
+       if (!student_data[0]) break;
+       std::string name;
+       int score;
+       std::stringstream line{student_data};
+       line >> name;
+       line >> score;
+       students[name] = score;
    }
-   std::cout << "Parsed configuration:" << std::endl
-             << "Compression: " << type << std::endl
-             << "Resolution: " << size << std::endl
-             << "Framerate: " << rate << std::endl;
+   int low, high;
+   std::cout << "Enter score range: ";
+   std::cin >> low >> high;
+   filter(students, low, high);
+   std::cout << "Students:" << std::endl;
+   for (const auto& x : students) {
+       std::cout << std::left << std::setw(15)
+                 << x.first << ": " << x.second << std::endl;
+   }
    return 0;
 }
