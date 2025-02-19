@@ -7771,4 +7771,33 @@
 // }
 
 
+#include <iostream>
+#include <list>
+#include <algorithm>
 
+template <typename T>
+int find(const std::list<T>& values, const T& value) {
+   auto iter = std::find(values.begin(), values.end() , value) ;
+   return (iter == values.end()) ? -1 : std::distance(values.begin(), iter);
+}
+
+int main() {
+   char value[100];
+   std::list<std::string> values;
+   std::cout << "Enter array:" << std::endl;
+   while (true) {
+       std::cin.getline(value, sizeof(value));
+       if (!value[0]) break;
+       values.push_back(value);
+   }
+   std::cout << "Enter value: ";
+   std::cin.getline(value, sizeof(value));
+   int index = find(values, std::string{value});
+   if (index < 0) {
+       std::cout << "Value '" << value << "' is not found.";
+   } else {
+       std::cout << "Value '" << value << "' is at index " << index << '.';
+   }
+   std::cout << std::endl;
+   return 0;
+}
