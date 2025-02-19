@@ -7712,43 +7712,63 @@
 // }
 
 
-#include <iostream>
-#include <shared_mutex>
-#include <thread>
-#include <vector>
+// #include <iostream>
+// #include <shared_mutex>
+// #include <thread>
+// #include <vector>
 
-std::shared_mutex sh_mtx;
-int data = 0;
+// std::shared_mutex sh_mtx;
+// int data = 0;
 
-// Читаючий потік (студент)
-void reader(int id) {
-    sh_mtx.lock_shared();  // Захоплюємо спільне блокування
-    std::cout << "Студент " << id << " бачить: " << data << std::endl;
-    sh_mtx.unlock_shared();  // Звільняємо спільне блокування
-}
+// // Читаючий потік (студент)
+// void reader(int id) {
+//     sh_mtx.lock_shared();  // Захоплюємо спільне блокування
+//     std::cout << "Студент " << id << " бачить: " << data << std::endl;
+//     sh_mtx.unlock_shared();  // Звільняємо спільне блокування
+// }
 
-// Пишучий потік (вчитель)
-void writer(int value) {
-    sh_mtx.lock();  // Захоплюємо ексклюзивне блокування
-    data = value;
-    std::cout << "Вчитель змінив значення на: " << data << std::endl;
-    sh_mtx.unlock();  // Звільняємо ексклюзивне блокування
-}
+// // Пишучий потік (вчитель)
+// void writer(int value) {
+//     sh_mtx.lock();  // Захоплюємо ексклюзивне блокування
+//     data = value;
+//     std::cout << "Вчитель змінив значення на: " << data << std::endl;
+//     sh_mtx.unlock();  // Звільняємо ексклюзивне блокування
+// }
 
-int main() {
-    std::vector<std::thread> threads;
+// int main() {
+//     std::vector<std::thread> threads;
     
-    // Запускаємо кілька читаючих потоків
-    for (int i = 1; i <= 3; ++i) {
-        threads.push_back(std::thread(reader, i));
-    }
+//     // Запускаємо кілька читаючих потоків
+//     for (int i = 1; i <= 3; ++i) {
+//         threads.push_back(std::thread(reader, i));
+//     }
     
-    // Запускаємо один пишучий потік
-    threads.push_back(std::thread(writer, 100));
+//     // Запускаємо один пишучий потік
+//     threads.push_back(std::thread(writer, 100));
     
-    // Приєднуємо всі потоки
-    for (auto& th : threads) {
-        th.join();
-    }
-    return 0;
-}
+//     // Приєднуємо всі потоки
+//     for (auto& th : threads) {
+//         th.join();
+//     }
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+
+// template <typename T>
+// void a(T v) {std::cout << "Template" << std::endl;};
+
+// template <>
+// void a<int>(int v) { std::cout << "Specialized" << std::endl; };
+
+// void a(int v) { std::cout << "Normal" << std::endl; };
+
+// int main() {
+//    a(4);
+//    return 0;
+// }
+
+
+
