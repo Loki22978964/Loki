@@ -7771,33 +7771,64 @@
 // }
 
 
+// #include <iostream>
+// #include <list>
+// #include <algorithm>
+
+// template <typename T>
+// int find(const std::list<T>& values, const T& value) {
+//    auto iter = std::find(values.begin(), values.end() , value) ;
+//    return (iter == values.end()) ? -1 : std::distance(values.begin(), iter);
+// }
+
+// int main() {
+//    char value[100];
+//    std::list<std::string> values;
+//    std::cout << "Enter array:" << std::endl;
+//    while (true) {
+//        std::cin.getline(value, sizeof(value));
+//        if (!value[0]) break;
+//        values.push_back(value);
+//    }
+//    std::cout << "Enter value: ";
+//    std::cin.getline(value, sizeof(value));
+//    int index = find(values, std::string{value});
+//    if (index < 0) {
+//        std::cout << "Value '" << value << "' is not found.";
+//    } else {
+//        std::cout << "Value '" << value << "' is at index " << index << '.';
+//    }
+//    std::cout << std::endl;
+//    return 0;
+// }
+
+
+
 #include <iostream>
-#include <list>
+#include <vector>
 #include <algorithm>
 
-template <typename T>
-int find(const std::list<T>& values, const T& value) {
-   auto iter = std::find(values.begin(), values.end() , value) ;
-   return (iter == values.end()) ? -1 : std::distance(values.begin(), iter);
+template <class T>
+void sort(std::vector<T>& values) {
+   std::sort(values.begin(), values.end());
 }
 
 int main() {
    char value[100];
-   std::list<std::string> values;
+   std::vector<int> values_i;
+   std::vector<std::string> values_s;
    std::cout << "Enter array:" << std::endl;
    while (true) {
        std::cin.getline(value, sizeof(value));
        if (!value[0]) break;
-       values.push_back(value);
+       values_i.push_back(std::atoi(value));
+       values_s.push_back(value);
    }
-   std::cout << "Enter value: ";
-   std::cin.getline(value, sizeof(value));
-   int index = find(values, std::string{value});
-   if (index < 0) {
-       std::cout << "Value '" << value << "' is not found.";
-   } else {
-       std::cout << "Value '" << value << "' is at index " << index << '.';
-   }
-   std::cout << std::endl;
+   sort(values_i);
+   sort(values_s);
+   std::cout << "Sorted as numbers:" << std::endl;
+   for (const auto& x : values_i) std::cout << x << std::endl;
+   std::cout << "Sorted as strings:" << std::endl;
+   for (const auto& x : values_s) std::cout << x << std::endl;
    return 0;
 }
