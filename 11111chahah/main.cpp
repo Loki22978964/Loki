@@ -7864,31 +7864,36 @@
 // }
 
 
-#include <iostream>
-#include <vector>
-#include <map>
-#include <iomanip>
+// #include <iostream>
+// #include <vector>
+// #include <map>
+// #include <iomanip>
 
-std::map<std::string, int> count(const std::vector<std::string>& values) {
-    td::map<std::string, int> srt;
+// std::map<std::string, int> count(const std::vector<std::string>& values) {
+//     std::map<std::string, int> srtt;
+//     for(const auto str : values){
+//         srtt[str]++;
+//     }
     
-   return srt;
-}
+//    return srt;
+// }
 
-int main() {
-   char value[100];
-   std::vector<std::string> values;
-   std::cout << "Enter array:" << std::endl;
-   while (true) {
-       std::cin.getline(value, sizeof(value));
-       if (!value[0]) break;
-       values.push_back(value);
-   }
-   auto counts = count(values);
-   std::cout << "Number of entries:" << std::endl;
-   for (auto x : counts) {
-       std::cout << std::left << std::setw(10)
-                 << x.first << ": " << x.second << std::endl;
-   }
-   return 0;
-}
+// int main() {
+//    char value[100];
+//    std::vector<std::string> values;
+//    std::cout << "Enter array:" << std::endl;
+//    while (true) {
+//        std::cin.getline(value, sizeof(value));
+//        if (!value[0]) break;
+//        values.push_back(value);
+//    }
+//    auto counts = count(values);
+//    std::cout << "Number of entries:" << std::endl;
+//    for (auto x : counts) {
+//        std::cout << std::left << std::setw(10)
+//                  << x.first << ": " << x.second << std::endl;
+//    }
+//    return 0;
+// }
+
+
