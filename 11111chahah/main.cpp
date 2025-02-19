@@ -7804,31 +7804,61 @@
 
 
 
-#include <iostream>
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+
+// template <class T>
+// void sort(std::vector<T>& values) {
+//    std::sort(values.begin(), values.end());
+// }
+
+// int main() {
+//    char value[100];
+//    std::vector<int> values_i;
+//    std::vector<std::string> values_s;
+//    std::cout << "Enter array:" << std::endl;
+//    while (true) {
+//        std::cin.getline(value, sizeof(value));
+//        if (!value[0]) break;
+//        values_i.push_back(std::atoi(value));
+//        values_s.push_back(value);
+//    }
+//    sort(values_i);
+//    sort(values_s);
+//    std::cout << "Sorted as numbers:" << std::endl;
+//    for (const auto& x : values_i) std::cout << x << std::endl;
+//    std::cout << "Sorted as strings:" << std::endl;
+//    for (const auto& x : values_s) std::cout << x << std::endl;
+//    return 0;
+// }
+
+
+
 #include <vector>
+#include <list>
+#include <iostream>
 #include <algorithm>
 
-template <class T>
-void sort(std::vector<T>& values) {
-   std::sort(values.begin(), values.end());
+void filter(const std::vector<int>& src, std::list<int>& tgt) {
+   std::copy_if(src.begin(),src.end(), std::back_inserter(tgt) , [](int x){ return x > 0;});
 }
 
 int main() {
    char value[100];
-   std::vector<int> values_i;
-   std::vector<std::string> values_s;
+   std::vector<int> values;
+   std::list<int> positive;
    std::cout << "Enter array:" << std::endl;
    while (true) {
        std::cin.getline(value, sizeof(value));
        if (!value[0]) break;
-       values_i.push_back(std::atoi(value));
-       values_s.push_back(value);
+       values.push_back(atoi(value));
    }
-   sort(values_i);
-   sort(values_s);
-   std::cout << "Sorted as numbers:" << std::endl;
-   for (const auto& x : values_i) std::cout << x << std::endl;
-   std::cout << "Sorted as strings:" << std::endl;
-   for (const auto& x : values_s) std::cout << x << std::endl;
+   filter(values, positive);
+   std::cout << "Positive values:";
+   for (auto x : positive) {
+       std::cout << ' ' << x;
+   }
+   std::cout << std::endl;
    return 0;
 }
