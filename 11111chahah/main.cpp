@@ -7835,30 +7835,60 @@
 
 
 
-#include <vector>
-#include <list>
-#include <iostream>
-#include <algorithm>
+// #include <vector>
+// #include <list>
+// #include <iostream>
+// #include <algorithm>
 
-void filter(const std::vector<int>& src, std::list<int>& tgt) {
-   std::copy_if(src.begin(),src.end(), std::back_inserter(tgt) , [](int x){ return x > 0;});
+// void filter(const std::vector<int>& src, std::list<int>& tgt) {
+//    std::copy_if(src.begin(),src.end(), std::back_inserter(tgt) , [](int x){ return x > 0;});
+// }
+
+// int main() {
+//    char value[100];
+//    std::vector<int> values;
+//    std::list<int> positive;
+//    std::cout << "Enter array:" << std::endl;
+//    while (true) {
+//        std::cin.getline(value, sizeof(value));
+//        if (!value[0]) break;
+//        values.push_back(atoi(value));
+//    }
+//    filter(values, positive);
+//    std::cout << "Positive values:";
+//    for (auto x : positive) {
+//        std::cout << ' ' << x;
+//    }
+//    std::cout << std::endl;
+//    return 0;
+// }
+
+
+#include <iostream>
+#include <vector>
+#include <map>
+#include <iomanip>
+
+std::map<std::string, int> count(const std::vector<std::string>& values) {
+    td::map<std::string, int> srt;
+    
+   return srt;
 }
 
 int main() {
    char value[100];
-   std::vector<int> values;
-   std::list<int> positive;
+   std::vector<std::string> values;
    std::cout << "Enter array:" << std::endl;
    while (true) {
        std::cin.getline(value, sizeof(value));
        if (!value[0]) break;
-       values.push_back(atoi(value));
+       values.push_back(value);
    }
-   filter(values, positive);
-   std::cout << "Positive values:";
-   for (auto x : positive) {
-       std::cout << ' ' << x;
+   auto counts = count(values);
+   std::cout << "Number of entries:" << std::endl;
+   for (auto x : counts) {
+       std::cout << std::left << std::setw(10)
+                 << x.first << ": " << x.second << std::endl;
    }
-   std::cout << std::endl;
    return 0;
 }
