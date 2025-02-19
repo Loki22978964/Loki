@@ -7897,3 +7897,53 @@
 // }
 
 
+#include <iostream>
+#include <string>
+
+enum Compression {
+   NONE = 0,
+   H264 = 1,
+   H265 = 2,
+};
+
+template <typename T>
+T convert(const std::string& s);
+
+template <>
+std::string convert(const std::string& s){
+    return s;
+}
+
+template <>
+int convert(const std::string& s){
+    return std::stoi(s);
+}
+
+
+template <>
+Compression convert(const std::string& s){
+   if (s == "H264"){return Compression::H264;}
+   if (s == "H264"){return Compression::H265;}
+   return Compression::NONE;
+}
+
+// PUT YOUR CODE HERE
+
+int main() {
+   std::cout << "Enter video configuration: ";
+   Compression type;
+   std::string size;
+   int rate;
+   for (int i = 0; i < 3; ++i) {
+       std::string config, value;
+       std::cin >> config >> value;
+       if (config == "type") type = convert<Compression>(value);
+       if (config == "size") size = convert<std::string>(value);
+       if (config == "rate") rate = convert<int>(value);
+   }
+   std::cout << "Parsed configuration:" << std::endl
+             << "Compression: " << type << std::endl
+             << "Resolution: " << size << std::endl
+             << "Framerate: " << rate << std::endl;
+   return 0;
+}
