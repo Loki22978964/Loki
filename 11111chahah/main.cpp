@@ -7998,6 +7998,33 @@
 // }
 
 
+// #include <iostream>
+
+// struct Process {
+//    std::string name;
+//    int ram;
+//    int cpu;
+// };
+
+// std::ostream& operator<<(std::ostream& s , const Process& proc){
+//     s << "Process "<< proc.name << ":" << std::endl <<
+//     "    RAM " << proc.ram << " KiB" << std::endl <<
+//     "    CPU " << proc.cpu << "%" << std::endl; 
+
+//     return s;
+// }
+
+// int main() {
+//    std::string name;
+//    int ram;
+//    int cpu;
+//    std::cout << "Enter process: ";
+//    std::cin >> name >> ram >> cpu;
+//    std::cout << Process{name, ram, cpu} << std::endl;
+//    return 0;
+// }
+
+
 #include <iostream>
 
 struct Process {
@@ -8006,20 +8033,18 @@ struct Process {
    int cpu;
 };
 
-std::ostream& operator<<(std::ostream& s , const Process& proc){
-    s << "Process"<< proc.name << ":" << std::endl <<
-    "RAM " << proc.ram << " KiB" << std::endl <<
-    "CPU " << proc.cpu << "%" << std::endl; 
-
-    return s;
-}
+std::istream& operator>>(std::istream& s , Process& proc){
+        s >> proc.name >> proc.ram >> proc.cpu ; 
+    
+        return s;
+    }
 
 int main() {
-   std::string name;
-   int ram;
-   int cpu;
+   Process p;
    std::cout << "Enter process: ";
-   std::cin >> name >> ram >> cpu;
-   std::cout << Process{name, ram, cpu} << std::endl;
-   return 0;
+   std::cin >> p;
+   std::cout << "Process " << p.name << ":"<<std::endl
+             << "    RAM " << p.ram << " KiB"<<std::endl
+             << "    CPU " << p.cpu << "%"<<std::endl;
+   return 0;  
 }
