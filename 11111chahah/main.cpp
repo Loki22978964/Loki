@@ -8051,28 +8051,83 @@
 
 
 
+// #include <iostream>
+// #include <string>
+// #include <thread>
+
+
+// void print(const std::string& str) {
+//    static int sleep = 100;
+//    std::this_thread::sleep_for(std::chrono::milliseconds{sleep});
+//    std::cout << str << std::endl;
+//    sleep /= 10;
+// }
+
+
+// int main() {
+//    std::string word1;
+//    std::string word2;
+//    std::cout << "Enter words: ";
+//    std::cin >> word1 >> word2;
+//    std::thread t1(print ,word1 );
+//    std::thread t2(print , word2);
+//    t1.join();
+//    t2.join();
+
+//    return 0;
+// }
+
+
+
+
 #include <iostream>
-#include <string>
-#include <thread>
+#include <fstream>
+#include <vector>
+#include <algorithm>
 
+const char filename[] = "countries.txt";
 
-void print(const std::string& str) {
-   static int sleep = 100;
-   std::this_thread::sleep_for(std::chrono::milliseconds{sleep});
-   std::cout << str << std::endl;
-   sleep /= 10;
+void write_countries(const std::vector<std::string>& countries) {
+    std::ofstream file(filename);
+    if (!file) {
+        std::cerr << "Error opening file for writing" << std::endl;
+        return;
+    }
+    for (const auto& country : countries) {
+        file << country << std::endl;
+    }
 }
 
+void read_countries(std::vector<std::string>& countries) {
+    std::ifstream file(filename);
+    if (!file) {
+        std::cerr << "Error opening file for reading" << std::endl;
+        return;
+    }
+    std::string country;
+    while (std::getline(file, country)) {
+        if (!country.empty()) {
+            countries.push_back(country);
+        }
+    }
+}
 
 int main() {
-   std::string word1;
-   std::string word2;
-   std::cout << "Enter words: ";
-   std::cin >> word1 >> word2;
-   std::thread t1(print ,word1 );
-   std::thread t2(print , word2);
-   t1.join();
-   t2.join();
-
-   return 0;
+    std::vector<std::string> countries;
+    std::cout << "Enter countries:" << std::endl;
+    std::string buffer;
+    while (true) {
+        std::getline(std::cin, buffer);
+        if (buffer.empty()) break;
+        countries.push_back(buffer);
+    }
+    std::ofstream{filename, std::ios_base::out | std::ios_base::trunc};
+    write_countries(countries);
+    countries.clear();
+    read_countries(countries);
+    std::sort(countries.begin(), countries.end());
+    for (const auto& x : countries) {
+        std::cout << x << std::endl;
+    }
+    return 0;
 }
