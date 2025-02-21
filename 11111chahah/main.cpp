@@ -8136,61 +8136,129 @@
 
 
 
+// #include <iostream>
+// #include <thread>
+// #include <mutex>
+// #include <vector>
+
+
+// class Sleepy {
+// public:
+//    Sleepy(int sleep) : sleep(sleep) {
+//        values = {1, 2, 3, 4, 5};
+//    }
+
+//    void print() const {
+//         mtx.lock();
+//        std::cout << "Values:";
+//        for (const auto& x : values) {
+//            std::cout << ' ' << x;
+//            std::cout.flush();
+//            std::this_thread::sleep_for(sleep);
+//        }
+//        std::cout << std::endl;
+//        mtx.unlock();
+//    }
+
+//    void clear() {
+//     mtx.lock();
+//        for (auto& x : values) {
+//            x = 0;
+//        }
+//        values.clear();
+//        std::cout << "Clear!" << std::endl;
+//        mtx.unlock();
+//    }
+
+// private:
+//    std::vector<int> values;
+//    std::chrono::milliseconds sleep;
+//    mutable std::mutex mtx;
+// };
+
+// int main() {
+//   int sleep;
+//    std::cout << "Enter sleep interval: ";
+//    std::cin >> sleep;
+//    Sleepy sleepy{sleep};
+//    std::thread t1{[&](){
+//        sleepy.print();
+//        std::this_thread::sleep_for(std::chrono::milliseconds(60));
+//        sleepy.print();
+//    }};
+//    std::thread t2{[&](){
+//        std::this_thread::sleep_for(std::chrono::milliseconds(30));
+//        sleepy.clear();
+//    }};
+//    t1.join();
+//    t2.join();
+//    return 0;
+// }
+
+
+
+
 #include <iostream>
-#include <thread>
-#include <mutex>
+#include <iomanip>
 #include <vector>
+#include <sstream>
+#include <algorithm>
 
-
-class Sleepy {
-public:
-   Sleepy(int sleep) : sleep(sleep) {
-       values = {1, 2, 3, 4, 5};
-   }
-
-   void print() const {
-        mtx.lock();
-       std::cout << "Values:";
-       for (const auto& x : values) {
-           std::cout << ' ' << x;
-           std::cout.flush();
-           std::this_thread::sleep_for(sleep);
-       }
-       std::cout << std::endl;
-       mtx.unlock();
-   }
-
-   void clear() {
-    mtx.lock();
-       for (auto& x : values) {
-           x = 0;
-       }
-       values.clear();
-       std::cout << "Clear!" << std::endl;
-       mtx.unlock();
-   }
-
-private:
-   std::vector<int> values;
-   std::chrono::milliseconds sleep;
-   mutable std::mutex mtx;
+struct Process {
+   std::string name;
+   int ram;
+   double cpu;
 };
 
 int main() {
-  int sleep;
-   std::cout << "Enter sleep interval: ";
-   std::cin >> sleep;
-   Sleepy sleepy{sleep};
-   std::thread t1{[&](){
-       sleepy.print();
-       std::this_thread::sleep_for(std::chrono::milliseconds(60));
-       sleepy.print();
-   }};
-   std::thread t2{[&](){
-       std::this_thread::sleep_for(std::chrono::milliseconds(30));
-       sleepy.clear();
-   }};
-   t1.join();
-   t2.join();
+   int count;
+   std::vector<Process> processes;
+   std::cout << "Enter number of processes: ";
+   std::cin >> count;
+   std::cout << "Enter processes:" << std::endl;
+   for (int i = 0; i < count; ++i) {
+       Process process;
+       std::cin >> process.name >> process.ram >> process.cpu;
+       processes.push_back(process);
+   }
+   auto iname = std::max_element(
+       processes.begin(),
+       processes.end(),
+       [](const Process& l, const Process& r) {
+           return l.name.size() < r.name.size();
+       });
+   auto iram = std::max_element(
+       processes.begin(),
+       processes.end(),
+       [](const Process& l, const Process& r) {
+           return l.ram < r.ram;
+       });
+   auto icpu = std::max_element(
+       processes.begin(),
+       processes.end(),
+       [](const Process& l, const Process& r) {
+           return l.cpu < r.cpu;
+       });
+   int wname = std::max(4, (int)(iname->name.size()));
+   std::stringstream stream;
+   stream << std::hex << std::showbase << iram->ram;
+   int wram = std::max(3, (int)(stream.str().size()));
+   stream = {};
+   stream << std::fixed << std::setprecision(2) << icpu->cpu;
+   int wcpu = std::max(3, (int)(stream.str().size()));
+   std::cout
+       << "| " << std::left << std::setw(wname) << "Name"
+       << " | " << std::right << std::setw(wram) << "RAM"
+       << " | " << std::right << std::setw(wcpu) << "CPU"
+       << " |" << std::endl;
+   // PUT YOUR CODE HERE
+   for (const auto& process : processes) {
+    std::cout
+        << "| " << std::left << std::setw(wname) << process.name
+        << " | " << std::right << std::setw(wram) << std::hex << process.ram
+        << " | " << std::right << std::setw(wcpu) << std::fixed << std::setprecision(2) << process.cpu
+        << " |" << std::endl;
+}
+
    return 0;
 }
