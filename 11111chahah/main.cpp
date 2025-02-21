@@ -7952,47 +7952,74 @@
 
 
 
+// #include <iostream>
+// #include <iomanip>
+// #include <sstream>
+// #include <string>
+// #include <map>
+
+
+// void filter(std::map<std::string, int>& students, int low, int high) {
+//    for(auto it = students.begin() ; it != students.end(); ){
+//     if(it->second < low || it->second > high){
+//         it = students.erase(it);
+//     }
+//     else{
+//         it++;
+//     }
+//    }
+// }
+
+
+// int main() {
+//    char student_data[100];
+//    std::map<std::string, int> students;
+//    std::cout << "Enter students and scores:" << std::endl;
+//    while (true) {
+//        std::cin.getline(student_data, sizeof(student_data));
+//        if (!student_data[0]) break;
+//        std::string name;
+//        int score;
+//        std::stringstream line{student_data};
+//        line >> name;
+//        line >> score;
+//        students[name] = score;
+//    }
+//    int low, high;
+//    std::cout << "Enter score range: ";
+//    std::cin >> low >> high;
+//    filter(students, low, high);
+//    std::cout << "Students:" << std::endl;
+//    for (const auto& x : students) {
+//        std::cout << std::left << std::setw(15)
+//                  << x.first << ": " << x.second << std::endl;
+//    }
+//    return 0;
+// }
+
+
 #include <iostream>
-#include <iomanip>
-#include <sstream>
-#include <string>
-#include <map>
 
+struct Process {
+   std::string name;
+   int ram;
+   int cpu;
+};
 
-void filter(std::map<std::string, int>& students, int low, int high) {
-   for(auto it = students.begin() ; it != students.end(); ){
-    if(it->second < low || it->second > high){
-        it = students.erase(it);
-    }
-    else{
-        it++;
-    }
-   }
+std::ostream& operator<<(std::ostream& s , const Process& proc){
+    s << "Process"<< proc.name << ":" << std::endl <<
+    "RAM " << proc.ram << " KiB" << std::endl <<
+    "CPU " << proc.cpu << "%" << std::endl; 
+
+    return s;
 }
 
-
 int main() {
-   char student_data[100];
-   std::map<std::string, int> students;
-   std::cout << "Enter students and scores:" << std::endl;
-   while (true) {
-       std::cin.getline(student_data, sizeof(student_data));
-       if (!student_data[0]) break;
-       std::string name;
-       int score;
-       std::stringstream line{student_data};
-       line >> name;
-       line >> score;
-       students[name] = score;
-   }
-   int low, high;
-   std::cout << "Enter score range: ";
-   std::cin >> low >> high;
-   filter(students, low, high);
-   std::cout << "Students:" << std::endl;
-   for (const auto& x : students) {
-       std::cout << std::left << std::setw(15)
-                 << x.first << ": " << x.second << std::endl;
-   }
+   std::string name;
+   int ram;
+   int cpu;
+   std::cout << "Enter process: ";
+   std::cin >> name >> ram >> cpu;
+   std::cout << Process{name, ram, cpu} << std::endl;
    return 0;
 }
