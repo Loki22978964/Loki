@@ -8080,54 +8080,117 @@
 
 
 
+// #include <iostream>
+// #include <fstream>
+// #include <vector>
+// #include <algorithm>
+
+// const char filename[] = "countries.txt";
+
+// void write_countries(const std::vector<std::string>& countries) {
+//     std::ofstream file(filename);
+//     if (!file) {
+//         std::cerr << "Error opening file for writing" << std::endl;
+//         return;
+//     }
+//     for (const auto& country : countries) {
+//         file << country << std::endl;
+//     }
+// }
+
+// void read_countries(std::vector<std::string>& countries) {
+//     std::ifstream file(filename);
+//     if (!file) {
+//         std::cerr << "Error opening file for reading" << std::endl;
+//         return;
+//     }
+//     std::string country;
+//     while (std::getline(file, country)) {
+//         if (!country.empty()) {
+//             countries.push_back(country);
+//         }
+//     }
+// }
+
+// int main() {
+//     std::vector<std::string> countries;
+//     std::cout << "Enter countries:" << std::endl;
+//     std::string buffer;
+//     while (true) {
+//         std::getline(std::cin, buffer);
+//         if (buffer.empty()) break;
+//         countries.push_back(buffer);
+//     }
+//     std::ofstream{filename, std::ios_base::out | std::ios_base::trunc};
+//     write_countries(countries);
+//     countries.clear();
+//     read_countries(countries);
+//     std::sort(countries.begin(), countries.end());
+//     for (const auto& x : countries) {
+//         std::cout << x << std::endl;
+//     }
+//     return 0;
+// }
+
+
+
+
+
 #include <iostream>
-#include <fstream>
+#include <thread>
+#include <mutex>
 #include <vector>
-#include <algorithm>
 
-const char filename[] = "countries.txt";
 
-void write_countries(const std::vector<std::string>& countries) {
-    std::ofstream file(filename);
-    if (!file) {
-        std::cerr << "Error opening file for writing" << std::endl;
-        return;
-    }
-    for (const auto& country : countries) {
-        file << country << std::endl;
-    }
-}
+class Sleepy {
+public:
+   Sleepy(int sleep) : sleep(sleep) {
+       values = {1, 2, 3, 4, 5};
+   }
 
-void read_countries(std::vector<std::string>& countries) {
-    std::ifstream file(filename);
-    if (!file) {
-        std::cerr << "Error opening file for reading" << std::endl;
-        return;
-    }
-    std::string country;
-    while (std::getline(file, country)) {
-        if (!country.empty()) {
-            countries.push_back(country);
-        }
-    }
-}
+   void print() const {
+        mtx.lock();
+       std::cout << "Values:";
+       for (const auto& x : values) {
+           std::cout << ' ' << x;
+           std::cout.flush();
+           std::this_thread::sleep_for(sleep);
+       }
+       std::cout << std::endl;
+       mtx.unlock();
+   }
+
+   void clear() {
+    mtx.lock();
+       for (auto& x : values) {
+           x = 0;
+       }
+       values.clear();
+       std::cout << "Clear!" << std::endl;
+       mtx.unlock();
+   }
+
+private:
+   std::vector<int> values;
+   std::chrono::milliseconds sleep;
+   mutable std::mutex mtx;
+};
 
 int main() {
-    std::vector<std::string> countries;
-    std::cout << "Enter countries:" << std::endl;
-    std::string buffer;
-    while (true) {
-        std::getline(std::cin, buffer);
-        if (buffer.empty()) break;
-        countries.push_back(buffer);
-    }
-    std::ofstream{filename, std::ios_base::out | std::ios_base::trunc};
-    write_countries(countries);
-    countries.clear();
-    read_countries(countries);
-    std::sort(countries.begin(), countries.end());
-    for (const auto& x : countries) {
-        std::cout << x << std::endl;
-    }
-    return 0;
+  int sleep;
+   std::cout << "Enter sleep interval: ";
+   std::cin >> sleep;
+   Sleepy sleepy{sleep};
+   std::thread t1{[&](){
+       sleepy.print();
+       std::this_thread::sleep_for(std::chrono::milliseconds(60));
+       sleepy.print();
+   }};
+   std::thread t2{[&](){
+       std::this_thread::sleep_for(std::chrono::milliseconds(30));
+       sleepy.clear();
+   }};
+   t1.join();
+   t2.join();
+   return 0;
 }
