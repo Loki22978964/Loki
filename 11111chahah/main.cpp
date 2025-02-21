@@ -8025,26 +8025,54 @@
 // }
 
 
-#include <iostream>
+// #include <iostream>
 
-struct Process {
-   std::string name;
-   int ram;
-   int cpu;
-};
+// struct Process {
+//    std::string name;
+//    int ram;
+//    int cpu;
+// };
 
-std::istream& operator>>(std::istream& s , Process& proc){
-        s >> proc.name >> proc.ram >> proc.cpu ; 
+// std::istream& operator>>(std::istream& s , Process& proc){
+//         s >> proc.name >> proc.ram >> proc.cpu ; 
     
-        return s;
-    }
+//         return s;
+//     }
+
+// int main() {
+//    Process p;
+//    std::cout << "Enter process: ";
+//    std::cin >> p;
+//    std::cout << "Process " << p.name << ":"<<std::endl
+//              << "    RAM " << p.ram << " KiB"<<std::endl
+//              << "    CPU " << p.cpu << "%"<<std::endl;
+//    return 0;  
+// }
+
+
+
+#include <iostream>
+#include <string>
+#include <thread>
+
+
+void print(const std::string& str) {
+   static int sleep = 100;
+   std::this_thread::sleep_for(std::chrono::milliseconds{sleep});
+   std::cout << str << std::endl;
+   sleep /= 10;
+}
+
 
 int main() {
-   Process p;
-   std::cout << "Enter process: ";
-   std::cin >> p;
-   std::cout << "Process " << p.name << ":"<<std::endl
-             << "    RAM " << p.ram << " KiB"<<std::endl
-             << "    CPU " << p.cpu << "%"<<std::endl;
-   return 0;  
+   std::string word1;
+   std::string word2;
+   std::cout << "Enter words: ";
+   std::cin >> word1 >> word2;
+   std::thread t1(print ,word1 );
+   std::thread t2(print , word2);
+   t1.join();
+   t2.join();
+
+   return 0;
 }
