@@ -8198,67 +8198,86 @@
 
 
 
+// #include <iostream>
+// #include <iomanip>
+// #include <vector>
+// #include <sstream>
+// #include <algorithm>
+
+// struct Process {
+//    std::string name;
+//    int ram;
+//    double cpu;
+// };
+
+// int main() {
+//    int count;
+//    std::vector<Process> processes;
+//    std::cout << "Enter number of processes: ";
+//    std::cin >> count;
+//    std::cout << "Enter processes:" << std::endl;
+//    for (int i = 0; i < count; ++i) {
+//        Process process;
+//        std::cin >> process.name >> process.ram >> process.cpu;
+//        processes.push_back(process);
+//    }
+//    auto iname = std::max_element(
+//        processes.begin(),
+//        processes.end(),
+//        [](const Process& l, const Process& r) {
+//            return l.name.size() < r.name.size();
+//        });
+//    auto iram = std::max_element(
+//        processes.begin(),
+//        processes.end(),
+//        [](const Process& l, const Process& r) {
+//            return l.ram < r.ram;
+//        });
+//    auto icpu = std::max_element(
+//        processes.begin(),
+//        processes.end(),
+//        [](const Process& l, const Process& r) {
+//            return l.cpu < r.cpu;
+//        });
+//    int wname = std::max(4, (int)(iname->name.size()));
+//    std::stringstream stream;
+//    stream << std::hex << std::showbase << iram->ram;
+//    int wram = std::max(3, (int)(stream.str().size()));
+//    stream = {};
+//    stream << std::fixed << std::setprecision(2) << icpu->cpu;
+//    int wcpu = std::max(3, (int)(stream.str().size()));
+//    std::cout
+//        << "| " << std::left << std::setw(wname) << "Name"
+//        << " | " << std::right << std::setw(wram) << "RAM"
+//        << " | " << std::right << std::setw(wcpu) << "CPU"
+//        << " |" << std::endl;
+//    // PUT YOUR CODE HERE
+//    for (const auto& process : processes) {
+//     std::cout
+//         << "| " << std::left << std::setw(wname) << process.name
+//         << " | " << std::right << std::setw(wram) << std::hex << process.ram
+//         << " | " << std::right << std::setw(wcpu) << std::fixed << std::setprecision(2) << process.cpu
+//         << " |" << std::endl;
+// }
+
+//    return 0;
+// }
+
+
+
+
+
 #include <iostream>
-#include <iomanip>
-#include <vector>
-#include <sstream>
-#include <algorithm>
 
-struct Process {
-   std::string name;
-   int ram;
-   double cpu;
-};
+int main(){
+    int a = 6;
+    int b = 2;
+    int c = 0;
 
-int main() {
-   int count;
-   std::vector<Process> processes;
-   std::cout << "Enter number of processes: ";
-   std::cin >> count;
-   std::cout << "Enter processes:" << std::endl;
-   for (int i = 0; i < count; ++i) {
-       Process process;
-       std::cin >> process.name >> process.ram >> process.cpu;
-       processes.push_back(process);
-   }
-   auto iname = std::max_element(
-       processes.begin(),
-       processes.end(),
-       [](const Process& l, const Process& r) {
-           return l.name.size() < r.name.size();
-       });
-   auto iram = std::max_element(
-       processes.begin(),
-       processes.end(),
-       [](const Process& l, const Process& r) {
-           return l.ram < r.ram;
-       });
-   auto icpu = std::max_element(
-       processes.begin(),
-       processes.end(),
-       [](const Process& l, const Process& r) {
-           return l.cpu < r.cpu;
-       });
-   int wname = std::max(4, (int)(iname->name.size()));
-   std::stringstream stream;
-   stream << std::hex << std::showbase << iram->ram;
-   int wram = std::max(3, (int)(stream.str().size()));
-   stream = {};
-   stream << std::fixed << std::setprecision(2) << icpu->cpu;
-   int wcpu = std::max(3, (int)(stream.str().size()));
-   std::cout
-       << "| " << std::left << std::setw(wname) << "Name"
-       << " | " << std::right << std::setw(wram) << "RAM"
-       << " | " << std::right << std::setw(wcpu) << "CPU"
-       << " |" << std::endl;
-   // PUT YOUR CODE HERE
-   for (const auto& process : processes) {
-    std::cout
-        << "| " << std::left << std::setw(wname) << process.name
-        << " | " << std::right << std::setw(wram) << std::hex << process.ram
-        << " | " << std::right << std::setw(wcpu) << std::fixed << std::setprecision(2) << process.cpu
-        << " |" << std::endl;
-}
-
-   return 0;
+    while (a >= b) {
+        a = a - b;
+        c++;
+    }
+    std::cout << c;
+    return 0;
 }
